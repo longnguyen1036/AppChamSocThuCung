@@ -1,10 +1,11 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import CamNang from './src/CamNang'
 
 const App = () => {
   return (
     <View>
-      <Text>App</Text>
+      <CamNang/>
     </View>
   )
 }
