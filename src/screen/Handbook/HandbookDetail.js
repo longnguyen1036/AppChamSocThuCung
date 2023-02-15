@@ -1,17 +1,17 @@
 import { StyleSheet, Text, View, Image, TextInput, Linking } from 'react-native'
 import React from 'react'
 
-const ChiTietCamNang = () => {
+const HandbookDetail = () => {
   return (
     <View>
       <View style = {{flexDirection: 'row'}}>
           <View style= {{width: '5%',justifyContent: 'center',
     alignItems: 'center', }}>
-            <Image source={require('../src/assets/image/backpet.png')} style = {{}} ></Image>
+            <Image source={require('./../../assets/image/backpet.png')} style = {{}} ></Image>
           </View>
           <View style= {{width: '95%'}}>
           <View style = {styles.seachViewContainer}>
-            <Image source={require('../src/assets/image/timkiempet.png')} style = {styles.seachImage} ></Image>
+            <Image source={require('./../../assets/image/timkiempet.png')} style = {styles.seachImage} ></Image>
             <TextInput placeholder='Tìm kiếm' style = {{flex: 1}} underlineColorAndroid="transparent"></TextInput>
 
           </View>
@@ -29,7 +29,7 @@ const ChiTietCamNang = () => {
           </View>
 
           <View style = {{marginTop: 10}}>
-            <Image source={require('../src/assets/image/anhcamnang.png')} style = {{width: 340}} ></Image>
+            <Image source={require('./../../assets/image/anhcamnang.png')} style = {{width: 340}} ></Image>
 
           </View>
 
@@ -51,7 +51,7 @@ const ChiTietCamNang = () => {
   )
 }
 
-export default ChiTietCamNang
+export default HandbookDetail
 
 const styles = StyleSheet.create({
     seachViewContainer: {

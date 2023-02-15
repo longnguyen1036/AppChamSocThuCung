@@ -1,8 +1,10 @@
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import React, { useState } from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { navigate } from '../../router/NavigationServices';
+import { LOGIN_SCREEN } from '../../router/ScreenName';
 
-const Welcome = () => {
+const Welcome = ({navigation}) => {
     const [currentPage, setCurrentPage] = useState(0);
 
 
@@ -12,6 +14,8 @@ const Welcome = () => {
     };
     const tieptuc = () => {
       console.log('tieptuc', currentPage);
+      navigation.navigate(LOGIN_SCREEN);
+      
     }
   
   
@@ -48,7 +52,7 @@ const Welcome = () => {
       <View style={styles.container}>
         <Image
           style={styles.hinh}
-          source={require('../assets/image/main.png')}></Image>
+          source={require('../../assets/image/main.png')}></Image>
   
         <Text style={styles.h1}>Xin chào bạn đến với Pet Care</Text>
         {

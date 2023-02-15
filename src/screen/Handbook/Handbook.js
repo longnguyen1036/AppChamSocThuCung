@@ -4,13 +4,13 @@ const DATA = [
     {
       id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
       title: 'Giống chó Alaskan Malamute: khổng lồ liệu giá có rẻ?',
-      image: require('../src/assets/image/anhcamnang.png'),
+      image: require('./../../assets/image/anhcamnang.png'),
       description: 'Giống chó Alaskan Malamute hay chó Alaska, là một trong những giống chó kéo xe',
     },
     {
       id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
       title: 'Hãy dừng lại nếu bạn đang cho chó mèo ăn chay',
-      image: require('../src/assets/image/anhcamnang1.png'),
+      image: require('./../../assets/image/anhcamnang1.png'),
       description: 'Hãy dừng ngay lại việc cho chó mèo ăn chay hoặc rau củ quả với..',
     },
   
@@ -25,14 +25,14 @@ const DATA = [
     </View>
   );
 
-const CamNang = () => {
+const Handbook = () => {
   return (
     <View>
       <View>
         
         <View style = {styles.headerContainer}>
           <View style= {{width: '40%'}}>
-            <Image source={require('../src/assets/image/backpet.png')} style = {{}} ></Image>
+            <Image source={require('./../../assets/image/backpet.png')} style = {{}} ></Image>
           </View>
           <View style= {{width: '50%'}}>
             <Text style= {styles.titleCamNang}>Cẩm nang</Text>
@@ -40,7 +40,7 @@ const CamNang = () => {
         </View>
         <View style = {{paddingHorizontal: 10}}>
           <View style = {styles.seachViewContainer}>
-            <Image source={require('../src/assets/image/timkiempet.png')} style = {styles.seachImage} ></Image>
+            <Image source={require('./../../assets/image/timkiempet.png')} style = {styles.seachImage} ></Image>
             <TextInput placeholder='Tìm kiếm' style = {{flex: 1}} underlineColorAndroid="transparent"></TextInput>
 
           </View>
@@ -68,7 +68,7 @@ const CamNang = () => {
   )
 }
 
-export default CamNang
+export default Handbook
 
 const styles = StyleSheet.create({
     item: {
