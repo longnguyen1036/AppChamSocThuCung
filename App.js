@@ -9,7 +9,7 @@ import ChangeAddress from './src/ChangeAddress'
 const App = () => {
   return (
     <View>
-      <ChangeAddress/>
+      <ChangeAcount/>
     </View>
   )
 }

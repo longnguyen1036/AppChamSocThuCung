@@ -31,6 +31,7 @@ const Block = ({
   justifyCenter,
   justifyEnd,
   justifyStart,
+  justifySpaceBetween,
   paddingTop,
   paddingBottom,
   paddingLeft,
@@ -90,6 +91,7 @@ const Block = ({
     justifyCenter && styles.justifyCenter,
     justifyStart && styles.justifyStart,
     justifyEnd && styles.justifyEnd,
+    justifySpaceBetween && styles.justifySpaceBetween,
     space && {justifyContent: `space-${space}`},
     paddingTop && {paddingTop: paddingTop},
     paddingRight && {paddingRight: paddingRight},
@@ -181,6 +183,9 @@ const styles = StyleSheet.create({
   },
   justifyCenter: {
     justifyContent: 'center',
+  },
+  justifySpaceBetween:{
+    justifyContent: 'space-between',
   },
   selfCenter: {
     alignSelf: 'center'
