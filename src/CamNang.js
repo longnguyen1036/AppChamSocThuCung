@@ -1,5 +1,8 @@
-import { StyleSheet, Text, View, Image, TextInput, FlatList,SafeAreaView, } from 'react-native'
+import { StyleSheet, View, Image, TextInput, FlatList,SafeAreaView, } from 'react-native'
 import React from 'react'
+import Block from './Block';
+import Text from './Text';
+
 const DATA = [
     {
       id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
@@ -27,28 +30,35 @@ const DATA = [
 
 const CamNang = () => {
   return (
-    <View>
-      <View>
+    <Block>
+      <Block>
         
-        <View style = {styles.headerContainer}>
-          <View style= {{width: '40%'}}>
+        <Block row={1} paddingVertical={20} paddingHorizontal= {20} >
+          <Block width={'40%'} >
             <Image source={require('../src/assets/image/backpet.png')} style = {{}} ></Image>
-          </View>
-          <View style= {{width: '50%'}}>
-            <Text style= {styles.titleCamNang}>Cẩm nang</Text>
-          </View>
-        </View>
-        <View style = {{paddingHorizontal: 10}}>
-          <View style = {styles.seachViewContainer}>
+          </Block>
+          <Block width={'50%'}>
+            <Text size={20} color={'black'} bold >Cẩm nang</Text>
+          </Block>
+        </Block>
+        <Block paddingHorizontal={10} >
+          <Block
+           row={1}
+           justifyCenter
+           alignCenter
+           backgroundColor={'#F2F3F2'}
+           height= {40}
+           borderRadius={15}
+           margin= {10}>
             <Image source={require('../src/assets/image/timkiempet.png')} style = {styles.seachImage} ></Image>
             <TextInput placeholder='Tìm kiếm' style = {{flex: 1}} underlineColorAndroid="transparent"></TextInput>
 
-          </View>
+          </Block>
 
-        </View>
+        </Block>
 
 
-        <View>
+        <Block>
           <SafeAreaView >
             <FlatList
               data={DATA}
@@ -57,14 +67,14 @@ const CamNang = () => {
             />
           </SafeAreaView>
 
-        </View>
+        </Block>
 
         
 
 
 
-      </View>
-    </View>
+      </Block>
+    </Block>
   )
 }
 
@@ -92,28 +102,6 @@ const styles = StyleSheet.create({
       },
       description: {
         fontSize: 14,
-      },
-      headerContainer: {
-        flexDirection: "row",
-        paddingVertical: 20,
-        paddingHorizontal: 20
-    
-      },
-      titleCamNang: {
-        fontSize: 20, 
-        color: 'black', 
-        fontWeight: '700'
-        
-      },
-      seachViewContainer: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F2F3F2',
-        height: 40,
-        borderRadius: 15,
-        margin: 10,
-    
       },
       seachImage: {
         padding: 10,
