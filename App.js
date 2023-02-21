@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-// import 'react-native-gesture-handler';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+
 
 
 import MainNavigation from './src/router'
@@ -13,6 +13,7 @@ import {loggedAction} from './src/redux/actions/authAction';
 
 const App = () => {
   return (
+
     <SafeAreaProvider>
       <Provider store={store}>
 
@@ -20,6 +21,7 @@ const App = () => {
       </Provider>
    
     </SafeAreaProvider>
+
   )
 }
 
