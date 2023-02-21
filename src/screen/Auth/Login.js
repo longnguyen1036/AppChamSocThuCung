@@ -12,9 +12,13 @@ import {
 } from 'react-native';
 import React, {useState, useContext} from 'react';
 import {REGISTER_SCREEN} from '../../router/ScreenName';
+import {useDispatch, useSelector} from 'react-redux';
+
 
 const Login = ({navigation}) => {
+  // const authState = useSelector(state => state.authState.userInfo)
   const [modalVisible, setModalVisible] = useState(false);
+  // console.log("authState: " , authState)
   return (
     <ScrollView>
       <View>

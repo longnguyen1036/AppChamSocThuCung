@@ -3,14 +3,23 @@ import React, { useState } from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { navigate } from '../../router/NavigationServices';
 import { LOGIN_SCREEN } from '../../router/ScreenName';
+import { loggedAction } from '../../redux/actions/authAction';
+// import { useDispatch, useSelector} from 'react-redux';
 
 const Welcome = ({navigation}) => {
     const [currentPage, setCurrentPage] = useState(0);
+    // const dispatch = useDispatch();
 
+    // const data = {
+    //     "name": "toan",
+    //     "age": 16,
+    //     "sex": "male",
+    // }
 
     const handleNextPage = () => {
       setCurrentPage(currentPage + 1);
       console.log('currentPage: ', currentPage)
+      // dispatch(loggedAction(data))
     };
     const tieptuc = () => {
       console.log('tieptuc', currentPage);
