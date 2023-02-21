@@ -7,12 +7,13 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 import MainNavigation from './src/router'
 import Home from './src/screen/Main/Home';
+import { ConfirmOTP, CreateNewPass, ForgetPass } from './src/screen/Auth';
 
 const App = () => {
   return (
     <SafeAreaProvider>
       {/* <MainNavigation></MainNavigation> */}
-      <Home></Home>
+      <CreateNewPass/>
     </SafeAreaProvider>
   )
 }
