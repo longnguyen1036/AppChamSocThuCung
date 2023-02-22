@@ -4,12 +4,13 @@ import CamNang from './src/CamNang'
 import ChiTietCamNang from './src/ChiTietCamNang'
 import ChangeAcount from './src/ChangeAcount'
 import ChangeAddress from './src/ChangeAddress'
+import Profile from './src/Profile'
 
 
 const App = () => {
   return (
     <View>
-      <ChangeAcount/>
+      <Profile/>
     </View>
   )
 }
