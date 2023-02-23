@@ -17,6 +17,11 @@ const Detail = () => {
         { key: 8, image: require('../src/assets/image/detail2.png')},
         { key: 9, image: require('../src/assets/image/detail1.png')},
     ])
+
+    const [selectedImage, setSelectedImage] = useState(require('../src/assets/image/detail1.png'));
+
+
+
   return (
     <View style={{ backgroundColor: '#dcdcdc', height: '100%'}}>
       <View style = {{alignItems: 'center',}}>
@@ -33,7 +38,7 @@ const Detail = () => {
         </View>
 
         <View>
-            <Image source={require('../src/assets/image/imagedetail.png')} style = {{width: 200, height: 200, borderRadius: 8}} ></Image>
+            <Image source={selectedImage} style = {{width: 200, height: 200, borderRadius: 8}} ></Image>
         </View>
 
         <ScrollView style={{width: '40%'}} horizontal={true}>
@@ -41,7 +46,7 @@ const Detail = () => {
         {
             ItemsImage.map((object)=>{
                 return (
-                    <TouchableOpacity key={object.key} style = {{alignItems: 'center', justifyContent: 'center', margin: 8}}>
+                    <TouchableOpacity onPress={()=> setSelectedImage(object.image)} key={object.key} style = {{alignItems: 'center', justifyContent: 'center', margin: 8}}>
                         <Image source={object.image}></Image>
                     </TouchableOpacity>
                 );
