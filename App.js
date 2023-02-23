@@ -5,12 +5,14 @@ import ChiTietCamNang from './src/ChiTietCamNang'
 import ChangeAcount from './src/ChangeAcount'
 import ChangeAddress from './src/ChangeAddress'
 import Profile from './src/Profile'
+import Detail from './src/Detail'
+import Detail2 from './src/Detail2'
 
 
 const App = () => {
   return (
     <View>
-      <Profile/>
+      <Detail2/>
     </View>
   )
 }
