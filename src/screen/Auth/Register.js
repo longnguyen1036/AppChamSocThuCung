@@ -11,12 +11,17 @@ import {
   Pressable,
 } from 'react-native';
 import React, {useState, useContext} from 'react';
+import authApi from '../../api/authApi';
 
 const Register = () => {
   const [hidden, setHidden] = useState(true);
   const [hidden1, setHidden1] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
-
+  const [nameAccount, setNameAccount] = useState('');
+  const [emailAccount, setEmailAccount] = useState('');
+  const [passwordAccount, setPasswordAccount] = useState('');
+  const [confirmPassWord, setConfirmPassWord] = useState('');
+  const [checkUser, setCheckUser] = useState();
 
   const hiddenPassWord = () => {
     setHidden(!hidden);
@@ -24,10 +29,24 @@ const Register = () => {
   const hiddenPassWord1 = () => {
     setHidden1(!hidden1);
   };
+
+  const submitRegister = async () => {
+    const user = await authApi.Register(
+      nameAccount,
+      emailAccount,
+      passwordAccount,
+    );
+    setCheckUser(user);
+  };
   return (
     <ScrollView>
       <View>
-        <View style={{justifyContent: 'center', alignItems: 'center', marginLeft: 20,}}>
+        <View
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginLeft: 20,
+          }}>
           <Image source={require('../../assets/image/phonenumber.png')}></Image>
         </View>
 
@@ -45,6 +64,8 @@ const Register = () => {
               borderColor: '#DADFE6',
             }}
             placeholder="Nhập tên tài khoản"
+            onChangeText={setNameAccount}
+            value={nameAccount}
           />
           <TextInput
             style={{
@@ -56,6 +77,8 @@ const Register = () => {
               borderColor: '#DADFE6',
             }}
             placeholder="Nhập email"
+            onChangeText={setEmailAccount}
+            value={emailAccount}
           />
           <TextInput
             style={{
@@ -66,6 +89,8 @@ const Register = () => {
               paddingLeft: 15,
               borderColor: '#DADFE6',
             }}
+            onChangeText={setPasswordAccount}
+            value={passwordAccount}
             placeholder="Nhập mật khẩu"
             secureTextEntry={hidden}></TextInput>
           <TouchableOpacity onPress={hiddenPassWord}>
@@ -96,6 +121,7 @@ const Register = () => {
               paddingLeft: 15,
               borderColor: '#DADFE6',
             }}
+            onChangeText={confirmPassWord}
             placeholder="Nhập lại mật khẩu"
             secureTextEntry={hidden1}></TextInput>
           <TouchableOpacity onPress={hiddenPassWord1}>
@@ -128,7 +154,8 @@ const Register = () => {
               justifyContent: 'center',
               padding: 8,
               marginTop: 10,
-            }}>
+            }}
+            onPress={() => submitRegister()}>
             <Text style={{fontSize: 17, color: 'white', fontWeight: 'bold'}}>
               Đăng ký
             </Text>
@@ -148,7 +175,10 @@ const Register = () => {
             <Image
               style={{width: 60, height: 60}}
               source={require('../../assets/image/warning.png')}></Image>
-            <Text style={styles.modalText}> Bạn chưa nhập đầy đủ thông tin!</Text>
+            <Text style={styles.modalText}>
+              {' '}
+              Bạn chưa nhập đầy đủ thông tin!
+            </Text>
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => setModalVisible(!modalVisible)}>
@@ -158,10 +188,10 @@ const Register = () => {
         </View>
       </Modal>
     </ScrollView>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;
 
 const styles = StyleSheet.create({
   icon: {
@@ -209,4 +239,4 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     textAlign: 'center',
   },
-})
+});

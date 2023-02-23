@@ -1,7 +1,7 @@
 import { StyleSheet, View, Image, TextInput, Linking } from 'react-native'
 import React from 'react'
-import Block from './Block';
-import Text from './Text';
+import Block from './../../components/Block';
+import Text from './../../components/Text';
 
 
 const HandbookDetail = () => {
@@ -9,12 +9,12 @@ const HandbookDetail = () => {
     <Block>
       <Block row={1} >
           <Block width={'5%'} justifyCenter alignCenter>
-            <Image source={require('../src/assets/image/backpet.png')} style = {{}} ></Image>
+            <Image source={require('./../../assets/image/backpet.png')} style = {{}} ></Image>
           </Block>
           <Block width={'95%'}>
           <Block row={1} justifyCenter alignCenter backgroundColor={'#F2F3F2'}
           height= {40} borderRadius = {15} margin={10}>
-            <Image source={require('../src/assets/image/timkiempet.png')} style = {styles.seachImage} ></Image>
+            <Image source={require('./../../assets/image/timkiempet.png')} style = {styles.seachImage} ></Image>
             <TextInput placeholder='Tìm kiếm' style = {{flex: 1}} underlineColorAndroid="transparent"></TextInput>
 
           </Block>
@@ -32,7 +32,7 @@ const HandbookDetail = () => {
           </Block>
 
           <Block marginTop={10}>
-            <Image source={require('../src/assets/image/anhcamnang.png')} style = {{width: 340}} ></Image>
+            <Image source={require('./../../assets/image/anhcamnang.png')} style = {{width: 340}} ></Image>
 
           </Block>
 

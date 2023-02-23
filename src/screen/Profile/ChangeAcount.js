@@ -1,9 +1,9 @@
 import { StyleSheet, View, TextInput, TouchableOpacity, Pressable, ScrollView } from 'react-native'
 import React, {useState} from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import { useTogglePasswordVisibility } from './useTogglePasswordVisibility'
-import Block from './Block'
-import Text from './Text'
+import { useTogglePasswordVisibility } from '../../components/Custom/useTogglePasswordVisibility'
+import Block from '../../components/Block'
+import Text from '../../components/Text'
 
 const ChangeAcount = () => {
 

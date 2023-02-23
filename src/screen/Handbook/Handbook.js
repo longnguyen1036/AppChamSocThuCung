@@ -1,7 +1,7 @@
 import { StyleSheet, View, Image, TextInput, FlatList,SafeAreaView, } from 'react-native'
 import React from 'react'
-import Block from './Block';
-import Text from './Text';
+import Block from './../../components/Block';
+import Text from './../../components/Text';
 
 const DATA = [
     {
@@ -35,7 +35,7 @@ const Handbook = () => {
         
         <Block row={1} paddingVertical={20} paddingHorizontal= {20} >
           <Block width={'40%'} >
-            <Image source={require('../src/assets/image/backpet.png')} style = {{}} ></Image>
+            <Image source={require('./../../assets/image/backpet.png')} style = {{}} ></Image>
           </Block>
           <Block width={'50%'}>
             <Text size={20} color={'black'} bold >Cẩm nang</Text>
@@ -50,7 +50,7 @@ const Handbook = () => {
            height= {40}
            borderRadius={15}
            margin= {10}>
-            <Image source={require('../src/assets/image/timkiempet.png')} style = {styles.seachImage} ></Image>
+            <Image source={require('./../../assets/image/timkiempet.png')} style = {styles.seachImage} ></Image>
             <TextInput placeholder='Tìm kiếm' style = {{flex: 1}} underlineColorAndroid="transparent"></TextInput>
 
           </Block>
