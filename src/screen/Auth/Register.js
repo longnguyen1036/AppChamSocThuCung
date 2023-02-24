@@ -12,8 +12,10 @@ import {
 } from 'react-native';
 import React, {useState, useContext} from 'react';
 import authApi from '../../api/authApi';
+import {CONFIRM_OTP_SCREEN} from './../../router/ScreenName';
+import {ToastAndroid} from 'react-native/Libraries/Components/ToastAndroid/ToastAndroid';
 
-const Register = () => {
+const Register = ({navigation}) => {
   const [hidden, setHidden] = useState(true);
   const [hidden1, setHidden1] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
@@ -30,13 +32,53 @@ const Register = () => {
     setHidden1(!hidden1);
   };
 
+  const register = async () => {
+    const emailRegex = /\S+@\S+.\S+/;
+    const isValidEmail = emailRegex.test(emailAccount);
+    console.log('log emaill', emailAccount);
+
+    if (passwordAccount.localeCompare(confirmPassWord) == 0) {
+      try {
+        if (nameAccount == '' || emailAccount == '' || passwordAccount == '') {
+          setModalVisible(true);
+        } else if (!isValidEmail) {
+          console.log('Email khong hop le');
+        } else {
+          submitRegister();
+        }
+      } catch (e) {
+        console.log('register error: ', e);
+      }
+    } else {
+      Alert.alert('Mật khẩu và xác nhận mật khẩu không giống nhau !!');
+    }
+  };
+
+  // const checkEmail = (emailAccount) => {
+  //   const emailRegex = /\S+@\S+.\S+/;
+  //   const isValidEmail = emailRegex.test(emailAccount);
+  //   console.log('log emaill',emailAccount)
+  //   if (isValidEmail) {
+  //     console.log('Email hợp lệ');
+  //     navigation.navigate('CONFIRM_OTP_SCREEN');
+  //   } else {
+  //     console.log('Email không đúng định dạng');
+  //   }
+  // };
+
   const submitRegister = async () => {
     const user = await authApi.Register(
       nameAccount,
       emailAccount,
       passwordAccount,
     );
-    setCheckUser(user);
+    setCheckUser(user.status);
+    console.log('data', user.status);
+    if (user.status === 200) {
+      navigation.navigate('CONFIRM_OTP_SCREEN');
+    } else {
+      console.log('loi');
+    }
   };
   return (
     <ScrollView>
@@ -121,7 +163,7 @@ const Register = () => {
               paddingLeft: 15,
               borderColor: '#DADFE6',
             }}
-            onChangeText={confirmPassWord}
+            onChangeText={setConfirmPassWord}
             placeholder="Nhập lại mật khẩu"
             secureTextEntry={hidden1}></TextInput>
           <TouchableOpacity onPress={hiddenPassWord1}>
@@ -155,7 +197,7 @@ const Register = () => {
               padding: 8,
               marginTop: 10,
             }}
-            onPress={() => submitRegister()}>
+            onPress={() => register()}>
             <Text style={{fontSize: 17, color: 'white', fontWeight: 'bold'}}>
               Đăng ký
             </Text>
