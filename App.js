@@ -11,6 +11,9 @@ import MainNavigation from './src/router'
 import {Provider, useDispatch, useSelector} from 'react-redux';
 import {store} from './src/redux/store';
 import {loggedAction} from './src/redux/actions/authAction';
+import PetScreen from './src/screen/Products/PetScreen';
+import ProductScreen from './src/screen/Products/ProductScreen';
+import ServiceScreen from './src/screen/Products/ServiceScreen';
 
 const App = () => {
   return (
@@ -26,6 +29,8 @@ const App = () => {
       </Provider>
 
     </SafeAreaProvider>
+    // <ServiceScreen/>
+    
 
   )
 }

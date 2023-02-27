@@ -41,6 +41,7 @@ const Handbook = () => {
             <Text size={20} color={'black'} bold >Cẩm nang</Text>
           </Block>
         </Block>
+        
         <Block paddingHorizontal={10} >
           <Block
            row={1}
