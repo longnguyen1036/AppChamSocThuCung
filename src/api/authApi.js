@@ -34,8 +34,27 @@ const OTPRegister = async(otpAcount)=>{
         return error;
     }
 }
+const Login = async(emailAccount, passWordAccount)=>{
+    
+    try {
+        console.log('loi api login', emailAccount, passWordAccount);
+        const login = await axios.post(`${BASE_URL_TEST}/checklogin`,
+       
+        {
+            emailAccount,
+            passWordAccount,
+        } );
+        console.log('api login',login.status);
+        return login;
+
+    } catch (error) {
+        console('loi api login error', error);
+        return error;
+    }
+}
 
 export default{
     Register,
-    OTPRegister
+    OTPRegister, 
+    Login
 }

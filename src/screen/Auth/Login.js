@@ -13,12 +13,37 @@ import {
 import React, {useState, useContext} from 'react';
 import {REGISTER_SCREEN} from '../../router/ScreenName';
 import {useDispatch, useSelector} from 'react-redux';
+import authApi from '../../api/authApi';
+import {CREATE_NEW_PASS} from './../../router/ScreenName';
 
 
 const Login = ({navigation}) => {
   // const authState = useSelector(state => state.authState.userInfo)
   const [modalVisible, setModalVisible] = useState(false);
   // console.log("authState: " , authState)
+  const [emailAccount, setEmailAccount] = useState('');
+  const [passWordAccount, setPasswordAccount] = useState('');
+
+  const Login = async () => {
+    try {
+      if ( emailAccount == '' || passWordAccount == '') {
+        setModalVisible(true);
+      }
+      const res = await authApi.Login(
+        emailAccount, 
+        passWordAccount,
+      );
+      // console.log('res',res);
+      if (res.status != 200) {
+        setModalVisible(true);
+      } else {
+        navigation.navigate('CREATE_NEW_PASS');
+      }
+    } catch (e) {
+      console.log('login error: ', e);
+      setModalVisible(true);
+    }
+  };
   return (
     <ScrollView>
       <View>
@@ -37,7 +62,8 @@ const Login = ({navigation}) => {
               paddingLeft: 15,
               borderColor: '#DADFE6',
             }}
-            placeholder="Nhập tên tài khoản"
+            placeholder="Nhập Email"
+            onChangeText={setEmailAccount}
           />
           <TextInput
             style={{
@@ -48,6 +74,7 @@ const Login = ({navigation}) => {
               borderColor: '#DADFE6',
             }}
             secureTextEntry
+            onChangeText={setPasswordAccount}
             placeholder="Nhập mật khẩu"
           />
           <View style={{width: '100%', alignItems: 'flex-end', marginTop: 10}}>
@@ -69,7 +96,7 @@ const Login = ({navigation}) => {
               padding: 8,
               marginTop: 10,
             }}
-            onPress={() => handleLogin()}>
+            onPress={() => Login()}>
             <Text style={{fontSize: 17, color: 'white', fontWeight: 'bold'}}>
               Đăng nhập
             </Text>
@@ -106,7 +133,7 @@ const Login = ({navigation}) => {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Image style={{width: 60, height: 60}}  source={require('../../assets/image/warning.png')}></Image>
-            <Text style={styles.modalText}>Sai tài khoản hoặc mật khẩu!</Text>
+            <Text style={styles.modalText}>Chua nhap dung tài khoản hoặc mật khẩu!</Text>
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => setModalVisible(!modalVisible)}
@@ -123,4 +150,43 @@ const Login = ({navigation}) => {
 
 export default Login;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  modalView: {
+    margin: 30,
+    marginTop: '60%',
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+  },
+  button: {
+    borderRadius: 5,
+    padding: 10,
+    elevation: 2
+  },
+  buttonOpen: {
+    backgroundColor: "#52B4FF",
+  },
+  buttonClose: {
+    backgroundColor: "#52B4FF",
+    width: 200,
+  },
+  textStyle: {
+    fontSize: 18,
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center"
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center"
+  }
+});

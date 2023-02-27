@@ -6,9 +6,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 
 import MainNavigation from './src/router'
-import Home from './src/screen/Main/Home';
 
-import { ConfirmOTP, CreateNewPass, ForgetPass } from './src/screen/Auth';
 
 import {Provider, useDispatch, useSelector} from 'react-redux';
 import {store} from './src/redux/store';
