@@ -13,21 +13,26 @@ import { ConfirmOTP, CreateNewPass, ForgetPass } from './src/screen/Auth';
 import {Provider, useDispatch, useSelector} from 'react-redux';
 import {store} from './src/redux/store';
 import {loggedAction} from './src/redux/actions/authAction';
+import ServiceDetail from './src/screen/ProductDetail/ServiceDetail';
+import ProfileShop from './src/screen/Shop/ProfileShop';
 
 const App = () => {
   return (
 
-    <SafeAreaProvider>
+    // <SafeAreaProvider>
 
-      {/* <MainNavigation></MainNavigation> */}
-      {/* <CreateNewPass/> */}
+    //   {/* <MainNavigation></MainNavigation> */}
+    //   {/* <CreateNewPass/> */}
 
-      <Provider store={store}>
+    //   <Provider store={store}>
 
-      <MainNavigation></MainNavigation>
-      </Provider>
+    //   <MainNavigation></MainNavigation>
+    //   </Provider>
 
-    </SafeAreaProvider>
+    // </SafeAreaProvider>
+    <>
+      <ProfileShop/>
+    </>
 
   )
 }
