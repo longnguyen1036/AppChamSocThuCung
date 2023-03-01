@@ -4,7 +4,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 
 
 
-const Detail = () => {
+const PetDetail = () => {
 
     const [ItemsImage, setItemsImage] = useState([
         { key: 1, image: require('../src/assets/image/detail1.png')},
@@ -19,7 +19,6 @@ const Detail = () => {
     ])
 
     const [selectedImage, setSelectedImage] = useState(require('../src/assets/image/detail1.png'));
-
 
 
   return (
@@ -53,19 +52,29 @@ const Detail = () => {
             })
         }
         </ScrollView>
-        <View style ={{marginTop: '3%'}}>
-            <Text style ={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>Balo nắp trong trơn màu đuôi lưới</Text>
+        <View style ={{marginTop: '3%', width:'73%'}}>
+            <Text style ={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>BEAGLE CƯNG CƯNG</Text>
             <Text style ={{fontSize: 18, fontWeight: 'bold'}}>700.000đ</Text>
             <Text style ={{fontSize: 17, color: 'black', fontWeight: '600'}}>Tình trạng: Còn hàng</Text>
         </View>
         <View style={{flexDirection:'row', width:'73%', marginTop: '3%'}}>
             <TouchableOpacity style={{backgroundColor: 'white', padding: 8, borderRadius: 8}}>
-                <Text style={{fontSize: 16, color: 'black', fontWeight: '700'}}>Danh mục</Text>
-                <Text>Phụ kiện</Text>
+                <Text style={{fontSize: 16, color: 'black', fontWeight: '700'}}>Gioi tinh</Text>
+                <Text>Giong cai</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={{backgroundColor: 'white', marginLeft: '10%', padding: 8, borderRadius: 8}}>
-                <Text style={{fontSize: 16, color: 'black', fontWeight: '700'}}>Dành cho</Text>
+            <TouchableOpacity style={{backgroundColor: 'white', marginLeft: '5%', padding: 8, borderRadius: 8}}>
+                <Text style={{fontSize: 16, color: 'black', fontWeight: '700'}}>Tuoi</Text>
+                <Text>6 thang</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={{backgroundColor: 'white', marginLeft: '5%', padding: 8, borderRadius: 8}}>
+                <Text style={{fontSize: 16, color: 'black', fontWeight: '700'}}>Can nang</Text>
+                <Text>4,7kg</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={{backgroundColor: 'white', marginLeft: '5%', padding: 8, borderRadius: 8}}>
+                <Text style={{fontSize: 16, color: 'black', fontWeight: '700'}}>Giong</Text>
                 <Text>Mèo</Text>
             </TouchableOpacity>
         </View>
@@ -98,6 +107,6 @@ const Detail = () => {
   )
 }
 
-export default Detail
+export default PetDetail
 
 const styles = StyleSheet.create({})

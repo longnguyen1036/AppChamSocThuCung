@@ -4,7 +4,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 
 
 
-const Detail2 = () => {
+const PetDetail = () => {
 
     const [ItemsImage, setItemsImage] = useState([
         { key: 1, image: require('../src/assets/image/detail1.png')},
@@ -107,6 +107,6 @@ const Detail2 = () => {
   )
 }
 
-export default Detail2
+export default PetDetail
 
 const styles = StyleSheet.create({})
