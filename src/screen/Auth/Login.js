@@ -15,6 +15,7 @@ import {REGISTER_SCREEN} from '../../router/ScreenName';
 import {useDispatch, useSelector} from 'react-redux';
 import authApi from '../../api/authApi';
 import {CREATE_NEW_PASS} from './../../router/ScreenName';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const Login = ({navigation}) => {
@@ -37,6 +38,11 @@ const Login = ({navigation}) => {
       if (res.status != 200) {
         setModalVisible(true);
       } else {
+        AsyncStorage.setItem('checkLogin', 'true');
+        const checkLogin = await AsyncStorage.getItem('checkLogin'); 
+        
+
+        console.log('Ttenajsd',checkLogin);
         navigation.navigate('CREATE_NEW_PASS');
       }
     } catch (e) {

@@ -1,6 +1,6 @@
 import { Image, StyleSheet, Text, View, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native'
 import React from 'react'
-import Block from './Block'
+import Block from '../../components/Block'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 
 
@@ -23,7 +23,7 @@ const Profile = () => {
             <View>
                 <View style = {{flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10}}>
                     <View>
-                        <Image source={require('../src/assets/image/profileavatar.png')} style = {{}} ></Image>
+                        <Image source={require('../../assets/image/profileavatar.png')} style = {{}} ></Image>
                     </View>
                     <View style = {{marginLeft: 10, justifyContent: 'center'}}>
                         <Text style= {{fontSize: 20, fontWeight: '700', color: 'black'}}>phuocps19167</Text>
