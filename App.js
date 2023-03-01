@@ -14,7 +14,8 @@ import {Provider, useDispatch, useSelector} from 'react-redux';
 import {store} from './src/redux/store';
 import {loggedAction} from './src/redux/actions/authAction';
 import ServiceDetail from './src/screen/ProductDetail/ServiceDetail';
-import ProfileShop from './src/screen/Shop/ProfileShop';
+
+import ProfileShop1 from './src/screen/Shop/ProfileShop1';
 
 const App = () => {
   return (
@@ -31,7 +32,7 @@ const App = () => {
 
     // </SafeAreaProvider>
     <>
-      <ProfileShop/>
+      <ProfileShop1/>
     </>
 
   )
