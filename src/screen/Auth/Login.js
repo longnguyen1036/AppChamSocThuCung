@@ -33,7 +33,7 @@ const Login = ({navigation}) => {
         emailAccount, 
         passWordAccount,
       );
-      // console.log('res',res);
+      console.log('resssssssssssssssssssssssssssss',res.status);
       if (res.status != 200) {
         setModalVisible(true);
       } else {
@@ -107,17 +107,17 @@ const Login = ({navigation}) => {
               width: '100%',
               marginTop: 10,
               flexDirection: 'row',
-              marginLeft: '30%',
+              marginLeft: '20%',
             }}>
-            <Text style={{textAlign: 'center', paddingHorizontal: 5}}>
-              <Text>Người dùng mới?</Text>
+              <Text>Người dùng mới? </Text>
               <TouchableOpacity
+  
                 onPress={() => {
                   navigation.navigate(REGISTER_SCREEN);
                 }}>
-                <Text style={{color: '#52B4FF'}}> Tạo tài khoản</Text>
+                <Text style={{color: '#52B4FF',}}>  Tạo tài khoản</Text>
               </TouchableOpacity>
-            </Text>
+            
           </View>
         </View>
       </View>

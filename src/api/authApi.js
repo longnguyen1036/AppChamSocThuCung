@@ -4,14 +4,14 @@ import axios from "axios";
 
 const Register = async (nameAccount, emailAccount, passWordAccount) =>{
     try {
-        console.log( 'log name accccc',nameAccount, emailAccount, passWordAccount);
+        // console.log( 'log name accccc',nameAccount, emailAccount, passWordAccount);
         const register = await axios.post(`${BASE_URL_TEST}/email`,
         {
             nameAccount,
             emailAccount,
             passWordAccount,
         } );
-        console.log('api register',register);
+        // console.log('api register',register);
         return register;
     } catch (error) {
         console.log('loi api register',error);
@@ -22,12 +22,12 @@ const Register = async (nameAccount, emailAccount, passWordAccount) =>{
 const OTPRegister = async(otpAcount)=>{
     
     try {
-        console.log( 'log name accccc',otpAcount);
+        // console.log( 'log name accccc',otpAcount);
         const registerotp = await axios.post(`${BASE_URL_TEST}/checkotp`,
         {
             otpAcount,
         } );
-        console.log('api registerotp',registerotp);
+        // console.log('api registerotp',registerotp);
         return registerotp;
     } catch (error) {
         console.log('loi api registerotp',error);
@@ -37,14 +37,13 @@ const OTPRegister = async(otpAcount)=>{
 const Login = async(emailAccount, passWordAccount)=>{
     
     try {
-        console.log('loi api login', emailAccount, passWordAccount);
+        console.log('truyen vao login', emailAccount, passWordAccount);
         const login = await axios.post(`${BASE_URL_TEST}/checklogin`,
-       
         {
             emailAccount,
             passWordAccount,
         } );
-        console.log('api login',login.status);
+        console.log('api login',login);
         return login;
 
     } catch (error) {
