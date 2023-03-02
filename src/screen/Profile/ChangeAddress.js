@@ -1,8 +1,8 @@
 import { StyleSheet, View, TextInput, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import Block from './components/Block'
-import Text from './components/Text'
+import Block from '../../components/Block'
+import Text from '../../components/Text'
 
 const ChangeAddress = () => {
   return (
