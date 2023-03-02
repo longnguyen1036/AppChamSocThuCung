@@ -3,11 +3,16 @@ import React from 'react'
 import Block from '../../components/Block'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const Profile = () => {
     const navigation = useNavigation();
 
+
+    const signOut = () => {
+        AsyncStorage.setItem('checkLogin', 'false');
+    }
   return (
     
     <View style = {{alignItems: 'center', backgroundColor: '#dcdcdc', height: '100%', width: '100%'}}>
@@ -105,7 +110,7 @@ const Profile = () => {
                 <Text style={{width: '90%', fontSize: 16, color: 'white', fontWeight: 'bold'}}>Lịch sử đặt dịch vụ</Text>
                 <FontAwesome5 style={{width: '10%'}} name='chevron-right' size={25} color={'white'} />
             </TouchableOpacity>
-            <TouchableOpacity style ={{flexDirection: 'row', justifyContent: 'space-around', paddingHorizontal: 10, marginTop: '5%'}}>
+            <TouchableOpacity style ={{flexDirection: 'row', justifyContent: 'space-around', paddingHorizontal: 10, marginTop: '5%'}} onPress={() => signOut()}>
                 <Text style={{width: '90%', fontSize: 16, color: 'white', fontWeight: 'bold'}}>Đăng xuất</Text>
                 <FontAwesome5 style={{width: '10%'}} name='chevron-right' size={25} color={'white'} />
             </TouchableOpacity>
