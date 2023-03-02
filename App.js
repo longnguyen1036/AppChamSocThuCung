@@ -11,17 +11,21 @@ import MainNavigation from './src/router'
 import { Provider, useDispatch, useSelector } from 'react-redux';
 import { store } from './src/redux/store';
 import { loggedAction } from './src/redux/actions/authAction';
+import Cart from './src/screen/Shop/Cart';
+import HistoryBought from './src/screen/History/HistoryBought';
+import HistoryService from './src/screen/History/HistoryService';
+
+
 
 const App = () => {
   return (
-    <SafeAreaProvider>
-      <Provider store={store}>
-        <MainNavigation></MainNavigation>
-      </Provider>
-    </SafeAreaProvider>
-
-
-
+    // <SafeAreaProvider>
+    //   <Provider store={store}>
+    //     <MainNavigation></MainNavigation>
+    //   </Provider>
+    // </SafeAreaProvider>
+    <HistoryService/>
+   
 
   )
 }
