@@ -29,7 +29,50 @@ const DATA = [
     },
 
     {
-        id: '58694a0f-3da1-471f-bd96-145571e29d79',
+        id: '58694a0f-3da1-471f-bd96-145571e29d78',
+        title: 'Khác',
+        image: require("../../assets/image/profileavatar.png"),
+        price: 39,
+      },
+      {
+        id: '58694a0f-3da1-471f-bd96-145571e29d76',
+        title: 'Khác',
+        image: require("../../assets/image/profileavatar.png"),
+        price: 39,
+      },
+      {
+        id: '58694a0f-3da1-471f-bd96-145571e29d70',
+        title: 'Khác',
+        image: require("../../assets/image/profileavatar.png"),
+        price: 39,
+      },
+
+      {
+        id: '58694a0f-3da1-471f-bd96-145571e29d762',
+        title: 'Khác',
+        image: require("../../assets/image/profileavatar.png"),
+        price: 39,
+      },
+      {
+        id: '58694a0f-3da1-471f-bd96-145571e29d71123',
+        title: 'Khác',
+        image: require("../../assets/image/profileavatar.png"),
+        price: 39,
+      },
+      {
+        id: '58694a0f-3da1-471f-bd96-145571e29d124',
+        title: 'Khác',
+        image: require("../../assets/image/profileavatar.png"),
+        price: 39,
+      },
+      {
+        id: '58694a0f-3da1-471f-bd96-145571e29d7125',
+        title: 'Khác',
+        image: require("../../assets/image/profileavatar.png"),
+        price: 39,
+      },
+      {
+        id: '58694a0f-3da1-471f-bd96-145571e29d7126',
         title: 'Khác',
         image: require("../../assets/image/profileavatar.png"),
         price: 39,
@@ -47,7 +90,7 @@ const ProfileShop1 = () => {
   const [activeCategory, setActiveCategory] = useState(0);
   return (
     <SafeAreaView>
-      <ScrollView>
+      <ScrollView decelerationRate={0.5}>
         <View style ={{backgroundColor: '#dcdcdc'}}>
             <View style={{backgroundColor: '#18A2E1', flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 10,
              paddingVertical: 10,
@@ -146,16 +189,16 @@ const ProfileShop1 = () => {
                 </Text>
               </TouchableOpacity>
             ))}
-        </ScrollView>
+          </ScrollView>
         
-        {activeCategory == 0 ?  <ScrollView contentContainerStyle={{height:300, flexWrap:'wrap'}} style={{marginTop: 10, paddingHorizontal: 80,}}>
+        {activeCategory == 0 ?  <ScrollView decelerationRate={0.5} style={{marginTop: -120}} contentContainerStyle={{flexWrap: 'wrap', height: '70%', paddingHorizontal: 10}} >
             {DATA.map((category, index) => (
               <TouchableOpacity
-                style={{ marginRight: 20 , marginTop: 10}}
+                style={{ marginRight: 80 , marginTop: 10}}
                 key={index}
                 
               >
-                <Image source={category.image}/>
+                <Image style={{width: 150, height: 150, resizeMode: 'cover'}} source={category.image}/>
                 <Text>
                   {category.title}
                 </Text>
@@ -200,64 +243,7 @@ const ProfileShop1 = () => {
                 </Text>
               </TouchableOpacity>
             ))}
-        </ScrollView>: null}
-  
-        
-
-
-        
-        
-        
-
-        {/* <View
-            style={{
-              flexDirection: "row",
-              flexWrap: "wrap",
-              justifyContent: "space-between",
-              marginVertical: 20,
-              marginHorizontal: 15,
-            }}
-          >
-            {DATA[activeCategory].recipes.map((item) => (
-              <TouchableOpacity
-                style={{ width: ITEM_WIDTH, marginBottom: 20 }}
-                key={item.id}
-              >
-                <Image
-                  style={{
-                    width: "100%",
-                    height: ITEM_WIDTH + 30,
-                    borderRadius: 20,
-                  }}
-                  source={item.image}
-                />
-                <Text
-                  style={{
-                    fontSize: 20,
-                    fontWeight: "700",
-                    marginTop: 10,
-                  }}
-                >
-                  {item.name}
-                </Text>
-                <Text
-                  style={{
-                    fontSize: 15,
-                    color: 'gray',
-                    marginVertical: 5,
-                  }}
-                >
-                  Today discount {item.discount}
-                </Text>
-                <Text style={{ fontSize: 20, fontWeight: "700" }}>
-                  $ {item.price}
-                </Text>
-              </TouchableOpacity>
-            ))}
-          </View> */}
-
-
-            
+        </ScrollView>: null}    
         </View>
       </ScrollView>
     </SafeAreaView>
