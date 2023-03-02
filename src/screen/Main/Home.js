@@ -13,8 +13,11 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import PagerView from 'react-native-pager-view';
 import {FlatList} from 'react-native-gesture-handler';
 import { FlatGrid } from 'react-native-super-grid';
+import { useNavigation } from '@react-navigation/native';
 
 const Home = () => {
+  const navigation = useNavigation();
+
   const DATA = [
     {
       id: 1,

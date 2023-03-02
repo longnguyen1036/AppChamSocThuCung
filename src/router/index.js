@@ -14,12 +14,12 @@ import {
 const Stack = createStackNavigator();
 import {navigationRef1} from './NavigationServices';
 import AuthStack from './AuthStack';
-import {MyTab} from './BottomNavigation';
-// import {Profile} from '../screen/Profile';
-// import {Home} from '../screen/Main';
-import { HandbookDetail} from './../screen/Handbook';
+import { MyTab } from './BottomNavigation';
+import {Profile} from '../screen/Profile';
+import {Home} from '../screen/Main';
+import {Handbook, HandbookDetail} from './../screen/Handbook';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-// import { FavouriteProducts } from '../screen/Favourite';
+import { FavouriteProducts } from '../screen/Favourite';
 
 function MainStack() {
   return (
@@ -27,13 +27,13 @@ function MainStack() {
       initialRouteName={MAIN_TAB}
       screenOptions={{headerShown: false}}>
       <Stack.Screen name={MAIN_TAB} component={MyTab} />
-      {/* <Stack.Screen name={HOME_SCREEN} component={Home} /> */}
-      {/* <Stack.Screen
+      <Stack.Screen name={HOME_SCREEN} component={Home} />
+      <Stack.Screen
         name={FAVOURITE_PRODUCTS_SCREEN}
         component={FavouriteProducts}
-      /> */}
-      {/* <Stack.Screen name={PROFILE_SCREEN} component={Profile} /> */}
-      {/* <Stack.Screen name={HANDBOOK_SCREEN} component={Handbook} /> */}
+      />
+      <Stack.Screen name={PROFILE_SCREEN} component={Profile} />
+      <Stack.Screen name={HANDBOOK_SCREEN} component={Handbook} />
       <Stack.Screen name={HANDBOOK_DETAIL_SCREEN} component={HandbookDetail} />
     </Stack.Navigator>
   );
@@ -52,7 +52,7 @@ function MainNavigation() {
   }, []);
   return (
     <NavigationContainer ref={navigationRef1}>
-      {checkLogin ? <MainStack /> : <AuthStack />}
+      {checkLogin === 'true' ? <MainStack /> : <AuthStack />}
     </NavigationContainer>
   );
 }

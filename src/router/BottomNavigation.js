@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import {
   HOME_SCREEN,
@@ -20,35 +20,39 @@ function MyTab() {
   return (
     <Tab.Navigator
       screenOptions={{headerShown: false, activeTintColor: '#FF781F'}}
-      initialRouteName="Feed">
+      initialRouteName="Home">
 
       <Tab.Screen
         name={HOME_SCREEN}
         component={Home}
         options={{
+          headerShown: false,
           tabBarLabel: 'Home',
           tabBarIcon: ({color, size}) => (
             <Ionicons name="home" color={color} size={size} />
           ),
         }}
+        
       />
       <Tab.Screen
         name={FAVOURITE_PRODUCTS_SCREEN}
         component={FavouriteProducts}
         options={{
-          tabBarLabel: 'Home',
+          headerShown: false,
+          tabBarLabel: 'Favourite',
           tabBarIcon: ({color, size}) => (
-            <Ionicons name="home" color={color} size={size} />
+            <Ionicons name="ios-trash" color={color} size={size} />
           ),
         }}
-      />{' '}
+      />
       <Tab.Screen
         name={HANDBOOK_SCREEN}
         component={Handbook}
         options={{
-          tabBarLabel: 'Home',
+          headerShown: false,
+          tabBarLabel: 'Handbook',
           tabBarIcon: ({color, size}) => (
-            <Ionicons name="home" color={color} size={size} />
+            <Ionicons name="md-add-circle" color={color} size={size} />
           ),
         }}
       />
@@ -56,9 +60,10 @@ function MyTab() {
         name={PROFILE_SCREEN}
         component={Profile}
         options={{
-          tabBarLabel: 'Music',
+          headerShown: false,
+          tabBarLabel: 'Profile',
           tabBarIcon: ({color, size}) => (
-            <Ionicons name="ios-play" color={'#FF781F'} size={30} style={{}} />
+            <Ionicons name="ios-wine-outline" color={color} size={size}  />
           ),
         }}
       />

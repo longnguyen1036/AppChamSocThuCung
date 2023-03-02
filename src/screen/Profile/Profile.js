@@ -2,9 +2,12 @@ import { Image, StyleSheet, Text, View, TouchableOpacity, SafeAreaView, ScrollVi
 import React from 'react'
 import Block from '../../components/Block'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
+import { useNavigation } from '@react-navigation/native';
 
 
 const Profile = () => {
+    const navigation = useNavigation();
+
   return (
     
     <View style = {{alignItems: 'center', backgroundColor: '#dcdcdc', height: '100%', width: '100%'}}>
