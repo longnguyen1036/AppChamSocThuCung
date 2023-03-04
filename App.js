@@ -11,11 +11,14 @@ import MainNavigation from './src/router'
 import { Provider, useDispatch, useSelector } from 'react-redux';
 import { store } from './src/redux/store';
 import { loggedAction } from './src/redux/actions/authAction';
+import ProfileShop1 from './src/screen/Shop/ProfileShop1';
+import { FavouriteProducts } from './src/screen/Favourite';
 
 
 
 const App = () => {
   return (
+
     <SafeAreaProvider>
       <Provider store={store}>
         <MainNavigation></MainNavigation>
@@ -23,6 +26,17 @@ const App = () => {
     </SafeAreaProvider>
    
    
+
+    // <SafeAreaProvider>
+    //   <Provider store={store}>
+    //     <MainNavigation></MainNavigation>
+    //   </Provider>
+    // </SafeAreaProvider>
+    // <FavouriteProducts/>
+
+
+
+
 
   )
 }
