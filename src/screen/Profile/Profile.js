@@ -46,7 +46,7 @@ const Profile = () => {
             </View>
             <View style= {{flexDirection: 'row', justifyContent: 'space-around', marginTop: '5%'}}>
                 <TouchableOpacity style={{backgroundColor: '#18A2E1', width: '30%', flexDirection: 'row',justifyContent: 'space-around',
-            alignItems: 'center', padding: 10, borderRadius: 10}}>
+            alignItems: 'center', padding: 10, borderRadius: 10}}  onPress={() => signOut()}>
                     <Text style= {{color: 'white', fontWeight: 'bold'}}>Camera</Text>
                     <FontAwesome5 name='camera-retro' size={25} color ={'white'} />
                     
@@ -110,8 +110,8 @@ const Profile = () => {
                 <Text style={{width: '90%', fontSize: 16, color: 'white', fontWeight: 'bold'}}>Lịch sử đặt dịch vụ</Text>
                 <FontAwesome5 style={{width: '10%'}} name='chevron-right' size={25} color={'white'} />
             </TouchableOpacity>
-            <TouchableOpacity style ={{flexDirection: 'row', justifyContent: 'space-around', paddingHorizontal: 10, marginTop: '5%'}} onPress={() => signOut()}>
-                <Text style={{width: '90%', fontSize: 16, color: 'white', fontWeight: 'bold'}}>Đăng xuất</Text>
+            <TouchableOpacity style ={{flexDirection: 'row', justifyContent: 'space-around', paddingHorizontal: 10, marginTop: '5%'}}>
+                <Text style={{width: '90%', fontSize: 16, color: 'white', fontWeight: 'bold'}}  onPress={() => signOut()}>Đăng xuất</Text>
                 <FontAwesome5 style={{width: '10%'}} name='chevron-right' size={25} color={'white'} />
             </TouchableOpacity>
 
