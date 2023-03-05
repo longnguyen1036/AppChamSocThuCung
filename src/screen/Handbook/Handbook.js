@@ -2,6 +2,7 @@ import { StyleSheet, View, Image, TextInput, FlatList,SafeAreaView, } from 'reac
 import React from 'react'
 import Block from './../../components/Block';
 import Text from './../../components/Text';
+import { useNavigation } from '@react-navigation/native';
 
 const DATA = [
     {
@@ -29,6 +30,8 @@ const DATA = [
   );
 
 const Handbook = () => {
+  const navigation = useNavigation();
+
   return (
     <Block>
       <Block>
