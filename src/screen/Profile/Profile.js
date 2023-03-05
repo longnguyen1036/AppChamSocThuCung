@@ -6,14 +6,15 @@ import { useNavigation } from '@react-navigation/native';
 
 
 const Profile = () => {
-    const navigation = useNavigation();
+    // const navigation = useNavigation();
 
   return (
     
-    <View style = {{alignItems: 'center', backgroundColor: '#dcdcdc', height: '100%', width: '100%'}}>
+    <View style = {{alignItems: 'center', backgroundColor: '#dcdcdc', flex: 1}}>
+        
         <View style ={{height: '25%', width: '100%', backgroundColor: '#18A2E1', borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20}}>
-        <Block row={1} alignCenter width={'100%'} justifySpaceBetween paddingHorizontal={10} marginTop={'5%'} >
+        <Block row={1} alignCenter width={'100%'} justifySpaceBetween paddingHorizontal={10} marginTop={'2%'} >
             <FontAwesome5 name='chevron-left' size={30} />
             <Text style = {{ width: '60%', color: 'white', fontSize: 20, fontWeight: 'bold' }}>Tài khoản</Text>
 
@@ -21,8 +22,8 @@ const Profile = () => {
 
 
         </View>
-        <View style = {{height: '30%', width: '90%', backgroundColor: '#FFFFFF', borderRadius: 10,
-    marginTop: '-20%'}}>
+        <View style = {{height: '27%', width: '90%', backgroundColor: '#FFFFFF', borderRadius: 10,
+    marginTop: '-25%'}}>
             <View>
                 <View style = {{flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10}}>
                     <View>
@@ -39,7 +40,7 @@ const Profile = () => {
 
 
             </View>
-            <View style= {{flexDirection: 'row', justifyContent: 'space-around', marginTop: '5%'}}>
+            <View style= {{flexDirection: 'row', justifyContent: 'space-around', marginTop: '1%'}}>
                 <TouchableOpacity style={{backgroundColor: '#18A2E1', width: '30%', flexDirection: 'row',justifyContent: 'space-around',
             alignItems: 'center', padding: 10, borderRadius: 10}}>
                     <Text style= {{color: 'white', fontWeight: 'bold'}}>Camera</Text>
@@ -56,8 +57,9 @@ const Profile = () => {
             </View>
 
         </View>
+        
 
-        <View style = {{ width: '90%', marginTop: '5%', flexDirection: 'row',
+        <View style = {{ width: '90%', marginTop: '3%', flexDirection: 'row',
     }}>
             <TouchableOpacity style={{backgroundColor: '#18A2E1', padding: 8, borderRadius: 8}}>
                 <FontAwesome5 name='stream' size={30} color={'white'} />
@@ -69,20 +71,20 @@ const Profile = () => {
 
         </View>
 
-        <View style = {{ width: '90%', marginTop: '5%', backgroundColor: '#18A2E1', height: '18%',
+        <View style = {{ width: '90%', marginTop: '3%', backgroundColor: '#18A2E1', height: '18%',
     borderRadius: 8, alignItems: 'center', justifyContent: 'center'}}>
             <TouchableOpacity style ={{flexDirection: 'row', justifyContent: 'space-around', paddingHorizontal: 10}}>
                 <Text style={{width: '90%', fontSize: 16, color: 'white', fontWeight: 'bold'}}>Thay đổi mật khẩu</Text>
-                <FontAwesome5 style={{width: '10%'}} name='chevron-right' size={25} />
+                <FontAwesome5 style={{width: '10%'}} name='chevron-right' size={18} />
             </TouchableOpacity>
-            <View style={{borderWidth: 0.5, borderColor: 'white', width: '95%', marginTop: '5%'}}></View>
-            <TouchableOpacity style ={{flexDirection: 'row', justifyContent: 'space-around', paddingHorizontal: 10, marginTop: '5%'}}>
+            <View style={{borderWidth: 0.5, borderColor: 'white', width: '95%', marginTop: '3%'}}></View>
+            <TouchableOpacity style ={{flexDirection: 'row', justifyContent: 'space-around', paddingHorizontal: 10, marginTop: '3%'}}>
                 <Text style={{width: '90%', fontSize: 16, color: 'white', fontWeight: 'bold'}}>Thay địa chỉ</Text>
-                <FontAwesome5 style={{width: '10%'}} name='chevron-right' size={25} />
+                <FontAwesome5 style={{width: '10%'}} name='chevron-right' size={18} />
             </TouchableOpacity>
 
         </View>
-        <View style = {{ width: '90%', marginTop: '5%', flexDirection: 'row',
+        <View style = {{ width: '90%', marginTop: '3%', flexDirection: 'row',
     }}>
             <TouchableOpacity style={{backgroundColor: '#18A2E1', padding: 8, borderRadius: 8}}>
                 <FontAwesome5 name='comments' size={30} color={'white'} />
@@ -94,20 +96,22 @@ const Profile = () => {
 
         </View>
         
-        <View style = {{ width: '90%', marginTop: '5%', backgroundColor: '#18A2E1', height: '30%',
+        
+        <View style = {{ width: '90%', marginTop: '3%', backgroundColor: '#18A2E1', height: '22%',
     borderRadius: 8, alignItems: 'center', justifyContent: 'center'}}>
             <TouchableOpacity style ={{flexDirection: 'row', justifyContent: 'space-around', paddingHorizontal: 10}}>
                 <Text style={{width: '90%', fontSize: 16, color: 'white', fontWeight: 'bold'}}>Lịch sử mua hàng</Text>
-                <FontAwesome5 style={{width: '10%'}} name='chevron-right' size={25} color={'white'} />
+                <FontAwesome5 style={{width: '10%'}} name='chevron-right' size={18} color={'white'} />
             </TouchableOpacity>
-            <View style={{borderWidth: 0.5, borderColor: 'white', width: '95%', marginTop: '5%'}}></View>
-            <TouchableOpacity style ={{flexDirection: 'row', justifyContent: 'space-around', paddingHorizontal: 10, marginTop: '5%'}}>
+            <View style={{borderWidth: 0.5, borderColor: 'white', width: '95%', marginTop: '3%'}}></View>
+            <TouchableOpacity style ={{flexDirection: 'row', justifyContent: 'space-around', paddingHorizontal: 10, marginTop: '3%'}}>
                 <Text style={{width: '90%', fontSize: 16, color: 'white', fontWeight: 'bold'}}>Lịch sử đặt dịch vụ</Text>
-                <FontAwesome5 style={{width: '10%'}} name='chevron-right' size={25} color={'white'} />
+                <FontAwesome5 style={{width: '10%'}} name='chevron-right' size={18} color={'white'} />
             </TouchableOpacity>
-            <TouchableOpacity style ={{flexDirection: 'row', justifyContent: 'space-around', paddingHorizontal: 10, marginTop: '5%'}}>
+            <View style={{borderWidth: 0.5, borderColor: 'white', width: '95%', marginTop: '3%'}}></View>
+            <TouchableOpacity style ={{flexDirection: 'row', justifyContent: 'space-around', paddingHorizontal: 10, marginTop: '3%'}}>
                 <Text style={{width: '90%', fontSize: 16, color: 'white', fontWeight: 'bold'}}>Đăng xuất</Text>
-                <FontAwesome5 style={{width: '10%'}} name='chevron-right' size={25} color={'white'} />
+                <FontAwesome5 style={{width: '10%'}} name='chevron-right' size={18} color={'white'} />
             </TouchableOpacity>
 
         </View>
