@@ -56,7 +56,7 @@ const Login = ({navigation}) => {
     <ScrollView>
       <View>
         <View style={{justifyContent: 'center', alignItems: 'center', marginLeft: 20,}}>
-          <Image source={require('../../assets/image/phonenumber.png')}></Image>
+          <Image source={require('../../assets/image/phonenumber.png')} style={styles.hinh}></Image>
         </View>
 
         <View style={{width: '100%', paddingHorizontal: 15}}>
@@ -196,5 +196,11 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: "center"
-  }
+  },
+  hinh: {
+    marginTop: 20,
+    marginLeft: '5%',
+    width: '100%',
+    height: 350,
+  },
 });

@@ -38,6 +38,13 @@ const Home = () => {
       price: 2000000,
       images: require('./../../assets/image/dog.png'),
     },
+    {
+      id: 2,
+      name: 'BEAGLE CƯNG CƯNG',
+      category: 'Thú cưng',
+      price: 2000000,
+      images: require('./../../assets/image/dog.png'),
+    },
   ];
 
   const renderItem = ({item}) => {
@@ -64,6 +71,7 @@ const Home = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+
       <View style={styles.header}>
         <View style={styles.h1}>
           <Text style={styles.t1}>Welcome to</Text>
