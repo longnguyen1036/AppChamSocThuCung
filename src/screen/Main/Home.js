@@ -16,7 +16,9 @@ import {FlatList} from 'react-native-gesture-handler';
 import { FlatGrid } from 'react-native-super-grid';
 import { useNavigation } from '@react-navigation/native';
 import Block from '../../components/Block';
-import AntDesign from 'react-native-vector-icons/AntDesign'
+import AntDesign from 'react-native-vector-icons/AntDesign';
+
+
 
 const Home = () => {
   const navigation = useNavigation();
@@ -114,10 +116,10 @@ const Home = () => {
           </View>
           <View >
             <View style={styles.categories}>
-              <MaterialIcons
+              <FontAwesome5
                 style={styles.icc}
                 color={'white'}
-                name="pets"
+                name="shopping-cart"
                 size={30}
               />
             </View>
@@ -126,10 +128,10 @@ const Home = () => {
 
           <View >
             <View style={styles.categories}>
-              <MaterialIcons
+              <Ionicons
                 style={styles.icc}
                 color={'white'}
-                name="pets"
+                name="time"
                 size={30}
               />
             </View>
@@ -218,7 +220,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   icc: {
-    marginLeft: '20%',
+    marginLeft: '15%',
   },
   c1: {
     color: '#172E4C',

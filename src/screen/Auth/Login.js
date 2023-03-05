@@ -14,11 +14,8 @@ import React, {useState, useContext} from 'react';
 import {REGISTER_SCREEN} from '../../router/ScreenName';
 import {useDispatch, useSelector} from 'react-redux';
 import authApi from '../../api/authApi';
-<<<<<<< HEAD
+
 import {CREATE_NEW_PASS, MAIN_TAB} from './../../router/ScreenName';
-=======
-import {CREATE_NEW_PASS, HOME_SCREEN} from './../../router/ScreenName';
->>>>>>> 9d7e03159b55f6696eb88195be303a8a82938e94
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -47,11 +44,8 @@ const Login = ({navigation}) => {
         
 
         console.log('Ttenajsd',checkLogin);
-<<<<<<< HEAD
         navigation.navigate(MAIN_TAB);
-=======
-        // navigation.navigate('HOME_SCREEN');
->>>>>>> 9d7e03159b55f6696eb88195be303a8a82938e94
+        // navigation.navigate('HOME_SCREEN');s
       }
     } catch (e) {
       console.log('login error: ', e);

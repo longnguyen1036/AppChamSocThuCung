@@ -10,8 +10,10 @@ const Profile = () => {
     const navigation = useNavigation();
 
 
-    const signOut = () => {
-        AsyncStorage.setItem('checkLogin', 'false');
+    const signOut = async () => {
+        await AsyncStorage.setItem('checkLogin', 'false');
+        const login = await AsyncStorage.getItem('checkLogin')
+        console.log('checkLogin o dang xuat', login)
     }
   return (
     
