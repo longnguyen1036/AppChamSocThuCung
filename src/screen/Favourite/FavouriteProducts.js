@@ -183,24 +183,6 @@ const FavouriteProducts = () => {
             ))}
         </ScrollView> : activeCategory == 1 ? <ScrollView  style={{marginTop: -5}}>
             {DATA1.map((item, index) => (
-              // <TouchableOpacity
-              //   style={{ marginRight: 20 , marginTop: 10, flexDirection: 'row', backgroundColor: 'aquamarine',
-              // justifyContent: 'space-around', borderRadius: 8}}
-              //   key={index}
-                
-              // >
-              //   <Image source={category.image}/>
-              //   <View>
-              //     <Text>
-              //       {category.title}
-              //     </Text>
-              //     <Text>
-              //       {category.price}
-              //     </Text>
-              //   </View>
-                
-              // </TouchableOpacity>
-
               <Block
                 marginLeft={'5%'}
                 backgroundColor={'#E6EAED'}

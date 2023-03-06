@@ -21,6 +21,7 @@ import PetDetail from './src/screen/ProductDetail/PetDetail';
 import ProductsDetail from './src/screen/ProductDetail/ProductsDetail';
 
 
+
 const App = () => {
   return (
     // <SafeAreaProvider>
@@ -28,7 +29,7 @@ const App = () => {
     //     <MainNavigation></MainNavigation>
     //   </Provider>
     // </SafeAreaProvider>
-    <FavouriteProducts/>
+    <Profile/>
 
 
 
