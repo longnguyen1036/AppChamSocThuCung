@@ -38,5 +38,8 @@ export const EDIT_PROFILE_ADDRESS = 'EDIT_PROFILE_ADDRESS';
 
 
 export const CART_SCREEN = 'CART_SCREEN';
+export const HISTORY_PRODUCTS = 'HISTORY_PRODUCTS';
+export const HISTORY_SERVICES = 'HISTORY_SERVICES';
+
 
 export const MAIN_TAB = 'MAIN_TAB';

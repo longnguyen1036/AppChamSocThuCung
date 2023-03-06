@@ -12,7 +12,9 @@ import {FavouriteProducts} from '../screen/Favourite';
 import {Handbook} from '../screen/Handbook';
 import {Profile} from '../screen/Profile';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Foundation from 'react-native-vector-icons/Foundation';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const Tab = createBottomTabNavigator();
 
@@ -41,7 +43,7 @@ function MyTab() {
           headerShown: false,
           tabBarLabel: 'Favourite',
           tabBarIcon: ({color, size}) => (
-            <Ionicons name="ios-trash" color={color} size={size} />
+            <MaterialIcons name="favorite" color={color} size={size} />
           ),
         }}
       />
@@ -52,7 +54,7 @@ function MyTab() {
           headerShown: false,
           tabBarLabel: 'Handbook',
           tabBarIcon: ({color, size}) => (
-            <Ionicons name="md-add-circle" color={color} size={size} />
+            <Foundation name="book-bookmark" color={color} size={size} />
           ),
         }}
       />
@@ -63,7 +65,7 @@ function MyTab() {
           headerShown: false,
           tabBarLabel: 'Profile',
           tabBarIcon: ({color, size}) => (
-            <Ionicons name="ios-wine-outline" color={color} size={size}  />
+            <FontAwesome name="user" color={color} size={size}  />
           ),
         }}
       />

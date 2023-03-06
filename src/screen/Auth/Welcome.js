@@ -31,9 +31,10 @@ const Welcome = ({navigation}) => {
     const welcome1 = () => {
      if(currentPage === 0){
       return (
-        <Text>
-          Chưa có tính năng như các ứng dụng quản lý thú cưng, nhưng PetCare sẽ hỗ
-          trợ chủ nuôi chăm sóc thú cưng.
+        <Text style={styles.vb}>
+          Với dịch vụ chăm sóc thú cưng, 
+          bạn sẽ làm cho cuộc sống của những người bạn
+           lông lá của chúng ta hạnh phúc hơn.
         </Text>
       );
      }
@@ -42,8 +43,10 @@ const Welcome = ({navigation}) => {
     const welcome2 = () => {
       if(currentPage === 1){
         return (
-          <Text>
-            TEsssss
+          <Text style={styles.vb}>
+            Với dịch vụ chăm sóc thú cưng, 
+          bạn sẽ làm cho cuộc sống của những người bạn
+           lông lá của chúng ta hạnh phúc hơn.
           </Text>
         );
        }
@@ -51,8 +54,10 @@ const Welcome = ({navigation}) => {
     const welcome3 = () => {
       if(currentPage === 2){
         return (
-          <Text>
-            HAHHAHHAHAH
+          <Text style={styles.vb}>
+            Với dịch vụ chăm sóc thú cưng, 
+          bạn sẽ làm cho cuộc sống của những người bạn
+           lông lá của chúng ta hạnh phúc hơn.
           </Text>
         );
        }
@@ -63,7 +68,9 @@ const Welcome = ({navigation}) => {
           style={styles.hinh}
           source={require('../../assets/image/main.png')}></Image>
   
-        <Text style={styles.h1}>Xin chào bạn đến với Pet Care</Text>
+        <Text style={styles.h1}>Xin chào bạn đến với </Text>
+        <Text style={styles.h2}>Pet Care</Text>
+
         {
           currentPage === 0 ? 
           <View>{welcome1()}</View> : null
@@ -77,22 +84,22 @@ const Welcome = ({navigation}) => {
           <View>{welcome3()}</View> : null
         }
       <View style={styles.bacham}>
-        {currentPage === 0 ? <Ionicons color={'#18A2E1'} name="radio-button-on" size={20}/> 
-        : <Ionicons name="radio-button-off" size={20}/>}
+        {currentPage === 0 ? <Ionicons color={'#18A2E1'} name="radio-button-on" size={10}/> 
+        : <Ionicons name="radio-button-off" size={10}/>}
   
-        {currentPage === 1 ? <Ionicons name="radio-button-on" color={'#18A2E1'}  size={20}/> 
-        : <Ionicons name="radio-button-off" size={20}/>}
+        {currentPage === 1 ? <Ionicons name="radio-button-on" color={'#18A2E1'}  size={10}/> 
+        : <Ionicons name="radio-button-off" size={10}/>}
   
-        {currentPage === 2 ? <Ionicons name="radio-button-on"  color={'#18A2E1'}  size={20}/> 
-        : <Ionicons name="radio-button-off" size={20}/>}
+        {currentPage === 2 ? <Ionicons name="radio-button-on"  color={'#18A2E1'}  size={10}/> 
+        : <Ionicons name="radio-button-off" size={10}/>}
   </View>
         {
           currentPage === 0 || currentPage === 1 ? 
           <TouchableOpacity style={styles.nut} onPress={()=>handleNextPage()}>
-          <Text>Tiếp tục</Text>
+          <Text style={{color: 'white'}}>Tiếp tục</Text>
         </TouchableOpacity> :
         <TouchableOpacity style={styles.nut} onPress={()=> tieptuc()}>
-        <Text>Bắt đầu</Text>
+        <Text style={{color: 'white'}}>Bắt đầu</Text>
       </TouchableOpacity>
         }
         
@@ -117,13 +124,19 @@ const styles = StyleSheet.create({
       },
       hinh: {
         marginTop: 20,
-        marginLeft: '1%',
-        width: '100%',
-        height: 300,
+        marginLeft: '-10%',
+        width: '120%',
+        height: 350,
       },
       h1: {
         fontSize: 20,
         textAlign: 'center',
+        color:'#0D4C92',
+      },
+      h2: {
+        fontSize: 25,
+        textAlign: 'center',
+        color:'#0D4C92',
       },
       nut: {
         marginTop: '5%',
@@ -133,6 +146,7 @@ const styles = StyleSheet.create({
         borderRadius: 2,
         marginLeft: '26%',
         alignItems: 'center',
+        paddingTop: '3%',
       },
       cham: {
         width: 10,
@@ -140,7 +154,15 @@ const styles = StyleSheet.create({
       },
       bacham : {
         flexDirection: 'row',
-        marginLeft: '40%',
+        marginLeft: '45%',
         marginTop: '10%',
       },
+
+      vb:{
+        paddingTop: '5%',
+        textAlign: 'center',
+        marginLeft: '10%',
+        width: '80%',
+        height: 100,
+      }
 })

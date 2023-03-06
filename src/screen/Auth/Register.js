@@ -89,7 +89,7 @@ const Register = ({navigation}) => {
             alignItems: 'center',
             marginLeft: 20,
           }}>
-          <Image source={require('../../assets/image/phonenumber.png')}></Image>
+          <Image style={styles.hinh} source={require('../../assets/image/phonenumber.png')}></Image>
         </View>
 
         <View style={{width: '100%', paddingHorizontal: 15}}>
@@ -280,5 +280,11 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: 'center',
+  },
+  hinh: {
+    marginTop: 20,
+    marginLeft: '5%',
+    width: '100%',
+    height: 350,
   },
 });

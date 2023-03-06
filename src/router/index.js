@@ -44,6 +44,8 @@ function MainStack() {
 function MainNavigation() {
   const [checkLogin, setCheckLogin] = useState('');
 
+  
+
   const getCheckLogin = async () => {
     const checkDangNhap = await AsyncStorage.getItem('checkLogin');
     setCheckLogin(checkDangNhap);
@@ -51,7 +53,7 @@ function MainNavigation() {
   };
   useEffect(() => {
     getCheckLogin();
-  }, []);
+  }, [checkLogin]);
   return (
     <NavigationContainer ref={navigationRef1}>
       {checkLogin === 'true' ? <MainStack /> : <AuthStack />}
