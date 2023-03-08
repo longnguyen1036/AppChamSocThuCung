@@ -9,6 +9,13 @@ import {
   HOME_SCREEN,
   FAVOURITE_PRODUCTS_SCREEN,
   PROFILE_SCREEN,
+  HISTORY_PRODUCTS,
+  HISTORY_SERVICES,
+  PETS_SCREEN,
+  PETS_DETAIL_SCREEN,
+  PRODUCTS_SCREEN,
+  PRODUCTS_DETAIL_SCREEN,
+  SER
 } from './ScreenName';
 
 const Stack = createStackNavigator();
@@ -22,6 +29,12 @@ import {Handbook, HandbookDetail} from './../screen/Handbook';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FavouriteProducts } from '../screen/Favourite';
+import HistoryBought from '../screen/History/HistoryBought';
+import HistoryService from '../screen/History/HistoryService';
+import PetScreen from '../screen/Products/PetScreen';
+import PetDetail from '../screen/ProductDetail/PetDetail';
+import ProductScreen from '../screen/Products/ProductScreen';
+import ProductsDetail from '../screen/ProductDetail/ProductsDetail';
 
 function MainStack() {
   return (
@@ -37,6 +50,18 @@ function MainStack() {
       <Stack.Screen name={PROFILE_SCREEN} component={Profile} />
       <Stack.Screen name={HANDBOOK_SCREEN} component={Handbook} />
       <Stack.Screen name={HANDBOOK_DETAIL_SCREEN} component={HandbookDetail} />
+
+      <Stack.Screen name={HISTORY_PRODUCTS} component={HistoryBought} />
+      <Stack.Screen name={HISTORY_SERVICES} component={HistoryService} />
+
+      <Stack.Screen name={PETS_SCREEN} component={PetScreen} />
+      <Stack.Screen name={PETS_DETAIL_SCREEN} component={PetDetail} />
+
+      <Stack.Screen name={PRODUCTS_SCREEN} component={ProductScreen} />
+      <Stack.Screen name={PRODUCTS_DETAIL_SCREEN} component={ProductsDetail} />
+
+      
+
     </Stack.Navigator>
   );
 }
