@@ -13,6 +13,14 @@ import { store } from './src/redux/store';
 import { loggedAction } from './src/redux/actions/authAction';
 import ProfileShop1 from './src/screen/Shop/ProfileShop1';
 import { FavouriteProducts } from './src/screen/Favourite';
+import ServiceDetail from './src/screen/ProductDetail/ServiceDetail';
+import SeviceDetail1 from './src/screen/ProductDetail/SeviceDetail1';
+import { ChangeAcount, ChangeAddress, Profile } from './src/screen/Profile';
+import { Handbook } from './src/screen/Handbook';
+import PetDetail from './src/screen/ProductDetail/PetDetail';
+import ProductsDetail from './src/screen/ProductDetail/ProductsDetail';
+
+
 
 
 
@@ -32,7 +40,6 @@ const App = () => {
     //     <MainNavigation></MainNavigation>
     //   </Provider>
     // </SafeAreaProvider>
-    // <FavouriteProducts/>
 
 
 

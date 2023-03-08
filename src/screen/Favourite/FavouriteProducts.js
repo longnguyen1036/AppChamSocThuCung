@@ -83,6 +83,12 @@ const DATA = [
     image: require("../../assets/image/profileavatar.png"),
     price: 39,
   },
+  {
+    id: '58694a0f-3da1-471f-bd96-145571e29d87',
+    title: 'Thú cưng',
+    image: require("../../assets/image/profileavatar.png"),
+    price: 39,
+  },
 ];
 
 const FavouriteProducts = () => {
@@ -123,7 +129,7 @@ const FavouriteProducts = () => {
         </Block>
       </Block>
 
-      <ScrollView horizontal style={{marginTop: 10, paddingHorizontal: 45}}>
+      <ScrollView horizontal = {true} style={{marginTop: 10, paddingHorizontal: 45, }}>
             {DATA.map((category, index) => (
               <TouchableOpacity
                 style={{ marginRight: 20 , marginTop: 10}}
@@ -150,7 +156,7 @@ const FavouriteProducts = () => {
             ))}
       </ScrollView>
 
-      {activeCategory == 0 ?  <ScrollView decelerationRate={0.5} style={{marginTop: 10}} contentContainerStyle={{flexWrap: 'wrap', height: '70%', paddingHorizontal: 10}} >
+      {activeCategory == 0 ?  <ScrollView decelerationRate={0.5} style={{marginTop: -70}} contentContainerStyle={{flexWrap: 'wrap', height: '70%', paddingHorizontal: 10}} >
             {DATA.map((category, index) => (
               <Block
               marginLeft={'8%'}
@@ -160,10 +166,10 @@ const FavouriteProducts = () => {
               marginTop={15}
               radius={8}
               key={index}>
-                <Image style={styles.ilist} source={category.image}></Image>
+                <Image style={styles.ilist1} source={category.image}></Image>
                 <Block paddingLeft={'5%'} margin={5} backgroundColor={'white'} height={70}>
                   <Block paddingTop={5}>
-                    <Text>{category.title}</Text>
+                    <Text style={{fontSize: 18, fontWeight: '700'}}>{category.title}</Text>
                     <Text style={{marginTop: 7, fontSize: 12}}>{category.price} VND</Text>
                   </Block>
                   <TouchableOpacity style={styles.nut}>
@@ -175,26 +181,8 @@ const FavouriteProducts = () => {
 
 
             ))}
-        </ScrollView> : activeCategory == 1 ? <ScrollView  style={{marginTop: 10,}}>
+        </ScrollView> : activeCategory == 1 ? <ScrollView  style={{marginTop: -5}}>
             {DATA1.map((item, index) => (
-              // <TouchableOpacity
-              //   style={{ marginRight: 20 , marginTop: 10, flexDirection: 'row', backgroundColor: 'aquamarine',
-              // justifyContent: 'space-around', borderRadius: 8}}
-              //   key={index}
-                
-              // >
-              //   <Image source={category.image}/>
-              //   <View>
-              //     <Text>
-              //       {category.title}
-              //     </Text>
-              //     <Text>
-              //       {category.price}
-              //     </Text>
-              //   </View>
-                
-              // </TouchableOpacity>
-
               <Block
                 marginLeft={'5%'}
                 backgroundColor={'#E6EAED'}
@@ -223,7 +211,7 @@ const FavouriteProducts = () => {
 
 
             ))}
-        </ScrollView> : activeCategory == 2 ? <ScrollView decelerationRate={0.5} style={{marginTop: 10}} contentContainerStyle={{flexWrap: 'wrap', height: '70%', paddingHorizontal: 10}}>
+        </ScrollView> : activeCategory == 2 ? <ScrollView decelerationRate={0.5} style={{marginTop: -70}} contentContainerStyle={{flexWrap: 'wrap', height: '70%', paddingHorizontal: 10}}>
             {DATA.map((category, index) => (
               <Block
               marginLeft={'8%'}
@@ -232,10 +220,10 @@ const FavouriteProducts = () => {
               height={168}
               marginTop={15}
               key={index}>
-                <Image style={styles.ilist} source={category.image}></Image>
+                <Image style={styles.ilist1} source={category.image}></Image>
                 <Block paddingLeft={'5%'} margin={5} backgroundColor={'white'} height={70}>
                   <Block paddingTop={5}>
-                    <Text>{category.title}</Text>
+                    <Text style={{fontSize: 18, fontWeight: '700'}}>{category.title}</Text>
                     <Text style={{marginTop: 7, fontSize: 12}}>{category.price} VND</Text>
                   </Block>
                   <TouchableOpacity style={styles.nut}>
@@ -257,6 +245,11 @@ const styles = StyleSheet.create({
     width: 80,
     height: 90,
     marginLeft: '5%',
+  },
+  ilist1: {
+    width: 80,
+    height: 90,
+    marginLeft: '20%',
   },
   nut: {
     width: 32,

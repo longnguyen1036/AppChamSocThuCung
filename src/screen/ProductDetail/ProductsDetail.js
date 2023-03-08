@@ -7,18 +7,18 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 const ProductsDetail = () => {
 
     const [ItemsImage, setItemsImage] = useState([
-        { key: 1, image: require('../src/assets/image/detail1.png')},
-        { key: 2, image: require('../src/assets/image/detail2.png')},
-        { key: 3, image: require('../src/assets/image/detail1.png')},
-        { key: 4, image: require('../src/assets/image/detail2.png')},
-        { key: 5, image: require('../src/assets/image/detail1.png')},
-        { key: 6, image: require('../src/assets/image/detail2.png')},
-        { key: 7, image: require('../src/assets/image/detail1.png')},
-        { key: 8, image: require('../src/assets/image/detail2.png')},
-        { key: 9, image: require('../src/assets/image/detail1.png')},
+        { key: 1, image: require('../../assets/image/detail1.png')},
+        { key: 2, image: require('../../assets/image/detail2.png')},
+        { key: 3, image: require('../../assets/image/detail1.png')},
+        { key: 4, image: require('../../assets/image/detail2.png')},
+        { key: 5, image: require('../../assets/image/detail1.png')},
+        { key: 6, image: require('../../assets/image/detail2.png')},
+        { key: 7, image: require('../../assets/image/detail1.png')},
+        { key: 8, image: require('../../assets/image/detail2.png')},
+        { key: 9, image: require('../../assets/image/detail1.png')},
     ])
 
-    const [selectedImage, setSelectedImage] = useState(require('../src/assets/image/detail1.png'));
+    const [selectedImage, setSelectedImage] = useState(require('../../assets/image/detail1.png'));
 
 
 
@@ -74,7 +74,7 @@ const ProductsDetail = () => {
     padding: 8, borderRadius: 8}}>
             <View style={{flexDirection: 'row'}}>
                 <View style={{backgroundColor: '#18A2E1', padding: 5, borderRadius: 8, alignItems: 'center'}}>
-                    <Image source={require('../src/assets/image/iconimg.png')} ></Image>
+                    <Image source={require('../../assets/image/iconimg.png')} ></Image>
                 </View>
                 
                 <View style={{marginLeft: '5%'}}>

@@ -1,16 +1,64 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Image, Switch, ScrollView } from 'react-native'
 import React, {useState} from 'react'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import DatePicker from 'react-native-date-picker'
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { Button } from 'react-native'
 
 const ServiceDetail = () => {
-    const [date, setDate] = useState(new Date())
+    // const [date, setDate] = useState(new Date())
     const [open, setOpen] = useState(false)
+    const [day, setDay] = useState('');
+    const [month, setMonth] = useState('');
+    const [year, setYear] = useState('');
+
+    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+
+    const showDatePicker = () => {
+        setDatePickerVisibility(true);
+    };
+
+    const hideDatePicker = () => {
+        setDatePickerVisibility(false);
+        setOpen(true);
+    };
+
+    const handleConfirm = (date) => {
+        console.warn("A date has been picked: ", date);
+        setDay(date.getUTCDate().toString());
+        setMonth(date.getUTCMonth().toString());
+        setYear(date.getUTCFullYear().toString());
+        hideDatePicker();
+    };
+
+    // const [pickerMode, setPickerMode] = useState(null);
+    // const [inline, setInline] = useState(false);
+
+    // const showDatePicker = () => {
+    //     setPickerMode("date");
+    // };
+
+    // const showTimePicker = () => {
+    //     setPickerMode("time");
+    // };
+
+    // const showDateTimePicker = () => {
+    //     setPickerMode("datetime");
+    // };
+
+    // const hidePicker = () => {
+    //     setPickerMode(null);
+    // };
+
+    // const handleConfirm = (date) => {
+    //     // In order to prevent the double-shown popup bug on Android, picker has to be hidden first (https://github.com/react-native-datetimepicker/datetimepicker/issues/54#issuecomment-618776550)
+    //     hidePicker();
+    //     console.warn("A date has been picked: ", date);
+    // };
 
   return (
-    <View style ={{backgroundColor: '#dcdcdc', height: '100%', width: '100%'}}>
+    <ScrollView style ={{backgroundColor: '#dcdcdc', height: '100%', width: '100%'}}>
       <View style= {{alignItems: 'center'}}>
         <View style= {{flexDirection: 'row', width: '100%', justifyContent: 'space-between',
         paddingHorizontal: '3%', paddingVertical: '3%'}}>
@@ -88,7 +136,8 @@ const ServiceDetail = () => {
         </View>
 
         <View style={{width: '75%', marginTop: '2%', flexDirection: 'row', justifyContent: 'space-between'}}>
-            <View><Button title={date.getDay().toString()+'-'+date.getMonth().toString()+'-'+date.getFullYear().toString()} onPress={() => setOpen(true)} />
+            <View>
+                {/* <Button title={date.getDay().toString()+'-'+date.getMonth().toString()+'-'+date.getFullYear().toString()} onPress={() => setOpen(true)} />
                 <DatePicker
                     modal
                     open={open}
@@ -100,12 +149,45 @@ const ServiceDetail = () => {
                     onCancel={() => {
                     setOpen(false)
                     }}
+                /> */}
+
+                <TouchableOpacity style={{backgroundColor: '#00ffff', padding: 10, borderRadius: 8}} onPress={showDatePicker}>
+                    <Text>{open ? day+'-'+ month+'-'+year: 'chon ngay'}</Text>
+                </TouchableOpacity>
+                <DateTimePickerModal
+                    isVisible={isDatePickerVisible}
+                    mode="date"
+                    onConfirm={handleConfirm}
+                    onCancel={hideDatePicker}
                 />
-                <Text>Chọn ngày</Text>
+                
             </View>
 
+
+
+            {/* <View style={styles.root}>
+      <Button title="Show Date Picker" onPress={showDatePicker} />
+      <Button title="Show Time Picker" onPress={showTimePicker} />
+      <Button title="Show DateTime Picker" onPress={showDateTimePicker} />
+      {Platform.OS === "ios" && (
+        <View style={styles.inlineSwitchContainer}>
+          <Text style={styles.inlineSwitchText}>Display inline?</Text>
+          <Switch value={inline} onValueChange={setInline} />
+        </View>
+      )}
+      <DateTimePickerModal
+        isVisible={pickerMode !== null}
+        mode={pickerMode}
+        onConfirm={handleConfirm}
+        onCancel={hidePicker}
+        display={inline ? "inline" : undefined}
+      />
+    </View> */}
+
+
+
             <View>
-                <Button title={date.getHours().toString()+'-'+date.getMinutes().toString()+'-'+date.getSeconds().toString()} onPress={() => setOpen(true)} />
+                {/* <Button title={date.getHours().toString()+'-'+date.getMinutes().toString()+'-'+date.getSeconds().toString()} onPress={() => setOpen(true)} />
                     <DatePicker
                         modal
                         open={open}
@@ -118,7 +200,7 @@ const ServiceDetail = () => {
                         setOpen(false)
                         }}
                     />
-                <Text>Chọn giờ</Text>
+                <Text>Chọn giờ</Text> */}
 
             </View>
             
@@ -132,10 +214,25 @@ const ServiceDetail = () => {
 
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   )
 }
 
 export default ServiceDetail
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    root: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+      },
+      inlineSwitchContainer: {
+        marginTop: 28,
+        flexDirection: "row",
+        alignItems: "center",
+      },
+      inlineSwitchText: {
+        fontSize: 18,
+        marginRight: 8,
+      },
+})
