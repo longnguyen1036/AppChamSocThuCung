@@ -13,6 +13,7 @@ import Text from '../../components/Text';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {FlatGrid} from 'react-native-super-grid';
 import {useState} from 'react';
+import { SERVICES_DETAIL_SCREEN } from '../../router/ScreenName';
 
 const ServiceScreen = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -50,6 +51,7 @@ const ServiceScreen = () => {
   const renderItem = ({item}) => {
     return (
       <Block
+      onPress={ ()=>navigation.navigate(SERVICES_DETAIL_SCREEN)}
         marginLeft={'8%'}
         backgroundColor={'#E6EAED'}
         width={330}

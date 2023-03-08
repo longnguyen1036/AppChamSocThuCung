@@ -5,7 +5,7 @@ import {
   SafeAreaView,
   Image,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
 import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -13,12 +13,11 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import PagerView from 'react-native-pager-view';
 import {FlatList} from 'react-native-gesture-handler';
-import { FlatGrid } from 'react-native-super-grid';
-import { useNavigation } from '@react-navigation/native';
+import {FlatGrid} from 'react-native-super-grid';
+import {useNavigation} from '@react-navigation/native';
 import Block from '../../components/Block';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-
-
+import { PETS_SCREEN, PRODUCTS_SCREEN, SERVICES_SCREEN } from '../../router/ScreenName';
 
 const Home = () => {
   const navigation = useNavigation();
@@ -50,16 +49,24 @@ const Home = () => {
   const renderItem = ({item}) => {
     return (
       <Block
-      radius={10}
+        radius={10}
         marginLeft={'8%'}
         backgroundColor={'#E6EAED'}
         width={160}
         height={195}>
         <Image style={styles.ilist} source={item.images}></Image>
-        <Block radius={10} paddingLeft={'5%'} margin={5} marginTop={25} backgroundColor={'white'} height={70}>
+        <Block
+          radius={10}
+          paddingLeft={'5%'}
+          margin={5}
+          marginTop={25}
+          backgroundColor={'white'}
+          height={70}>
           <Block paddingTop={5}>
             <Text>{item.name}</Text>
-            <Text marginTop={7} size={12}>{item.price} VND</Text>
+            <Text marginTop={7} size={12}>
+              {item.price} VND
+            </Text>
           </Block>
           <TouchableOpacity style={styles.nut}>
             <AntDesign name="right" size={25} />
@@ -71,7 +78,6 @@ const Home = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-
       <View style={styles.header}>
         <View style={styles.h1}>
           <Text style={styles.t1}>Welcome to</Text>
@@ -111,7 +117,7 @@ const Home = () => {
       <View style={styles.category}>
         <Text style={styles.c1}>Danh mục</Text>
         <Block marginLeft={80} row={1}>
-          <View>
+          <TouchableOpacity onPress={ ()=>navigation.navigate(PETS_SCREEN)}>
             <View style={styles.categories}>
               <MaterialIcons
                 style={styles.icc}
@@ -121,8 +127,8 @@ const Home = () => {
               />
             </View>
             <Text style={{marginLeft: '8%'}}>Thú cưng</Text>
-          </View>
-          <View >
+          </TouchableOpacity>
+          <TouchableOpacity onPress={ ()=>navigation.navigate(PRODUCTS_SCREEN)}>
             <View style={styles.categories}>
               <FontAwesome5
                 style={styles.icc}
@@ -132,9 +138,9 @@ const Home = () => {
               />
             </View>
             <Text style={{marginLeft: '8%'}}>Sản phẩm</Text>
-          </View>
+          </TouchableOpacity>
 
-          <View >
+          <TouchableOpacity onPress={ ()=>navigation.navigate(SERVICES_SCREEN)}>
             <View style={styles.categories}>
               <Ionicons
                 style={styles.icc}
@@ -144,16 +150,13 @@ const Home = () => {
               />
             </View>
             <Text style={{marginLeft: '8%'}}>Dịch vụ</Text>
-          </View>
-          
+          </TouchableOpacity>
         </Block>
       </View>
 
       <View>
-      <Text style={styles.c1}>Top bán chạy</Text>
-        <FlatGrid key={DATA.name} 
-        data={DATA} 
-        renderItem={renderItem} />
+        <Text style={styles.c1}>Top bán chạy</Text>
+        <FlatGrid key={DATA.name} data={DATA} renderItem={renderItem} />
       </View>
     </SafeAreaView>
   );
@@ -238,13 +241,13 @@ const styles = StyleSheet.create({
   category: {
     marginTop: '5%',
   },
-  viewlist:{
+  viewlist: {
     marginLeft: '10%',
     backgroundColor: '#E6EAED',
     width: 150,
     height: 168,
   },
-   
+
   seachImage: {
     padding: 10,
     marginLeft: 10,

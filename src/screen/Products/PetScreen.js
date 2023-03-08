@@ -12,6 +12,7 @@ import Text from '../../components/Text';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {FlatGrid} from 'react-native-super-grid';
 import {useState} from 'react';
+import { PETS_DETAIL_SCREEN } from '../../router/ScreenName';
 
 const PetScreen = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -36,6 +37,7 @@ const PetScreen = () => {
   const renderItem = ({item}) => {
     return (
       <Block
+      onPress={ ()=>navigation.navigate(PETS_DETAIL_SCREEN)}
         marginLeft={'8%'}
         backgroundColor={'#E6EAED'}
         width={150}
@@ -55,7 +57,7 @@ const PetScreen = () => {
   };
 
   return (
-    <Block>
+    <Block >
       <Block row={1} paddingVertical={10} paddingHorizontal={10}>
         <Block width={'40%'}>
           <Image

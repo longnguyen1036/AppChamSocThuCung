@@ -12,6 +12,7 @@ import Text from '../../components/Text';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {FlatGrid} from 'react-native-super-grid';
 import {useState} from 'react';
+import { PRODUCTS_DETAIL_SCREEN } from '../../router/ScreenName';
 
 const ProductScreen = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -34,6 +35,7 @@ const ProductScreen = () => {
   const renderItem = ({item}) => {
     return (
       <Block
+      onPress={ ()=>navigation.navigate(PRODUCTS_DETAIL_SCREEN)}
         marginLeft={'8%'}
         backgroundColor={'#E6EAED'}
         width={150}
