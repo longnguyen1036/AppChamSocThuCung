@@ -14,7 +14,8 @@ import React, {useState, useContext} from 'react';
 import {REGISTER_SCREEN} from '../../router/ScreenName';
 import {useDispatch, useSelector} from 'react-redux';
 import authApi from '../../api/authApi';
-import {CREATE_NEW_PASS, HOME_SCREEN} from './../../router/ScreenName';
+
+import {CREATE_NEW_PASS, MAIN_TAB} from './../../router/ScreenName';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -43,7 +44,8 @@ const Login = ({navigation}) => {
         
 
         console.log('Ttenajsd',checkLogin);
-        // navigation.navigate('HOME_SCREEN');
+        navigation.navigate(MAIN_TAB);
+        // navigation.navigate('HOME_SCREEN');s
       }
     } catch (e) {
       console.log('login error: ', e);
@@ -54,7 +56,7 @@ const Login = ({navigation}) => {
     <ScrollView>
       <View>
         <View style={{justifyContent: 'center', alignItems: 'center', marginLeft: 20,}}>
-          <Image source={require('../../assets/image/phonenumber.png')}></Image>
+          <Image source={require('../../assets/image/phonenumber.png')} style={styles.hinh}></Image>
         </View>
 
         <View style={{width: '100%', paddingHorizontal: 15}}>
@@ -194,5 +196,11 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: "center"
-  }
+  },
+  hinh: {
+    marginTop: 20,
+    marginLeft: '5%',
+    width: '100%',
+    height: 350,
+  },
 });

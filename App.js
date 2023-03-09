@@ -22,8 +22,19 @@ import ProductsDetail from './src/screen/ProductDetail/ProductsDetail';
 
 
 
+
+
 const App = () => {
   return (
+
+    // <SafeAreaProvider>
+    //   <Provider store={store}>
+    //     <MainNavigation></MainNavigation>
+    //   </Provider>
+    // </SafeAreaProvider>
+   
+   
+
     // <SafeAreaProvider>
     //   <Provider store={store}>
     //     <MainNavigation></MainNavigation>

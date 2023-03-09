@@ -23,7 +23,7 @@ const DATA = [
   
   const Item = ({title, image, description}) => (
     <View elevation={5} style={styles.item}>
-      <Image source={image} style = {{ width: 340}} ></Image>
+      <Image source={image} style = {{ width: '100%'}} ></Image>
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.description}>{description}</Text>
     </View>

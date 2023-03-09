@@ -5,6 +5,7 @@ import {
   SafeAreaView,
   Image,
   ScrollView,
+  TouchableOpacity
 } from 'react-native';
 import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -14,6 +15,10 @@ import PagerView from 'react-native-pager-view';
 import {FlatList} from 'react-native-gesture-handler';
 import { FlatGrid } from 'react-native-super-grid';
 import { useNavigation } from '@react-navigation/native';
+import Block from '../../components/Block';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+
+
 
 const Home = () => {
   const navigation = useNavigation();
@@ -33,26 +38,40 @@ const Home = () => {
       price: 2000000,
       images: require('./../../assets/image/dog.png'),
     },
+    {
+      id: 2,
+      name: 'BEAGLE CƯNG CƯNG',
+      category: 'Thú cưng',
+      price: 2000000,
+      images: require('./../../assets/image/dog.png'),
+    },
   ];
 
   const renderItem = ({item}) => {
     return (
-      <View style={styles.viewlist}>
-      <Image style={styles.ilist} source={item.images}></Image>
-      <View>
-        <View>
-          <Text>{item.name}</Text>
-          <Text>{item.category}</Text>
-          <Text>{item.price}VND</Text>
-        </View>
-      </View>
-    </View>
-    )
-    
+      <Block
+      radius={10}
+        marginLeft={'8%'}
+        backgroundColor={'#E6EAED'}
+        width={160}
+        height={195}>
+        <Image style={styles.ilist} source={item.images}></Image>
+        <Block radius={10} paddingLeft={'5%'} margin={5} marginTop={25} backgroundColor={'white'} height={70}>
+          <Block paddingTop={5}>
+            <Text>{item.name}</Text>
+            <Text marginTop={7} size={12}>{item.price} VND</Text>
+          </Block>
+          <TouchableOpacity style={styles.nut}>
+            <AntDesign name="right" size={25} />
+          </TouchableOpacity>
+        </Block>
+      </Block>
+    );
   };
 
   return (
     <SafeAreaView style={styles.container}>
+
       <View style={styles.header}>
         <View style={styles.h1}>
           <Text style={styles.t1}>Welcome to</Text>
@@ -91,7 +110,7 @@ const Home = () => {
 
       <View style={styles.category}>
         <Text style={styles.c1}>Danh mục</Text>
-        <ScrollView showsHorizontalScrollIndicator={true}>
+        <Block marginLeft={80} row={1}>
           <View>
             <View style={styles.categories}>
               <MaterialIcons
@@ -103,18 +122,31 @@ const Home = () => {
             </View>
             <Text style={{marginLeft: '8%'}}>Thú cưng</Text>
           </View>
-          {/* <View >
+          <View >
             <View style={styles.categories}>
-              <MaterialIcons
+              <FontAwesome5
                 style={styles.icc}
                 color={'white'}
-                name="pets"
+                name="shopping-cart"
                 size={30}
               />
             </View>
-            <Text style={{marginLeft: '8%'}}>Thú cưng</Text>
-          </View> */}
-        </ScrollView>
+            <Text style={{marginLeft: '8%'}}>Sản phẩm</Text>
+          </View>
+
+          <View >
+            <View style={styles.categories}>
+              <Ionicons
+                style={styles.icc}
+                color={'white'}
+                name="time"
+                size={30}
+              />
+            </View>
+            <Text style={{marginLeft: '8%'}}>Dịch vụ</Text>
+          </View>
+          
+        </Block>
       </View>
 
       <View>
@@ -196,7 +228,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   icc: {
-    marginLeft: '20%',
+    marginLeft: '15%',
   },
   c1: {
     color: '#172E4C',
@@ -212,9 +244,30 @@ const styles = StyleSheet.create({
     width: 150,
     height: 168,
   },
-   ilist:{
-      width: 80,
-      height: 90,
-      marginLeft: '20%',
+   
+  seachImage: {
+    padding: 10,
+    marginLeft: 10,
+    height: 20,
+    width: 20,
+    resizeMode: 'stretch',
+    alignItems: 'center',
+  },
+  ilist: {
+    width: 80,
+    height: 90,
+    marginLeft: '20%',
+    marginTop: '2%',
+  },
+  nut: {
+    width: 32,
+    height: 32,
+    backgroundColor: '#F2F3F2',
+    position: 'absolute',
+    right: '5%',
+    bottom: '8%',
+    alignItems: 'center',
+    borderRadius: 4,
+    paddingTop: '15%',
   },
 });
