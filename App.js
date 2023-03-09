@@ -19,6 +19,8 @@ import { ChangeAcount, ChangeAddress, Profile } from './src/screen/Profile';
 import { Handbook } from './src/screen/Handbook';
 import PetDetail from './src/screen/ProductDetail/PetDetail';
 import ProductsDetail from './src/screen/ProductDetail/ProductsDetail';
+import ProducScreen from './src/screen/Favourite/ProducScreen';
+import ProductScreeen1 from './src/screen/Favourite/ProductScreeen1';
 
 
 
@@ -40,7 +42,7 @@ const App = () => {
     //     <MainNavigation></MainNavigation>
     //   </Provider>
     // </SafeAreaProvider>
-    <Profile/>
+    <FavouriteProducts/>
 
 
 
