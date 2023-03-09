@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { LOGIN_SCREEN } from '../../router/ScreenName';
 
 const CreateNewPass = ({navigation}) => {
   const [hidden, setHidden] = useState(true);
@@ -91,6 +92,7 @@ const CreateNewPass = ({navigation}) => {
       </View>
       <View style={styles.v4}>
         <TouchableOpacity
+        onPress={() =>navigation.navigate(LOGIN_SCREEN)}
           style={styles.btn}>
           <Text style={styles.t4}>Xác nhận</Text>
         </TouchableOpacity>

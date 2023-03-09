@@ -12,9 +12,9 @@ import Text from '../../components/Text';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {FlatGrid} from 'react-native-super-grid';
 import {useState} from 'react';
-import { PRODUCTS_DETAIL_SCREEN } from '../../router/ScreenName';
+import {PRODUCTS_DETAIL_SCREEN} from '../../router/ScreenName';
 
-const ProductScreen = () => {
+const ProductScreen = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const DATA = [
@@ -34,34 +34,45 @@ const ProductScreen = () => {
 
   const renderItem = ({item}) => {
     return (
-      <Block
-      onPress={ ()=>navigation.navigate(PRODUCTS_DETAIL_SCREEN)}
-        marginLeft={'8%'}
-        backgroundColor={'#E6EAED'}
-        width={150}
-        height={168}>
-        <Image style={styles.ilist} source={item.images}></Image>
-        <Block paddingLeft={'5%'} margin={5} backgroundColor={'white'} height={70}>
-          <Block paddingTop={5}>
-            <Text>{item.name}</Text>
-            <Text marginTop={7} size={12}>{item.price} VND</Text>
+      <TouchableOpacity
+        onPress={() => navigation.navigate(PRODUCTS_DETAIL_SCREEN)}>
+        <Block
+          marginLeft={'8%'}
+          backgroundColor={'#E6EAED'}
+          width={150}
+          height={168}>
+          <Image style={styles.ilist} source={item.images}></Image>
+          <Block
+            paddingLeft={'5%'}
+            margin={5}
+            backgroundColor={'white'}
+            height={70}>
+            <Block paddingTop={5}>
+              <Text>{item.name}</Text>
+              <Text marginTop={7} size={12}>
+                {item.price} VND
+              </Text>
+            </Block>
+            <TouchableOpacity style={styles.nut}>
+              <AntDesign name="right" size={25} />
+            </TouchableOpacity>
           </Block>
-          <TouchableOpacity style={styles.nut}>
-            <AntDesign name="right" size={25} />
-          </TouchableOpacity>
         </Block>
-      </Block>
+      </TouchableOpacity>
     );
   };
 
   return (
     <Block>
       <Block row={1} paddingVertical={10} paddingHorizontal={10}>
-        <Block width={'40%'}>
-          <Image
-            source={require('./../../assets/image/backpet.png')}
-            style={{marginTop: 8}}></Image>
-        </Block>
+        <TouchableOpacity style={{width: '40%'}} onPress={() => navigation.goBack()}>
+          
+            <Image
+              source={require('./../../assets/image/backpet.png')}
+              style={{marginTop: 8}}></Image>
+          
+        </TouchableOpacity>
+
         <Block width={'50%'}>
           <Text size={20} color={'black'} bold>
             Sản phẩm
@@ -138,7 +149,6 @@ const ProductScreen = () => {
             </Block>
           </View>
 
-
           <View marginTop={30}>
             <Text marginLeft={10}>Theo danh mục</Text>
             <Block marginTop={5} row={1}>
@@ -168,7 +178,6 @@ const ProductScreen = () => {
                 <Text marginLeft={15}>Phụ kiện</Text>
               </Block>
             </Block>
-
           </View>
 
           <View marginTop={30}>
@@ -335,7 +344,7 @@ const ProductScreen = () => {
   );
 };
 
-export default ProductScreen
+export default ProductScreen;
 
 const styles = StyleSheet.create({
   seachImage: {
@@ -362,4 +371,4 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     paddingTop: '15%',
   },
-})
+});

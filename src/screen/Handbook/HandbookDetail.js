@@ -1,15 +1,17 @@
-import { StyleSheet, View, Image, TextInput, Linking } from 'react-native'
+import { StyleSheet, View, Image, TextInput, Linking, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Block from './../../components/Block';
 import Text from './../../components/Text';
 
 
-const HandbookDetail = () => {
+const HandbookDetail = ({navigation}) => {
   return (
     <Block>
       <Block row={1} >
           <Block width={'5%'} justifyCenter alignCenter>
+          <TouchableOpacity onPress={()=> navigation.goBack()}>
             <Image source={require('./../../assets/image/backpet.png')} style = {{}} ></Image>
+            </TouchableOpacity>
           </Block>
           <Block width={'95%'}>
           <Block row={1} justifyCenter alignCenter backgroundColor={'#F2F3F2'}

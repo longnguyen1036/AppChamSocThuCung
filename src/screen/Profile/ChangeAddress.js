@@ -4,11 +4,13 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import Block from '../../components/Block'
 import Text from '../../components/Text'
 
-const ChangeAddress = () => {
+const ChangeAddress = ({navigation}) => {
   return (
     <Block>
       <Block row={1} alignCenter width={'100%'} paddingHorizontal={10} marginTop={'5%'} justifySpaceBetween>
+      <TouchableOpacity onPress={()=> navigation.goBack()}>
         <Ionicons name='chevron-back-outline' size={30} />
+        </TouchableOpacity>
         <Text style = {{ width: '70%', color: 'black', fontSize: 20, fontWeight: 'bold' }}>Thay đổi địa chỉ</Text>
 
       </Block>

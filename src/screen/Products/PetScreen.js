@@ -14,7 +14,7 @@ import {FlatGrid} from 'react-native-super-grid';
 import {useState} from 'react';
 import { PETS_DETAIL_SCREEN } from '../../router/ScreenName';
 
-const PetScreen = () => {
+const PetScreen = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const DATA = [
@@ -36,8 +36,9 @@ const PetScreen = () => {
 
   const renderItem = ({item}) => {
     return (
+      <TouchableOpacity  onPress={ ()=>navigation.navigate(PETS_DETAIL_SCREEN)}>
       <Block
-      onPress={ ()=>navigation.navigate(PETS_DETAIL_SCREEN)}
+     
         marginLeft={'8%'}
         backgroundColor={'#E6EAED'}
         width={150}
@@ -53,17 +54,20 @@ const PetScreen = () => {
           </TouchableOpacity>
         </Block>
       </Block>
+      </TouchableOpacity>
     );
   };
 
   return (
     <Block >
       <Block row={1} paddingVertical={10} paddingHorizontal={10}>
-        <Block width={'40%'}>
+      <TouchableOpacity style={{width: '40%'}} onPress={() => navigation.goBack()}>
+          
           <Image
             source={require('./../../assets/image/backpet.png')}
             style={{marginTop: 8}}></Image>
-        </Block>
+        
+      </TouchableOpacity>
         <Block width={'50%'}>
           <Text size={20} color={'black'} bold>
             Thú cưng

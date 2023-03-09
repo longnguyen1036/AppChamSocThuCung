@@ -9,7 +9,7 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 
-const SeviceDetail1 = () => {
+const SeviceDetail1 = ({navigation}) => {
     const [date, setDate] = useState(new Date())
     const [open, setOpen] = useState(false)
   return (
@@ -17,7 +17,7 @@ const SeviceDetail1 = () => {
       <View style={{ alignItems: 'center'}}>
         <View style= {{flexDirection: 'row', width: '100%', justifyContent: 'space-between',
             paddingHorizontal: '3%', paddingVertical: '3%'}}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.goBack()}>
                         <FontAwesome5 name='chevron-left' size={30} color={'black'} />
                     </TouchableOpacity>
 

@@ -11,6 +11,7 @@ import {
    Pressable
 } from 'react-native';
 import React, {useState, useContext} from 'react';
+import { OTP_FORGET_PASS_SCREEN } from '../../router/ScreenName';
 
 const ForgetPass = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -41,10 +42,12 @@ const ForgetPass = ({navigation}) => {
         placeholder="Nhập Email"></TextInput>
     </View>
     <View style={styles.v4}>
-      <TouchableOpacity style={styles.btn} >
+      <TouchableOpacity style={styles.btn} 
+      onPress={()=> navigation.navigate(OTP_FORGET_PASS_SCREEN)}>
         <Text style={styles.t4}>Tiếp theo</Text>
       </TouchableOpacity>
     </View>
+
     <Modal
       animationType="slide"
       transparent={true}

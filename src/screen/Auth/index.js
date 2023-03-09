@@ -4,6 +4,7 @@ import Register from "./Register";
 import ForgetPass from "./ForgetPass";
 import ConfirmOTP from "./ConfirmOTP";
 import CreateNewPass from "./CreateNewPass";
+import OTPFogetPass from "./OTPFogetPass";
 
 export{
     Welcome,
@@ -11,5 +12,6 @@ export{
     Register,
     ForgetPass,
     ConfirmOTP,
-    CreateNewPass
+    CreateNewPass,
+    OTPFogetPass
 }

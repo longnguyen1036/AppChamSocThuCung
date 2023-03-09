@@ -12,7 +12,7 @@ import Block from '../../components/Block';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { EDIT_PROFILE_ADDRESS, HISTORY_SERVICES } from '../../router/ScreenName';
+import { EDIT_PROFILE_ACCOUNT, EDIT_PROFILE_ADDRESS, HISTORY_PRODUCTS, HISTORY_SERVICES } from '../../router/ScreenName';
 
 const Profile = ({navigation}) => {
   // const navigation = useNavigation();
@@ -210,6 +210,7 @@ const Profile = ({navigation}) => {
           justifyContent: 'center',
         }}>
         <TouchableOpacity
+        onPress={ ()=>navigation.navigate(HISTORY_PRODUCTS)}
           style={{
             flexDirection: 'row',
             justifyContent: 'space-around',
@@ -263,31 +264,7 @@ const Profile = ({navigation}) => {
           />
         </TouchableOpacity>
 
-        <TouchableOpacity
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-            paddingHorizontal: 10,
-            marginTop: '5%',
-          }}>
-          <Text
-            style={{
-              width: '90%',
-              fontSize: 16,
-              color: 'white',
-              fontWeight: 'bold',
-            }}
-            onPress={() => signOut()}>
-            Đăng xuất
-          </Text>
-          <FontAwesome5
-            style={{width: '10%'}}
-            name="chevron-right"
-            size={25}
-            color={'white'}
-          />
-        </TouchableOpacity>
-
+       
         <View
           style={{
             borderWidth: 0.5,
@@ -296,6 +273,7 @@ const Profile = ({navigation}) => {
             marginTop: '3%',
           }}></View>
         <TouchableOpacity
+        onPress={() => signOut()}
           style={{
             flexDirection: 'row',
             justifyContent: 'space-around',

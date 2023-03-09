@@ -11,7 +11,7 @@ import {
   Pressable,
 } from 'react-native';
 import React, {useState, useContext} from 'react';
-import {REGISTER_SCREEN} from '../../router/ScreenName';
+import {FORGET_PASS, REGISTER_SCREEN} from '../../router/ScreenName';
 import {useDispatch, useSelector} from 'react-redux';
 import authApi from '../../api/authApi';
 
@@ -45,7 +45,7 @@ const Login = ({navigation}) => {
 
         console.log('Ttenajsd',checkLogin);
         navigation.navigate(MAIN_TAB);
-        // navigation.navigate('HOME_SCREEN');s
+        // navigation.navigate('HOME_SCREEN');
       }
     } catch (e) {
       console.log('login error: ', e);
@@ -88,7 +88,7 @@ const Login = ({navigation}) => {
           <View style={{width: '100%', alignItems: 'flex-end', marginTop: 10}}>
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate('FPass');
+                navigation.navigate(FORGET_PASS);
               }}>
               <Text>Quên mật khẩu?</Text>
             </TouchableOpacity>

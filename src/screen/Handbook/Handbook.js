@@ -2,6 +2,8 @@ import { StyleSheet, View, Image, TextInput, FlatList,SafeAreaView, } from 'reac
 import React from 'react'
 import Block from './../../components/Block';
 import Text from './../../components/Text';
+import { HANDBOOK_DETAIL_SCREEN } from '../../router/ScreenName';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 const DATA = [
@@ -21,16 +23,19 @@ const DATA = [
   ];
   
   
+ 
+
+const Handbook = ({navigation}) => {
   const Item = ({title, image, description}) => (
+    <TouchableOpacity onPress={ ()=>navigation.navigate(HANDBOOK_DETAIL_SCREEN)}>
     <View elevation={5} style={styles.item}>
       <Image source={image} style = {{ width: '100%'}} ></Image>
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.description}>{description}</Text>
+      
     </View>
+    </TouchableOpacity>
   );
-
-const Handbook = () => {
-  
 
   return (
     <Block>
@@ -64,7 +69,9 @@ const Handbook = () => {
 
         <Block>
           <SafeAreaView >
+
             <FlatList
+            
               data={DATA}
               renderItem={({item}) => <Item title={item.title} image = {item.image} description = {item.description} />}
               keyExtractor={item => item.id}

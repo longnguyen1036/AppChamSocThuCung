@@ -1,21 +1,17 @@
 import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView,  } from 'react-native'
 import React, {useState} from 'react'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
+import { PROFILE_SHOP_SCREEN } from '../../router/ScreenName'
 
 
 
-const PetDetail = () => {
+const PetDetail = ({navigation}) => {
 
     const [ItemsImage, setItemsImage] = useState([
         { key: 1, image: require('../../assets/image/detail1.png')},
         { key: 2, image: require('../../assets/image/detail2.png')},
         { key: 3, image: require('../../assets/image/detail1.png')},
         { key: 4, image: require('../../assets/image/detail2.png')},
-        { key: 5, image: require('../../assets/image/detail1.png')},
-        { key: 6, image: require('../../assets/image/detail2.png')},
-        { key: 7, image: require('../../assets/image/detail1.png')},
-        { key: 8, image: require('../../assets/image/detail2.png')},
-        { key: 9, image: require('../../assets/image/detail1.png')},
     ])
 
     const [selectedImage, setSelectedImage] = useState(require('../../assets/image/detail1.png'));
@@ -26,7 +22,7 @@ const PetDetail = () => {
       <View style = {{alignItems: 'center',}}>
         <View style= {{flexDirection: 'row', width: '100%', justifyContent: 'space-between',
     paddingHorizontal: '3%', paddingVertical: '3%'}}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={ ()=>navigation.goBack()}>
                 <FontAwesome5 name='chevron-left' size={30} color={'black'} />
             </TouchableOpacity>
 
@@ -40,7 +36,7 @@ const PetDetail = () => {
             <Image source={selectedImage} style = {{width: 200, height: 200, borderRadius: 8}} ></Image>
         </View>
 
-        <ScrollView style={{width: '40%'}} horizontal={true}>
+        <ScrollView style={{width: '66%'}} horizontal={true}>
 
         {
             ItemsImage.map((object)=>{
@@ -52,6 +48,8 @@ const PetDetail = () => {
             })
         }
         </ScrollView>
+        
+        <View >
         <View style ={{marginTop: '3%', width:'73%'}}>
             <Text style ={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>BEAGLE CƯNG CƯNG</Text>
             <Text style ={{fontSize: 18, fontWeight: 'bold'}}>700.000đ</Text>
@@ -78,8 +76,9 @@ const PetDetail = () => {
                 <Text>Mèo</Text>
             </TouchableOpacity>
         </View>
+        </View>
 
-        <View style={{marginTop: '5%', flexDirection: 'row', width: '73%', justifyContent: 'space-between', backgroundColor: 'white', alignItems: 'center',
+        <TouchableOpacity onPress={()=> navigation.navigate(PROFILE_SHOP_SCREEN)} style={{marginTop: '5%', flexDirection: 'row', width: '73%', justifyContent: 'space-between', backgroundColor: 'white', alignItems: 'center',
     padding: 8, borderRadius: 8}}>
             <View style={{flexDirection: 'row'}}>
                 <View style={{backgroundColor: '#18A2E1', padding: 5, borderRadius: 8, alignItems: 'center'}}>
@@ -95,7 +94,7 @@ const PetDetail = () => {
             <TouchableOpacity style={{backgroundColor: '#18A2E1', borderRadius: 8, alignItems: 'center', justifyContent: 'center', padding: 5, height: 40}}>
                 <FontAwesome5 name='comments' size={20} color={'white'} />
             </TouchableOpacity>
-        </View>
+        </TouchableOpacity>
 
         <TouchableOpacity style={{marginTop: '5%', backgroundColor: '#18A2E1', padding: '3%', borderRadius: 8}}>
             <Text style={{fontSize: 20, color: 'white', fontWeight: '800'}}>Thêm vào giỏ hàng</Text>

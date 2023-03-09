@@ -5,7 +5,7 @@ import { useTogglePasswordVisibility } from '../../components/Custom/useTogglePa
 import Block from '../../components/Block'
 import Text from '../../components/Text'
 
-const ChangeAcount = () => {
+const ChangeAcount = ({navigation}) => {
 
     const { passwordVisibility, rightIcon, handlePasswordVisibility } =
     useTogglePasswordVisibility();
@@ -21,8 +21,10 @@ const ChangeAcount = () => {
   return (
     <Block>
       <Block row={1} alignCenter width={'100%'} justifySpaceBetween paddingHorizontal={10} marginTop={'5%'} >
+        <TouchableOpacity onPress={()=> navigation.goBack()}>
         <Ionicons name='chevron-back-outline' size={30} />
-        <Text style = {{ width: '70%', color: 'black', fontSize: 20, fontWeight: 'bold' }}>Thay đổi địa chỉ</Text>
+        </TouchableOpacity>
+        <Text style = {{ width: '70%', color: 'black', fontSize: 20, fontWeight: 'bold' }}>Chỉnh sửa tài khoản</Text>
 
       </Block>
 
