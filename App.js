@@ -21,7 +21,10 @@ import PetDetail from './src/screen/ProductDetail/PetDetail';
 import ProductsDetail from './src/screen/ProductDetail/ProductsDetail';
 import ProducScreen from './src/screen/Favourite/ProducScreen';
 import ProductScreeen1 from './src/screen/Favourite/ProductScreeen1';
-
+import ProductScreen from './src/screen/Products/ProductScreen';
+import PetScreen from './src/screen/Products/PetScreen';
+import ServiceScreen from './src/screen/Products/ServiceScreen';
+import { HISTORY_PRODUCTS } from './src/router/ScreenName';
 
 
 
@@ -42,7 +45,7 @@ const App = () => {
     //     <MainNavigation></MainNavigation>
     //   </Provider>
     // </SafeAreaProvider>
-    <FavouriteProducts/>
+    <ChangeAcount/>
 
 
 
