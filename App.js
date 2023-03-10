@@ -25,6 +25,7 @@ import ProductScreen from './src/screen/Products/ProductScreen';
 import PetScreen from './src/screen/Products/PetScreen';
 import ServiceScreen from './src/screen/Products/ServiceScreen';
 import { HISTORY_PRODUCTS } from './src/router/ScreenName';
+import Shop from './src/screen/Products/Shop';
 
 
 
@@ -45,7 +46,7 @@ const App = () => {
     //     <MainNavigation></MainNavigation>
     //   </Provider>
     // </SafeAreaProvider>
-    <ChangeAcount/>
+    <Shop/>
 
 
 
