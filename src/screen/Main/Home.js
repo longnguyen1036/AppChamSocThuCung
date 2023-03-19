@@ -48,36 +48,31 @@ const Home = () => {
 
   const renderItem = ({item}) => {
     return (
+      <TouchableOpacity>
       <Block
-        radius={10}
+       radius={10}
         marginLeft={'8%'}
         backgroundColor={'#E6EAED'}
         width={160}
-        height={195}>
+        height={198}>
         <Image style={styles.ilist} source={item.images}></Image>
-        <Block
-          radius={10}
-          paddingLeft={'5%'}
-          margin={5}
-          marginTop={25}
-          backgroundColor={'white'}
-          height={70}>
+        <Block radius={10} paddingLeft={'5%'} margin={5} backgroundColor={'white'} height={80}>
           <Block paddingTop={5}>
-            <Text>{item.name}</Text>
-            <Text marginTop={7} size={12}>
-              {item.price} VND
-            </Text>
+            <Text >{item.name}</Text>
+            <Text color={'#'}>Cate</Text>
+            <Text marginTop={7} size={15}>{item.price} VND</Text>
           </Block>
           <TouchableOpacity style={styles.nut}>
-            <AntDesign name="right" size={25} />
+            <AntDesign color={'white'} name="right" size={25} />
           </TouchableOpacity>
         </Block>
       </Block>
+      </TouchableOpacity>
     );
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={{flex: 1, backgroundColor: '#DADADA'}}>
       <View style={styles.header}>
         <View style={styles.h1}>
           <Text style={styles.t1}>Welcome to</Text>
@@ -115,8 +110,10 @@ const Home = () => {
       </View>
 
       <View style={styles.category}>
-        <Text style={styles.c1}>Danh mục</Text>
-        <Block marginLeft={80} row={1}>
+      <View style={{paddingHorizontal: '3%', marginTop: '3%', marginBottom: '3%'}}>
+        <Text style ={{fontSize: 20, fontWeight: '700', color: 'black'}}> Danh mục</Text>
+      </View>
+        <Block marginLeft={60} marginRight={50} row>
           <TouchableOpacity onPress={ ()=>navigation.navigate(PETS_SCREEN)}>
             <View style={styles.categories}>
               <MaterialIcons
@@ -126,7 +123,7 @@ const Home = () => {
                 size={30}
               />
             </View>
-            <Text style={{marginLeft: '8%'}}>Thú cưng</Text>
+            <Text style={{marginLeft: '10%'}}>Thú cưng</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={ ()=>navigation.navigate(PRODUCTS_SCREEN)}>
             <View style={styles.categories}>
@@ -134,10 +131,10 @@ const Home = () => {
                 style={styles.icc}
                 color={'white'}
                 name="shopping-cart"
-                size={30}
+                size={25}
               />
             </View>
-            <Text style={{marginLeft: '8%'}}>Sản phẩm</Text>
+            <Text style={{marginLeft: '10%'}}>Sản phẩm</Text>
           </TouchableOpacity>
 
           <TouchableOpacity onPress={ ()=>navigation.navigate(SERVICES_SCREEN)}>
@@ -149,13 +146,15 @@ const Home = () => {
                 size={30}
               />
             </View>
-            <Text style={{marginLeft: '8%'}}>Dịch vụ</Text>
+            <Text style={{marginLeft: '15%'}}>Dịch vụ</Text>
           </TouchableOpacity>
         </Block>
       </View>
+      <View style={{paddingHorizontal: '5%', marginTop: '3%'}}>
+        <Text style ={{fontSize: 20, fontWeight: '700', color: 'black'}}>Top bán chạy</Text>
+      </View>
 
       <View>
-        <Text style={styles.c1}>Top bán chạy</Text>
         <FlatGrid key={DATA.name} data={DATA} renderItem={renderItem} />
       </View>
     </SafeAreaView>
@@ -227,22 +226,18 @@ const styles = StyleSheet.create({
     height: 50,
     backgroundColor: '#18A2E1',
     justifyContent: 'center',
-    marginLeft: '10%',
+    marginLeft: '15%',
     borderRadius: 5,
   },
   icc: {
-    marginLeft: '15%',
+    marginLeft: '20%',
   },
-  c1: {
-    color: '#172E4C',
-    fontSize: 18,
-    marginLeft: '5%',
-  },
+ 
   category: {
-    marginTop: '5%',
+    marginTop: '2%',
   },
   viewlist: {
-    marginLeft: '10%',
+    marginLeft: '15%',
     backgroundColor: '#E6EAED',
     width: 150,
     height: 168,
@@ -257,15 +252,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   ilist: {
-    width: 80,
-    height: 90,
-    marginLeft: '20%',
+    width: 100,
+    height: 100,
+    marginLeft: '19%',
     marginTop: '2%',
+    marginBottom: '2%',
+
   },
   nut: {
     width: 32,
     height: 32,
-    backgroundColor: '#F2F3F2',
+    backgroundColor: '#18A2E1',
     position: 'absolute',
     right: '5%',
     bottom: '8%',

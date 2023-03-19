@@ -39,14 +39,16 @@ const ProductScreen = ({navigation}) => {
         <Block
           marginLeft={'8%'}
           backgroundColor={'#E6EAED'}
-          width={150}
-          height={168}>
+          width={160}
+          height={190}
+          radius={10}>
           <Image style={styles.ilist} source={item.images}></Image>
           <Block
             paddingLeft={'5%'}
             margin={5}
             backgroundColor={'white'}
-            height={70}>
+            height={70}
+            radius={10}>
             <Block paddingTop={5}>
               <Text>{item.name}</Text>
               <Text marginTop={7} size={12}>
@@ -63,7 +65,7 @@ const ProductScreen = ({navigation}) => {
   };
 
   return (
-    <Block>
+    <Block backgroundColor={'white'} flex={1}>
       <Block row={1} paddingVertical={10} paddingHorizontal={10}>
         <TouchableOpacity style={{width: '40%'}} onPress={() => navigation.goBack()}>
           
@@ -356,9 +358,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   ilist: {
-    width: 80,
-    height: 90,
-    marginLeft: '20%',
+    width: 100,
+    height: 110,
+    marginLeft: '18%',
   },
   nut: {
     width: 32,

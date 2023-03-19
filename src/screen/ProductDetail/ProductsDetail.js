@@ -78,10 +78,10 @@ const ProductsDetail = ({navigation}) => {
           <View style={{flexDirection: 'row', width: '73%', marginTop: '3%'}}>
             <TouchableOpacity
               style={{backgroundColor: 'white', padding: 8, borderRadius: 8}}>
-              <Text style={{fontSize: 16, color: 'black', fontWeight: '700'}}>
+              <Text style={{fontSize: 10,}}>
                 Danh mục
               </Text>
-              <Text>Phụ kiện</Text>
+              <Text style={{fontSize: 12, color: 'black', fontWeight: '700'}}>Phụ kiện</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -91,10 +91,10 @@ const ProductsDetail = ({navigation}) => {
                 padding: 8,
                 borderRadius: 8,
               }}>
-              <Text style={{fontSize: 16, color: 'black', fontWeight: '700'}}>
+              <Text style={{fontSize: 10,}} >
                 Dành cho
               </Text>
-              <Text>Mèo</Text>
+              <Text style={{textAlign: 'center',fontSize: 12, color: 'black', fontWeight: '700'}}>Mèo</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -104,12 +104,13 @@ const ProductsDetail = ({navigation}) => {
           style={{
             marginTop: '5%',
             flexDirection: 'row',
-            width: '73%',
+            width: '80%',
             justifyContent: 'space-between',
             backgroundColor: 'white',
             alignItems: 'center',
             padding: 8,
             borderRadius: 8,
+            borderWidth: 1
           }}>
           <View style={{flexDirection: 'row'}}>
             <View

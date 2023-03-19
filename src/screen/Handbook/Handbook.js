@@ -38,7 +38,7 @@ const Handbook = ({navigation}) => {
   );
 
   return (
-    <Block>
+    <Block backgroundColor={'#E6EAED'}>
       <Block>
         
         <Block row={1} paddingVertical={20} paddingHorizontal= {20} >

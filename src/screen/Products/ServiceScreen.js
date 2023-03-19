@@ -53,19 +53,21 @@ const ServiceScreen = ({navigation}) => {
       <TouchableOpacity
         onPress={() => navigation.navigate(SERVICES_DETAIL_SCREEN)}>
         <Block
-          marginLeft={'8%'}
+          marginLeft={'5%'}
           backgroundColor={'#E6EAED'}
-          width={330}
-          height={120}
+          width={350}
+          height={130}
           row={1}
-          marginTop={10}>
+          marginTop={10} 
+          radius={10}>
           <Image style={styles.ilist} source={item.images}></Image>
           <Block
             paddingLeft={'5%'}
             margin={5}
             backgroundColor={'white'}
-            height={110}
-            width={220}>
+            height={120}
+            width={240}
+            radius={10}>
             <Block paddingTop={5}>
               <Text>{item.name}</Text>
               <Text color={'red'} size={12}>
@@ -85,7 +87,7 @@ const ServiceScreen = ({navigation}) => {
   };
 
   return (
-    <Block>
+    <Block backgroundColor={'white'} flex={1}>
       <Block row={1} paddingVertical={10} paddingHorizontal={10}>
         <TouchableOpacity
           style={{width: '40%'}}

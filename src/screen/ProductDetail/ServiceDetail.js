@@ -100,12 +100,13 @@ const ServiceDetail = ({navigation}) => {
           style={{
             marginTop: '3%',
             flexDirection: 'row',
-            width: '75%',
+            width: '85%',
             justifyContent: 'space-between',
             backgroundColor: 'white',
             alignItems: 'center',
             padding: 8,
             borderRadius: 8,
+            borderWidth: 1,
           }}>
           <View style={{flexDirection: 'row'}}>
             <View
@@ -205,7 +206,7 @@ const ServiceDetail = ({navigation}) => {
                 /> */}
 
             <TouchableOpacity
-              style={{backgroundColor: '#00ffff', padding: 10, borderRadius: 8}}
+              style={{backgroundColor: '#ffffff', padding: 10, borderRadius: 8}}
               onPress={showDatePicker}>
               <Text>{open ? day + '-' + month + '-' + year : 'chon ngay'}</Text>
             </TouchableOpacity>
@@ -258,10 +259,11 @@ const ServiceDetail = ({navigation}) => {
           style={{
             backgroundColor: '#18A2E1',
             borderRadius: 8,
-            width: '40%',
+            width: '50%',
             justifyContent: 'center',
             alignItems: 'center',
             padding: '2%',
+            marginTop: '10%'
           }}>
           <Text style={{fontSize: 20, color: 'white', fontWeight: '800'}}>
             Đặt lịch

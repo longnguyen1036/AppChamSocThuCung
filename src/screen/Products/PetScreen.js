@@ -41,10 +41,11 @@ const PetScreen = ({navigation}) => {
      
         marginLeft={'8%'}
         backgroundColor={'#E6EAED'}
-        width={150}
-        height={168}>
+        width={160}
+        height={190} 
+        radius={10}>
         <Image style={styles.ilist} source={item.images}></Image>
-        <Block paddingLeft={'5%'} margin={5} backgroundColor={'white'} height={70}>
+        <Block radius={10}   paddingLeft={'5%'} margin={5} backgroundColor={'white'} height={70}>
           <Block paddingTop={5}>
             <Text>{item.name}</Text>
             <Text marginTop={7} size={12}>{item.price} VND</Text>
@@ -59,7 +60,7 @@ const PetScreen = ({navigation}) => {
   };
 
   return (
-    <Block >
+    <Block flex={1} backgroundColor={'white'} >
       <Block row={1} paddingVertical={10} paddingHorizontal={10}>
       <TouchableOpacity style={{width: '40%'}} onPress={() => navigation.goBack()}>
           
@@ -384,9 +385,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   ilist: {
-    width: 80,
-    height: 90,
-    marginLeft: '20%',
+    width: 100,
+    height: 110,
+    marginLeft: '18%',
   },
   nut: {
     width: 32,
