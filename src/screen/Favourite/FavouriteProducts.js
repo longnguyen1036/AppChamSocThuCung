@@ -10,6 +10,8 @@ import React, {useState} from 'react';
 import Block from '../../components/Block';
 import Text from '../../components/Text';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import ProducScreen from './ProducScreen';
+import ProductScreeen1 from './ProductScreeen1';
 // import { useNavigation } from '@react-navigation/native';
 const DATA1 = [
   {
@@ -100,7 +102,11 @@ const DATA = [
 
 const FavouriteProducts = () => {
   // const navigation = useNavigation();
-  const [activeCategory, setActiveCategory] = useState(0);
+  const [activeCategory, setActiveCategory] = useState(true);
+  const [activeCategory1, setActiveCategory1] = useState(false);
+  const [activeCategory2, setActiveCategory2] = useState(false);
+
+  
 
   return (
     <ScrollView>
@@ -134,7 +140,7 @@ const FavouriteProducts = () => {
             style={{flex: 1}}
             underlineColorAndroid="transparent"></TextInput>
         </Block>
-      </Block>
+        </Block>
 
       <ScrollView
         horizontal={true}
@@ -281,6 +287,18 @@ const FavouriteProducts = () => {
 export default FavouriteProducts;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    
+  },
+  menu: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: '3%'
+
+  },
+ 
+
   ilist: {
     width: 80,
     height: 90,
