@@ -11,7 +11,7 @@ import { Provider, useDispatch, useSelector } from 'react-redux';
 import { store } from './src/redux/store';
 import { loggedAction } from './src/redux/actions/authAction';
 import ProfileShop1 from './src/screen/Shop/ProfileShop1';
-import { FavouriteProducts } from './src/screen/Favourite';
+import { FavouriteProducts, FavouriteServices } from './src/screen/Favourite';
 import ServiceDetail from './src/screen/ProductDetail/ServiceDetail';
 import SeviceDetail1 from './src/screen/ProductDetail/SeviceDetail1';
 import { ChangeAcount, ChangeAddress, Profile } from './src/screen/Profile';
@@ -32,19 +32,19 @@ import Shop from './src/screen/Products/Shop';
 const App = () => {
   return (
 
-    <SafeAreaProvider>
-      <Provider store={store}>
-        <MainNavigation></MainNavigation>
-      </Provider>
-    </SafeAreaProvider>
-   
-   
-
     // <SafeAreaProvider>
     //   <Provider store={store}>
     //     <MainNavigation></MainNavigation>
     //   </Provider>
     // </SafeAreaProvider>
+   
+   
+
+    <SafeAreaProvider>
+      <Provider store={store}>
+        <MainNavigation></MainNavigation>
+      </Provider>
+    </SafeAreaProvider>
 
 
 

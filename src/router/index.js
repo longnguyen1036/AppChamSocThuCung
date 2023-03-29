@@ -20,7 +20,9 @@ import {
   PROFILE_SHOP_SCREEN,
   EDIT_PROFILE_ACCOUNT, 
   EDIT_PROFILE_ADDRESS, 
-  CART_SCREEN
+  CART_SCREEN,
+  FAVOURITE_PETS_SCREEN,
+  FAVOURITE_SERVICES_SCREEN
 } from './ScreenName';
 
 const Stack = createStackNavigator();
@@ -33,7 +35,7 @@ import {Home} from '../screen/Main';
 import {Handbook, HandbookDetail} from './../screen/Handbook';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { FavouriteProducts } from '../screen/Favourite';
+import { FavouritePets, FavouriteProducts, FavouriteServices } from '../screen/Favourite';
 import HistoryBought from '../screen/History/HistoryBought';
 import HistoryService from '../screen/History/HistoryService';
 import PetScreen from '../screen/Products/PetScreen';
@@ -55,6 +57,14 @@ function MainStack() {
       <Stack.Screen
         name={FAVOURITE_PRODUCTS_SCREEN}
         component={FavouriteProducts}
+      />
+       <Stack.Screen
+        name={FAVOURITE_PETS_SCREEN}
+        component={FavouritePets}
+      />
+       <Stack.Screen
+        name={FAVOURITE_SERVICES_SCREEN}
+        component={FavouriteServices}
       />
       <Stack.Screen name={PROFILE_SCREEN} component={Profile} />
       <Stack.Screen name={HANDBOOK_SCREEN} component={Handbook} />
