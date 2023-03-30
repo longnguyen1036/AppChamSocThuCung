@@ -46,7 +46,7 @@ const App = () => {
     //     <MainNavigation></MainNavigation>
     //   </Provider>
     // </SafeAreaProvider>
-    <Shop/>
+    <FavouriteProducts/>
 
 
 
