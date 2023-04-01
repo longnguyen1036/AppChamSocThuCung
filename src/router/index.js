@@ -22,7 +22,8 @@ import {
   EDIT_PROFILE_ADDRESS, 
   CART_SCREEN,
   FAVOURITE_PETS_SCREEN,
-  FAVOURITE_SERVICES_SCREEN
+  FAVOURITE_SERVICES_SCREEN,
+  FAVOURITE_SCREEN
 } from './ScreenName';
 
 const Stack = createStackNavigator();
@@ -45,6 +46,8 @@ import ProductsDetail from '../screen/ProductDetail/ProductsDetail';
 import { ServiceScreen } from '../screen/Products';
 import { ServiceDetail } from '../screen/ProductDetail';
 import { Cart, ProfileShop1 } from '../screen/Shop';
+import Favourite from './Favourites';
+import Favourites from './Favourites';
 
 
 function MainStack() {
@@ -54,18 +57,8 @@ function MainStack() {
       screenOptions={{headerShown: false}}>
       <Stack.Screen name={MAIN_TAB} component={MyTab} />
       <Stack.Screen name={HOME_SCREEN} component={Home} />
-      <Stack.Screen
-        name={FAVOURITE_PRODUCTS_SCREEN}
-        component={FavouriteProducts}
-      />
-       <Stack.Screen
-        name={FAVOURITE_PETS_SCREEN}
-        component={FavouritePets}
-      />
-       <Stack.Screen
-        name={FAVOURITE_SERVICES_SCREEN}
-        component={FavouriteServices}
-      />
+      <Stack.Screen  name={FAVOURITE_SCREEN} component={Favourites} options={{headerShown: true, title: 'Yêu thích'}}/>
+     
       <Stack.Screen name={PROFILE_SCREEN} component={Profile} />
       <Stack.Screen name={HANDBOOK_SCREEN} component={Handbook} />
       <Stack.Screen name={HANDBOOK_DETAIL_SCREEN} component={HandbookDetail} />

@@ -6,6 +6,7 @@ import {
   FAVOURITE_PRODUCTS_SCREEN,
   HANDBOOK_SCREEN,
   PROFILE_SCREEN,
+  FAVOURITE_SCREEN,
 } from './ScreenName';
 import Home from '../screen/Main/Home';
 import {FavouriteProducts} from '../screen/Favourite';
@@ -15,6 +16,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Foundation from 'react-native-vector-icons/Foundation';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Favourites from './Favourites';
 
 const Tab = createBottomTabNavigator();
 
@@ -37,8 +39,8 @@ function MyTab() {
         
       />
       <Tab.Screen
-        name={FAVOURITE_PRODUCTS_SCREEN}
-        component={FavouriteProducts}
+        name={FAVOURITE_SCREEN}
+        component={Favourites}
         options={{
           headerShown: false,
           tabBarLabel: 'Favourite',
