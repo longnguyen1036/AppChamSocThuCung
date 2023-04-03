@@ -66,23 +66,7 @@ import {
   
     return (
       <Block backgroundColor={'white'} flex={1}>
-        <Block row={1} paddingVertical={10} paddingHorizontal={10}>
-          <TouchableOpacity style={{width: '40%'}} onPress={() => navigation.goBack()}>
-            
-              <Image
-                source={require('./../../assets/image/backpet.png')}
-                style={{marginTop: 8}}></Image>
-            
-          </TouchableOpacity>
-  
-          <Block width={'50%'}>
-            <Text size={20} color={'black'} bold>
-             Yêu thích
-            </Text>
-          </Block>
-  
-          
-        </Block>
+        
   
         <Block paddingHorizontal={10}>
           <Block
@@ -102,15 +86,7 @@ import {
               underlineColorAndroid="transparent"></TextInput>
           </Block>
         </Block>
-        <Block row justifyCenter >
-  
-         <TouchableOpacity onPress={()=> navigation.navigate(FAVOURITE_PRODUCTS_SCREEN)}><Text marginRight={25} size={18} >Sản phẩm</Text></TouchableOpacity>
-  
-          <TouchableOpacity ><Text size={18} bold>Thú cưng</Text></TouchableOpacity>
-  
-          <TouchableOpacity onPress={()=> navigation.navigate(FAVOURITE_SERVICES_SCREEN)} ><Text marginLeft={25} size={18}>Dịch vụ</Text></TouchableOpacity>
-  
-        </Block>
+        
   
         <Block>
           <FlatGrid key={DATA.name} data={DATA} renderItem={renderItem} />
