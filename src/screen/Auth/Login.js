@@ -10,7 +10,7 @@ import {
   Modal,
   Pressable,
 } from 'react-native';
-import React, {useState, useContext} from 'react';
+import React, {useState, useEffect} from 'react';
 import {FORGET_PASS, REGISTER_SCREEN} from '../../router/ScreenName';
 import {useDispatch, useSelector} from 'react-redux';
 import authApi from '../../api/authApi';
@@ -19,7 +19,7 @@ import {CREATE_NEW_PASS, MAIN_TAB} from './../../router/ScreenName';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { loggedAction } from '../../redux/actions/authAction';
 import {setToken, getToken} from '../../helper/auth';
-
+import messaging from '@react-native-firebase/messaging';
 
 const Login = ({navigation}) => {
   const dispatch = useDispatch()
@@ -27,7 +27,22 @@ const Login = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [emailAccount, setEmailAccount] = useState('prolatui@gmail.com');
   const [passWordAccount, setPasswordAccount] = useState('123');
+  const [fcmTokenFireBase, setFcmTokenFireBase] = useState()
 
+  const registerAppWithFCM = async () => {
+    await messaging().registerDeviceForRemoteMessages();
+  
+    // Lấy token FCM cho thiết bị hiện tại
+    const fcmToken = await messaging().getToken();
+    // console.log('FCM Token:', fcmToken);
+    setFcmTokenFireBase(fcmToken);
+
+  };
+
+  useEffect(() => {
+    registerAppWithFCM()
+  },[])
+  
   const Login = async () => {
     try {
       if ( emailAccount == '' || passWordAccount == '') {
@@ -45,8 +60,7 @@ const Login = ({navigation}) => {
         const checkLogin = await AsyncStorage.getItem('checkLogin'); 
         dispatch(loggedAction(res.data));
         
-
-        console.log('Ttenajsd',checkLogin);
+        console.log('fcm token',fcmTokenFireBase);
         navigation.navigate(MAIN_TAB);
         await setToken(res.data.token)
 
