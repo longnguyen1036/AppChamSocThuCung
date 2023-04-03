@@ -17,7 +17,7 @@ import {FlatGrid} from 'react-native-super-grid';
 import {useNavigation} from '@react-navigation/native';
 import Block from '../../components/Block';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import { PETS_SCREEN, PRODUCTS_SCREEN, SERVICES_SCREEN } from '../../router/ScreenName';
+import { PETS_SCREEN, PRODUCTS_SCREEN, PROFILE_SCREEN, SERVICES_SCREEN } from '../../router/ScreenName';
 
 const Home = () => {
   const navigation = useNavigation();
@@ -85,9 +85,12 @@ const Home = () => {
             name="shopping-bag"
             size={25}
           />
+          <TouchableOpacity onPress={() => navigation.navigate(PROFILE_SCREEN)}>
           <Image
             style={styles.i1}
             source={require('../../assets/image/meo.png')}></Image>
+            
+          </TouchableOpacity>
         </View>
       </View>
 

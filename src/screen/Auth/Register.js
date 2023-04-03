@@ -23,6 +23,8 @@ const Register = ({navigation}) => {
   const [emailAccount, setEmailAccount] = useState('');
   const [passwordAccount, setPasswordAccount] = useState('');
   const [confirmPassWord, setConfirmPassWord] = useState('');
+  const [address, setAddress] = useState('');
+  const [telephone, setTelephone] = useState('');
   const [checkUser, setCheckUser] = useState();
 
   const hiddenPassWord = () => {
@@ -54,23 +56,15 @@ const Register = ({navigation}) => {
     }
   };
 
-  // const checkEmail = (emailAccount) => {
-  //   const emailRegex = /\S+@\S+.\S+/;
-  //   const isValidEmail = emailRegex.test(emailAccount);
-  //   console.log('log emaill',emailAccount)
-  //   if (isValidEmail) {
-  //     console.log('Email hợp lệ');
-  //     navigation.navigate('CONFIRM_OTP_SCREEN');
-  //   } else {
-  //     console.log('Email không đúng định dạng');
-  //   }
-  // };
+
 
   const submitRegister = async () => {
     const user = await authApi.Register(
       nameAccount,
       emailAccount,
       passwordAccount,
+      address,
+      telephone
     );
     setCheckUser(user.status);
     console.log('data', user.status);
@@ -121,6 +115,32 @@ const Register = ({navigation}) => {
             placeholder="Nhập email"
             onChangeText={setEmailAccount}
             value={emailAccount}
+          />
+           <TextInput
+            style={{
+              width: '100%',
+              borderWidth: 1,
+              marginVertical: 5,
+              borderRadius: 6,
+              paddingLeft: 15,
+              borderColor: '#DADFE6',
+            }}
+            placeholder="Nhập địa chỉ"
+            onChangeText={setAddress}
+            value={address}
+          />
+           <TextInput
+            style={{
+              width: '100%',
+              borderWidth: 1,
+              marginVertical: 5,
+              borderRadius: 6,
+              paddingLeft: 15,
+              borderColor: '#DADFE6',
+            }}
+            placeholder="Nhập số điện thoại"
+            onChangeText={setTelephone}
+            value={telephone}
           />
           <TextInput
             style={{

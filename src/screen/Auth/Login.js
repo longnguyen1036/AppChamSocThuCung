@@ -17,14 +17,16 @@ import authApi from '../../api/authApi';
 
 import {CREATE_NEW_PASS, MAIN_TAB} from './../../router/ScreenName';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { loggedAction } from '../../redux/actions/authAction';
+import {setToken, getToken} from '../../helper/auth';
 
 
 const Login = ({navigation}) => {
-  // const authState = useSelector(state => state.authState.userInfo)
+  const dispatch = useDispatch()
+
   const [modalVisible, setModalVisible] = useState(false);
-  // console.log("authState: " , authState)
-  const [emailAccount, setEmailAccount] = useState('');
-  const [passWordAccount, setPasswordAccount] = useState('');
+  const [emailAccount, setEmailAccount] = useState('prolatui@gmail.com');
+  const [passWordAccount, setPasswordAccount] = useState('123');
 
   const Login = async () => {
     try {
@@ -41,11 +43,13 @@ const Login = ({navigation}) => {
       } else {
         AsyncStorage.setItem('checkLogin', 'true');
         const checkLogin = await AsyncStorage.getItem('checkLogin'); 
+        dispatch(loggedAction(res.data));
         
 
         console.log('Ttenajsd',checkLogin);
         navigation.navigate(MAIN_TAB);
-        // navigation.navigate('HOME_SCREEN');
+        await setToken(res.data.token)
+
       }
     } catch (e) {
       console.log('login error: ', e);

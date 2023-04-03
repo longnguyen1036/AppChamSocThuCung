@@ -1,8 +1,9 @@
 import { BASE_URL_TEST } from "./BASE_URL";
 
 import axios from "axios";
+import { getToken } from "../helper/auth";
 
-const Register = async (nameAccount, emailAccount, passWordAccount) =>{
+const Register = async (nameAccount, emailAccount, passWordAccount, address, numberphone) =>{
     try {
         // console.log( 'log name accccc',nameAccount, emailAccount, passWordAccount);
         const register = await axios.post(`${BASE_URL_TEST}/email`,
@@ -10,6 +11,8 @@ const Register = async (nameAccount, emailAccount, passWordAccount) =>{
             nameAccount,
             emailAccount,
             passWordAccount,
+            address,
+            numberphone
         } );
         // console.log('api register',register);
         return register;
@@ -52,8 +55,51 @@ const Login = async(emailAccount, passWordAccount)=>{
     }
 }
 
+
+const getProfile = async (id) => {
+    try {
+        console.log('id', id);
+        const token = await getToken();
+        const getProduct = await axios.get(`${BASE_URL_TEST}/getinfor`, {
+            headers: {
+                token: `Bearer ${token}`,
+            },
+        });
+        // console.log('getProfile', getProduct)
+        return getProduct
+
+    } catch (error) {
+        console('loi api getProfile error', error);
+
+    }
+
+}
+
+const UpdateProfile = async (address) => {
+    try {
+        const token = await getToken();
+        const getProduct = await axios.post(`${BASE_URL_TEST}/updateuser`,
+        {
+            address
+        },
+        {
+            headers: {
+                token: `Bearer ${token}`,
+            },
+        });
+        console.log('UpdateProfile', getProduct)
+        return getProduct
+
+    } catch (error) {
+        console('loi api UpdateProfile error', error);
+
+    }
+
+}
 export default{
     Register,
     OTPRegister, 
-    Login
+    Login,
+    getProfile,
+    UpdateProfile
 }

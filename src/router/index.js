@@ -45,6 +45,8 @@ import ProductsDetail from '../screen/ProductDetail/ProductsDetail';
 import { ServiceScreen } from '../screen/Products';
 import { ServiceDetail } from '../screen/ProductDetail';
 import { Cart, ProfileShop1 } from '../screen/Shop';
+import { useDispatch, useSelector } from 'react-redux';
+import { loggedAction, logoutAction } from '../redux/actions/authAction';
 
 
 function MainStack() {
@@ -95,20 +97,28 @@ function MainStack() {
 
 function MainNavigation() {
   const [checkLogin, setCheckLogin] = useState('');
+  const authState = useSelector(state => state.authState.logged);
+  console.log('authStatedasdasd', authState);
 
+  const dispatch = useDispatch();
   
 
-  const getCheckLogin = async () => {
-    const checkDangNhap = await AsyncStorage.getItem('checkLogin');
-    setCheckLogin(checkDangNhap);
-    console.log('Check Dang Nhap', checkLogin);
-  };
   useEffect(() => {
+    const getCheckLogin = async () => {
+      const checkDangNhap = await AsyncStorage.getItem('checkLogin');
+      setCheckLogin(checkDangNhap);
+      console.log('Check Dang Nhap', checkDangNhap);
+      if (checkDangNhap == true) {
+        dispatch(loggedAction());
+      } else {
+        dispatch(logoutAction());
+      }
+    };
     getCheckLogin();
   }, [checkLogin]);
   return (
     <NavigationContainer ref={navigationRef1}>
-      {checkLogin === 'true' ? <MainStack /> : <AuthStack />}
+     {authState == true ? <MainStack /> : <AuthStack />}
     </NavigationContainer>
   );
 }

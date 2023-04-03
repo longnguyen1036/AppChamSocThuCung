@@ -6,22 +6,71 @@ import {
   TouchableOpacity,
   SafeAreaView,
   ScrollView,
+  Alert,
+  Linking
 } from 'react-native';
-import React from 'react';
+import React,{useState, useEffect, useCallback} from 'react';
 import Block from '../../components/Block';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { EDIT_PROFILE_ACCOUNT, EDIT_PROFILE_ADDRESS, HISTORY_PRODUCTS, HISTORY_SERVICES } from '../../router/ScreenName';
+import { useDispatch, useSelector } from 'react-redux';
+import { loggedAction, logoutAction } from '../../redux/actions/authAction';
+import authApi from '../../api/authApi';
+import { useFocusEffect } from '@react-navigation/native';
 
 const Profile = ({navigation}) => {
-  // const navigation = useNavigation();
+  const dispatch = useDispatch()
+
+  const [profileUser, setProfileUser] = useState()
+
+  const getProfileUser = async () => {
+    const user = await authApi.getProfile()
+    setProfileUser(user.data.data)
+    console.log('user profile', user.data.data)
+  }
+
+  useEffect(() => {
+    getProfileUser();
+  },[])
+
+  useFocusEffect(
+    useCallback(() => {
+      getProfileUser();
+    }, []),
+  );
+
+  const getLocation =  () => {
+    const address = profileUser.address[0]
+    const url = `https://www.google.com/maps/search/${encodeURIComponent(address)}`
+    Linking.openURL(url)
+}
 
   const signOut = async () => {
-    await AsyncStorage.setItem('checkLogin', 'false');
-    const login = await AsyncStorage.getItem('checkLogin');
-    console.log('checkLogin o dang xuat', login);
-  };
+    Alert.alert(
+        'Đăng xuất',
+        'Bạn có chắc sẽ đăng xuất tài khoản này',
+        [
+          {
+            text: 'Không',
+            onPress: () => console.log('Cancel Pressed'),
+            style: 'cancel',
+          },
+          {
+            text: 'Có',
+            onPress: async () => {
+            AsyncStorage.setItem('checkLogin', 'false');
+            const checkLogin = await AsyncStorage.getItem('checkLogin'); 
+            dispatch(logoutAction());
+              
+              console.log('dang xuat')
+            },
+          },
+        ],
+        {cancelable: false},
+      );
+    };
   return (
     <View style={{alignItems: 'center', backgroundColor: '#dcdcdc', flex: 1}}>
       <View
@@ -73,11 +122,17 @@ const Profile = ({navigation}) => {
             </View>
             <View style={{marginLeft: 10, justifyContent: 'center'}}>
               <Text style={{fontSize: 20, fontWeight: '700', color: 'black'}}>
-                phuocps19167
+                {profileUser?.nameAccount}
               </Text>
-              <Text style={{marginTop: 10}}>phuocphps19167@fpt.edu.vn</Text>
-              <Text style={{marginTop: 5}}>
-                Hoàng Diệu - P Linh Trung - Thủ Đức
+              <Text style={{marginTop: 10}}>{profileUser?.emailAccount}</Text>
+              <TouchableOpacity onPress={() => getLocation()}>
+
+              <Text style={{marginTop: 5, color: 'blue'}}>
+                {profileUser?.address[0]}
+              </Text>
+              </TouchableOpacity>
+              <Text style={{marginTop: 0}}>
+                {profileUser?.numberphone[0]}
               </Text>
             </View>
           </View>
@@ -173,7 +228,9 @@ const Profile = ({navigation}) => {
             paddingHorizontal: 10,
             marginTop: '3%',
           }}
-          onPress={ ()=>navigation.navigate(EDIT_PROFILE_ADDRESS)}>
+          onPress={ ()=>navigation.navigate(EDIT_PROFILE_ADDRESS,{
+            addressUser: profileUser?.address[0]
+          })}>
           <Text
             style={{
               width: '90%',

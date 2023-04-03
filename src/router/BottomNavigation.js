@@ -10,7 +10,7 @@ import {
 import Home from '../screen/Main/Home';
 import {FavouriteProducts} from '../screen/Favourite';
 import {Handbook} from '../screen/Handbook';
-import {Profile} from '../screen/Profile';
+import Profile from '../screen/Profile/Profile';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Foundation from 'react-native-vector-icons/Foundation';
