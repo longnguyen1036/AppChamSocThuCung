@@ -39,17 +39,15 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FavouritePets, FavouriteProducts, FavouriteServices } from '../screen/Favourite';
 import HistoryBought from '../screen/History/HistoryBought';
 import HistoryService from '../screen/History/HistoryService';
-import PetScreen from '../screen/Products/PetScreen';
-import PetDetail from '../screen/ProductDetail/PetDetail';
-import ProductScreen from '../screen/Products/ProductScreen';
-import ProductsDetail from '../screen/ProductDetail/ProductsDetail';
-import { ServiceScreen } from '../screen/Products';
-import { ServiceDetail } from '../screen/ProductDetail';
 import { Cart, ProfileShop1 } from '../screen/Shop';
 import { useDispatch, useSelector } from 'react-redux';
 import { loggedAction, logoutAction } from '../redux/actions/authAction';
-import Favourite from './Favourites';
 import Favourites from './Favourites';
+import PetScreen from '../screen/Pets/PetScreen';
+import { PetDetail } from '../screen/Pets';
+import { ProductScreen, ServiceScreen } from '../screen/Products';
+import ProductsDetail from '../screen/Products/ProductsDetail';
+import { ServiceDetail } from '../screen/Service';
 
 
 function MainStack() {
