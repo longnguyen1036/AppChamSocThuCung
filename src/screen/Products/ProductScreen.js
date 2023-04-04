@@ -6,13 +6,13 @@ import {
   TextInput,
   Modal,
 } from 'react-native';
-import React from 'react';
+import React,{useState, useEffect} from 'react';
 import Block from '../../components/Block';
 import Text from '../../components/Text';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {FlatGrid} from 'react-native-super-grid';
-import {useState} from 'react';
 import {PRODUCTS_DETAIL_SCREEN} from '../../router/ScreenName';
+import productApi from '../../api/productApi';
 
 const ProductScreen = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -31,6 +31,15 @@ const ProductScreen = ({navigation}) => {
       images: require('./../../assets/image/dog.png'),
     },
   ];
+
+  const getAllProducts = async () => {
+      const res = await productApi.getAllProducts('productStore')
+      console.log('res nenene',res.data)
+  }
+
+  useEffect(() => {
+      getAllProducts();
+  },[])
 
   const renderItem = ({item}) => {
     return (

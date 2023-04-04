@@ -56,9 +56,8 @@ const Login = async(emailAccount, passWordAccount)=>{
 }
 
 
-const getProfile = async (id) => {
+const getProfile = async () => {
     try {
-        console.log('id', id);
         const token = await getToken();
         const getProduct = await axios.get(`${BASE_URL_TEST}/getinfor`, {
             headers: {
@@ -87,11 +86,33 @@ const UpdateProfile = async (address) => {
                 token: `Bearer ${token}`,
             },
         });
-        console.log('UpdateProfile', getProduct)
+        // console.log('UpdateProfile', getProduct)
         return getProduct
 
     } catch (error) {
         console('loi api UpdateProfile error', error);
+
+    }
+
+}
+
+const UpdateTokenFCM = async (tokenFCM) => {
+    try {
+        const token = await getToken();
+        const getProduct = await axios.post(`${BASE_URL_TEST}/updateuser`,
+        {
+            tokenFCM
+        },
+        {
+            headers: {
+                token: `Bearer ${token}`,
+            },
+        });
+        // console.log('UpdateTokenFCM', getProduct)
+        return getProduct
+
+    } catch (error) {
+        console('loi api UpdateTokenFCM error', error);
 
     }
 
@@ -101,5 +122,6 @@ export default{
     OTPRegister, 
     Login,
     getProfile,
-    UpdateProfile
+    UpdateProfile,
+    UpdateTokenFCM
 }
