@@ -6,6 +6,8 @@ import {
   Image,
   Switch,
   ScrollView,
+  Modal,
+  FlatList,
 } from 'react-native';
 import React, {useState} from 'react';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -13,57 +15,68 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import DatePicker from 'react-native-date-picker';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {Button} from 'react-native';
+import Block from '../../components/Block';
 
 const ServiceDetail = ({navigation}) => {
-  // const [date, setDate] = useState(new Date())
-  const [open, setOpen] = useState(false);
-  const [day, setDay] = useState('');
-  const [month, setMonth] = useState('');
-  const [year, setYear] = useState('');
+  const [date, setDate] = useState(new Date());
+  const [modalVisible2, setModalVisible2] = useState(false);
 
-  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-
-  const showDatePicker = () => {
-    setDatePickerVisibility(true);
+  const DATA = [
+    {
+      id: 1,
+      status: false,
+      time: '10:00',
+    },
+    {
+      id: 2,
+      status: true,
+      time: '10:30',
+    },
+    {
+      id: 3,
+      status: true,
+      time: '12:00',
+    },
+    {
+      id: 4,
+      status: false,
+      time: '14:30',
+    },
+    {
+      id: 5,
+      status: false,
+      time: '17:00',
+    },
+    {
+      id: 6,
+      status: false,
+      time: '18:30',
+    },
+    {
+      id: 7,
+      status: true,
+      time: '20:00',
+    },
+  ];
+  const renderItem = ({item}) => {
+    return (
+      <Block
+        alignCenter
+        margin={5}
+        width={60}
+        height={60}
+        paddingVertical={15}
+        backgroundColor={'#ECF2F8'}>
+        <Text
+          style={{
+            fontSize: 18,
+            color: item.status == false ? 'grey' : 'black',
+          }}>
+          {item.time}
+        </Text>
+      </Block>
+    );
   };
-
-  const hideDatePicker = () => {
-    setDatePickerVisibility(false);
-    setOpen(true);
-  };
-
-  const handleConfirm = date => {
-    console.warn('A date has been picked: ', date);
-    setDay(date.getUTCDate().toString());
-    setMonth(date.getUTCMonth().toString());
-    setYear(date.getUTCFullYear().toString());
-    hideDatePicker();
-  };
-
-  // const [pickerMode, setPickerMode] = useState(null);
-  // const [inline, setInline] = useState(false);
-
-  // const showDatePicker = () => {
-  //     setPickerMode("date");
-  // };
-
-  // const showTimePicker = () => {
-  //     setPickerMode("time");
-  // };
-
-  // const showDateTimePicker = () => {
-  //     setPickerMode("datetime");
-  // };
-
-  // const hidePicker = () => {
-  //     setPickerMode(null);
-  // };
-
-  // const handleConfirm = (date) => {
-  //     // In order to prevent the double-shown popup bug on Android, picker has to be hidden first (https://github.com/react-native-datetimepicker/datetimepicker/issues/54#issuecomment-618776550)
-  //     hidePicker();
-  //     console.warn("A date has been picked: ", date);
-  // };
 
   return (
     <ScrollView
@@ -77,7 +90,7 @@ const ServiceDetail = ({navigation}) => {
             paddingHorizontal: '3%',
             paddingVertical: '3%',
           }}>
-          <TouchableOpacity onPress={()=>navigation.goBack()}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
             <FontAwesome5 name="chevron-left" size={30} color={'black'} />
           </TouchableOpacity>
 
@@ -180,7 +193,7 @@ const ServiceDetail = ({navigation}) => {
 
         <View
           style={{width: '75%', alignContent: 'flex-start', marginTop: '2%'}}>
-          <Text style={{fontSize: 18, fontWeight: '600'}}>Chọn lịch</Text>
+          <Text style={{fontSize: 18, fontWeight: '600'}}>Thời gian</Text>
         </View>
 
         <View
@@ -190,69 +203,27 @@ const ServiceDetail = ({navigation}) => {
             flexDirection: 'row',
             justifyContent: 'space-between',
           }}>
-          <View>
-            {/* <Button title={date.getDay().toString()+'-'+date.getMonth().toString()+'-'+date.getFullYear().toString()} onPress={() => setOpen(true)} />
-                <DatePicker
-                    modal
-                    open={open}
-                    date={date}
-                    onConfirm={(date) => {
-                    setOpen(false)
-                    setDate(date)
-                    }}
-                    onCancel={() => {
-                    setOpen(false)
-                    }}
-                /> */}
+          <Block
+            alignCenter
+            width={100}
+            height={40}
+            backgroundColor={'white'}
+            paddingTop={'2%'}
+            radius={5}>
+            <Text style={{fontSize: 18, color: 'black'}}>{date.toLocaleDateString()}</Text>
+          </Block>
 
-            <TouchableOpacity
-              style={{backgroundColor: '#ffffff', padding: 10, borderRadius: 8}}
-              onPress={showDatePicker}>
-              <Text>{open ? day + '-' + month + '-' + year : 'chon ngay'}</Text>
-            </TouchableOpacity>
-            <DateTimePickerModal
-              isVisible={isDatePickerVisible}
-              mode="date"
-              onConfirm={handleConfirm}
-              onCancel={hideDatePicker}
-            />
-          </View>
-
-          {/* <View style={styles.root}>
-      <Button title="Show Date Picker" onPress={showDatePicker} />
-      <Button title="Show Time Picker" onPress={showTimePicker} />
-      <Button title="Show DateTime Picker" onPress={showDateTimePicker} />
-      {Platform.OS === "ios" && (
-        <View style={styles.inlineSwitchContainer}>
-          <Text style={styles.inlineSwitchText}>Display inline?</Text>
-          <Switch value={inline} onValueChange={setInline} />
-        </View>
-      )}
-      <DateTimePickerModal
-        isVisible={pickerMode !== null}
-        mode={pickerMode}
-        onConfirm={handleConfirm}
-        onCancel={hidePicker}
-        display={inline ? "inline" : undefined}
-      />
-    </View> */}
-
-          <View>
-            {/* <Button title={date.getHours().toString()+'-'+date.getMinutes().toString()+'-'+date.getSeconds().toString()} onPress={() => setOpen(true)} />
-                    <DatePicker
-                        modal
-                        open={open}
-                        date={date}
-                        onConfirm={(date) => {
-                        setOpen(false)
-                        setDate(date)
-                        }}
-                        onCancel={() => {
-                        setOpen(false)
-                        }}
-                    />
-                <Text>Chọn giờ</Text> */}
-          </View>
+          <TouchableOpacity style={{marginLeft: '30%'}} onPress={()=> setModalVisible2()}>
+            <Block
+              alignCenter
+              width={100}
+              height={40}
+              backgroundColor={'white'}
+              paddingTop={'7%'}
+              radius={5}>
+              <Text style={{fontSize: 18, color: 'black'}}>Chọn lịch</Text>
+            </Block>
+          </TouchableOpacity>
         </View>
 
         <TouchableOpacity
@@ -263,13 +234,39 @@ const ServiceDetail = ({navigation}) => {
             justifyContent: 'center',
             alignItems: 'center',
             padding: '2%',
-            marginTop: '10%'
+            marginTop: '10%',
           }}>
           <Text style={{fontSize: 20, color: 'white', fontWeight: '800'}}>
             Đặt lịch
           </Text>
         </TouchableOpacity>
       </View>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible2}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.');
+          setModalVisible2(!modalVisible2);
+        }}>
+        <View style={styles.modalView}>
+          <FlatList numColumns={4} data={DATA} renderItem={renderItem} />
+
+          <Block row margin={10}>
+            <TouchableOpacity
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => setModalVisible2(!modalVisible2)}>
+              <Text style={styles.textStyle}>Đồng ý</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.button, styles.buttonClose2]}
+              onPress={() => setModalVisible2(!modalVisible2)}>
+              <Text style={styles.textStyle}>Hủy</Text>
+            </TouchableOpacity>
+          </Block>
+        </View>
+      </Modal>
     </ScrollView>
   );
 };
@@ -290,5 +287,54 @@ const styles = StyleSheet.create({
   inlineSwitchText: {
     fontSize: 18,
     marginRight: 8,
+  },
+  modalView: {
+    margin: 30,
+    marginTop: '60%',
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 5,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: '#52B4FF',
+  },
+  buttonClose: {
+    backgroundColor: '#52B4FF',
+    width: 100,
+  },
+  buttonClose2: {
+    marginLeft: '10%',
+    backgroundColor: 'grey',
+    width: 100,
+  },
+  textStyle: {
+    fontSize: 18,
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
+  },
+  hinh: {
+    marginTop: 20,
+    marginLeft: '5%',
+    width: '100%',
+    height: 350,
   },
 });

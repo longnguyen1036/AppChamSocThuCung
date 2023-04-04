@@ -13,28 +13,16 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import {FlatGrid} from 'react-native-super-grid';
 import {PRODUCTS_DETAIL_SCREEN} from '../../router/ScreenName';
 import productApi from '../../api/productApi';
+import formatMoney from '../../components/FormatMoney';
 
 const ProductScreen = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
-
-  const DATA = [
-    {
-      id: 1,
-      name: 'BEAGLE CƯNG CƯNG',
-      price: 1800000,
-      images: require('./../../assets/image/dog.png'),
-    },
-    {
-      id: 2,
-      name: 'BEAGLE CƯNG CƯNG',
-      price: 2000000,
-      images: require('./../../assets/image/dog.png'),
-    },
-  ];
+  const [listProduct, setListProduct] = useState([]);
 
   const getAllProducts = async () => {
       const res = await productApi.getAllProducts('productStore')
       console.log('res nenene',res.data)
+      setListProduct(res.data.data)
   }
 
   useEffect(() => {
@@ -51,7 +39,7 @@ const ProductScreen = ({navigation}) => {
           width={160}
           height={190}
           radius={10}>
-          <Image style={styles.ilist} source={item.images}></Image>
+          <Image style={styles.ilist} source={{uri: item.imgProduct}}></Image>
           <Block
             paddingLeft={'5%'}
             margin={5}
@@ -59,9 +47,9 @@ const ProductScreen = ({navigation}) => {
             height={70}
             radius={10}>
             <Block paddingTop={5}>
-              <Text>{item.name}</Text>
+              <Text>{item.nameProduct}</Text>
               <Text marginTop={7} size={12}>
-                {item.price} VND
+                {formatMoney(item.priceProduct)}
               </Text>
             </Block>
             <TouchableOpacity style={styles.nut}>
@@ -115,7 +103,7 @@ const ProductScreen = ({navigation}) => {
       </Block>
 
       <Block width={'90%'}>
-        <FlatGrid key={DATA.name} data={DATA} renderItem={renderItem} />
+        <FlatGrid key={listProduct._id} data={listProduct} renderItem={renderItem} />
       </Block>
 
       <Modal
