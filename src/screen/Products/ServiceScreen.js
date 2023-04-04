@@ -126,11 +126,252 @@ const ServiceScreen = ({navigation}) => {
         </Block>
       </Block>
 
-      <Block >
+      <Block>
         <FlatList key={DATA.name} data={DATA} renderItem={renderItem} />
       </Block>
 
-      
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.');
+          setModalVisible(!modalVisible);
+        }}>
+        <Block
+          marginLeft={50}
+          width={350}
+          height={720}
+          backgroundColor={'white'}>
+          <Block width={'100%'} height={30} backgroundColor={'#F2F3F2'}>
+            <Text marginLeft={15} size={20}>
+              Bộ lọc tìm kiếm
+            </Text>
+          </Block>
+
+          <View marginTop={20}>
+            <Text marginLeft={10}>Theo khoảng giá</Text>
+            <Block marginTop={5} row={1}>
+              <Block
+                marginLeft={20}
+                padding={5}
+                width={80}
+                height={30}
+                backgroundColor={'#F2F3F2'}>
+                <Text marginLeft={15}>0 VND</Text>
+              </Block>
+
+              <Block
+                marginLeft={50}
+                padding={5}
+                width={130}
+                height={30}
+                backgroundColor={'#F2F3F2'}>
+                <Text marginLeft={15}>300000000 VND</Text>
+              </Block>
+            </Block>
+          </View>
+
+          <View marginTop={30}>
+            <Text marginLeft={10}>Theo danh mục</Text>
+            <Block marginTop={5} row={1}>
+              <Block
+                marginLeft={20}
+                padding={5}
+                width={90}
+                height={30}
+                backgroundColor={'#F2F3F2'}>
+                <Text marginLeft={15}>Thú y</Text>
+              </Block>
+
+              <Block
+                marginLeft={20}
+                padding={5}
+                width={90}
+                height={30}
+                backgroundColor={'#F2F3F2'}>
+                <Text marginLeft={15}>Cắt tỉa</Text>
+              </Block>
+              <Block
+                marginLeft={20}
+                padding={5}
+                width={90}
+                height={30}
+                backgroundColor={'#F2F3F2'}>
+                <Text marginLeft={15}>Tắm gội</Text>
+              </Block>
+            </Block>
+            <Block
+                marginTop={10}
+                marginLeft={20}
+                padding={5}
+                width={90}
+                height={30}
+                backgroundColor={'#F2F3F2'}>
+                <Text marginLeft={15}>Khách sạn</Text>
+              </Block>
+          </View>
+
+          <View marginTop={30}>
+            <Text marginLeft={10}>Theo giống</Text>
+
+            <Block marginTop={5} row={1}>
+              <Block
+                marginLeft={20}
+                padding={5}
+                width={90}
+                height={30}
+                backgroundColor={'#F2F3F2'}>
+                <Text marginLeft={25}>Chó</Text>
+              </Block>
+
+              <Block
+                marginLeft={20}
+                padding={5}
+                width={90}
+                height={30}
+                backgroundColor={'#F2F3F2'}>
+                <Text marginLeft={20}>Mèo</Text>
+              </Block>
+              <Block
+                marginLeft={20}
+                padding={5}
+                width={90}
+                height={30}
+                backgroundColor={'#F2F3F2'}>
+                <Text marginLeft={10}>Hamster</Text>
+              </Block>
+            </Block>
+
+            <Block marginTop={10} row={1}>
+              <Block
+                marginLeft={20}
+                padding={5}
+                width={90}
+                height={30}
+                backgroundColor={'#F2F3F2'}>
+                <Text marginLeft={25}>Vẹt</Text>
+              </Block>
+
+              <Block
+                marginLeft={20}
+                padding={5}
+                width={90}
+                height={30}
+                backgroundColor={'#F2F3F2'}>
+                <Text marginLeft={20}>Khác</Text>
+              </Block>
+            </Block>
+          </View>
+
+          <View marginTop={30}>
+            <Text marginLeft={10}>Theo khu vực</Text>
+
+            <Block marginTop={5} row={1}>
+              <Block
+                marginLeft={20}
+                padding={5}
+                width={90}
+                height={30}
+                backgroundColor={'#F2F3F2'}>
+                <Text marginLeft={15}>Tân Bình</Text>
+              </Block>
+
+              <Block
+                marginLeft={20}
+                padding={5}
+                width={90}
+                height={30}
+                backgroundColor={'#F2F3F2'}>
+                <Text marginLeft={5}>Bình Thạnh</Text>
+              </Block>
+              <Block
+                marginLeft={20}
+                padding={5}
+                width={90}
+                height={30}
+                backgroundColor={'#F2F3F2'}>
+                <Text marginLeft={15}>Thủ Đức</Text>
+              </Block>
+            </Block>
+            <Block marginTop={5} row={1}>
+              <Block
+                marginLeft={20}
+                padding={5}
+                width={90}
+                height={30}
+                backgroundColor={'#F2F3F2'}>
+                <Text marginLeft={15}>Quận 1</Text>
+              </Block>
+
+              <Block
+                marginLeft={20}
+                padding={5}
+                width={90}
+                height={30}
+                backgroundColor={'#F2F3F2'}>
+                <Text marginLeft={15}>Quận 2 </Text>
+              </Block>
+              <Block
+                marginLeft={20}
+                padding={5}
+                width={90}
+                height={30}
+                backgroundColor={'#F2F3F2'}>
+                <Text marginLeft={15}>Quận 3</Text>
+              </Block>
+            </Block>
+            <Block marginTop={5} row={1}>
+              <Block
+                marginLeft={20}
+                padding={5}
+                width={90}
+                height={30}
+                backgroundColor={'#F2F3F2'}>
+                <Text marginLeft={15}>Quận 10</Text>
+              </Block>
+
+              <Block
+                marginLeft={20}
+                padding={5}
+                width={90}
+                height={30}
+                backgroundColor={'#F2F3F2'}>
+                <Text marginLeft={5}>Phú Nhuận</Text>
+              </Block>
+            </Block>
+          </View>
+
+          <Block marginTop={20} row={1} bottom={-100}>
+            <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
+              <Block
+                marginLeft={20}
+                width={130}
+                height={50}
+                backgroundColor={'white'}
+                border={1}
+                radius={5}
+                borderColor={'#F80202'}
+                alignCenter>
+                <Text marginTop={12} size={18} color={'#F80202'}>
+                  Trở về
+                </Text>
+              </Block>
+            </TouchableOpacity>
+            <Block
+              marginLeft={20}
+              width={130}
+              height={50}
+              backgroundColor={'#18A2E1'}
+              radius={5}
+              alignCenter>
+              <Text marginTop={12} size={18} color={'white'}>
+                Tìm kiếm
+              </Text>
+            </Block>
+          </Block>
+        </Block>
+      </Modal>
     </Block>
   );
 };
