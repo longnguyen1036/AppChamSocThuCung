@@ -210,7 +210,7 @@ const ServiceDetail = ({navigation}) => {
             backgroundColor={'white'}
             paddingTop={'2%'}
             radius={5}>
-            <Text style={{fontSize: 18}}>{date.toLocaleDateString()}</Text>
+            <Text style={{fontSize: 18, color: 'black'}}>{date.toLocaleDateString()}</Text>
           </Block>
 
           <TouchableOpacity style={{marginLeft: '30%'}} onPress={()=> setModalVisible2()}>
@@ -221,53 +221,9 @@ const ServiceDetail = ({navigation}) => {
               backgroundColor={'white'}
               paddingTop={'7%'}
               radius={5}>
-              <Text style={{fontSize: 18}}>Chọn lịch</Text>
+              <Text style={{fontSize: 18, color: 'black'}}>Chọn lịch</Text>
             </Block>
           </TouchableOpacity>
-          <View>
-            {/* <Button title={date.getDay().toString()+'-'+date.getMonth().toString()+'-'+date.getFullYear().toString()} onPress={() => setOpen(true)} />
-                <DatePicker
-                    modal
-                    open={open}
-                    date={date}
-                    onConfirm={(date) => {
-                    setOpen(false)
-                    setDate(date)
-                    }}
-                    onCancel={() => {
-                    setOpen(false)
-                    }}
-                /> */}
-
-            {/* <TouchableOpacity
-              style={{backgroundColor: '#ffffff', padding: 10, borderRadius: 8}}
-              onPress={showDatePicker}>
-              <Text>{open ? day + '-' + month + '-' + year : 'chon ngay'}</Text>
-            </TouchableOpacity> */}
-            {/* <DateTimePickerModal
-              isVisible={isDatePickerVisible}
-              mode="date"
-              onConfirm={handleConfirm}
-              onCancel={hideDatePicker}
-            /> */}
-          </View>
-
-          <View>
-            {/* <Button title={date.getHours().toString()+'-'+date.getMinutes().toString()+'-'+date.getSeconds().toString()} onPress={() => setOpen(true)} />
-                    <DatePicker
-                        modal
-                        open={open}
-                        date={date}
-                        onConfirm={(date) => {
-                        setOpen(false)
-                        setDate(date)
-                        }}
-                        onCancel={() => {
-                        setOpen(false)
-                        }}
-                    />
-                <Text>Chọn giờ</Text> */}
-          </View>
         </View>
 
         <TouchableOpacity
