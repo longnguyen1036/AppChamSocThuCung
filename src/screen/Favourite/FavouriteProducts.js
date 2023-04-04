@@ -6,35 +6,36 @@ import {
   TextInput,
   Modal,
 } from 'react-native';
-import React from 'react';
+import React,{useState, useEffect} from 'react';
 import Block from '../../components/Block';
 import Text from '../../components/Text';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {FlatGrid} from 'react-native-super-grid';
-import {useState} from 'react';
 import {
   FAVOURITE_PETS_SCREEN,
   FAVOURITE_SERVICES_SCREEN,
   PRODUCTS_DETAIL_SCREEN,
 } from '../../router/ScreenName';
+import productApi from '../../api/productApi';
+import formatMoney from '../../components/FormatMoney';
 
 const FavouriteProducts = ({navigation}) => {
-  const DATA = [
-    {
-      id: 1,
-      name: 'BEAGLE CƯNG CƯNG',
-      price: 1800000,
-      images: require('./../../assets/image/dog.png'),
-    },
-    {
-      id: 2,
-      name: 'BEAGLE CƯNG CƯNG',
-      price: 2000000,
-      images: require('./../../assets/image/dog.png'),
-    },
-  ];
+  const [listfavorite, setListFavorite] = useState([])
+
+  
+
+  const getFavoritePets = async () => {
+    const res = await productApi.getAllFavorite()
+    console.log('res' ,res.data.data)
+    setListFavorite(res.data.data.favoriteProductId)
+}
+
+  useEffect(() => {
+    getFavoritePets()
+  },[])
 
   const renderItem = ({item}) => {
+    // console.log('item', item)
     return (
       <TouchableOpacity
         onPress={() => navigation.navigate(PRODUCTS_DETAIL_SCREEN)}>
@@ -44,7 +45,7 @@ const FavouriteProducts = ({navigation}) => {
           width={160}
           height={190}
           radius={10}>
-          <Image style={styles.ilist} source={item.images}></Image>
+          <Image style={styles.ilist} source={{uri: item.imgProduct}}></Image>
           <Block
             paddingLeft={'5%'}
             margin={5}
@@ -53,9 +54,9 @@ const FavouriteProducts = ({navigation}) => {
             width={150}
             radius={10}>
             <Block paddingTop={5}>
-              <Text>{item.name}</Text>
+              <Text>{item.nameProduct}</Text>
               <Text marginTop={17} size={12}>
-                {item.price} VND
+                {formatMoney(item.priceProduct)} 
               </Text>
             </Block>
             <TouchableOpacity style={styles.nut}>
@@ -91,7 +92,7 @@ const FavouriteProducts = ({navigation}) => {
       
 
       <Block width={'90%'}>
-        <FlatGrid key={DATA.name} data={DATA} renderItem={renderItem} />
+      <FlatGrid key={listfavorite._id} data={listfavorite} renderItem={renderItem} />
       </Block>
     </Block>
   );

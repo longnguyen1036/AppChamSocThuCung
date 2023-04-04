@@ -63,6 +63,7 @@ const Login = ({navigation}) => {
         console.log('fcm token',fcmTokenFireBase);
         navigation.navigate(MAIN_TAB);
         await setToken(res.data.token)
+        await authApi.UpdateTokenFCM(fcmTokenFireBase)
 
       }
     } catch (e) {
