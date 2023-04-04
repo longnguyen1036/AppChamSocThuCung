@@ -88,7 +88,7 @@ import {
         </Block>
         
   
-        <Block>
+        <Block width={'90%'}>
           <FlatGrid key={DATA.name} data={DATA} renderItem={renderItem} />
         </Block>
   

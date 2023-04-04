@@ -43,6 +43,7 @@ const Profile = ({navigation}) => {
 
   const getLocation =  () => {
     const address = profileUser.address[0]
+
     const url = `https://www.google.com/maps/search/${encodeURIComponent(address)}`
     Linking.openURL(url)
 }
@@ -71,6 +72,7 @@ const Profile = ({navigation}) => {
         {cancelable: false},
       );
     };
+    
   return (
     <View style={{alignItems: 'center', backgroundColor: '#dcdcdc', flex: 1}}>
       <View

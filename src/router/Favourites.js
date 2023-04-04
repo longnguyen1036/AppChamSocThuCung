@@ -18,7 +18,7 @@ import {
 } from '../screen/Notification';
 import Block from '../components/Block';
 import Text from '../components/Text';
-import {FavouritePets, FavouriteProducts} from '../screen/Favourite';
+import {FavouritePets, FavouriteProducts, FavouriteServices} from '../screen/Favourite';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const Tab = createMaterialTopTabNavigator();
@@ -53,7 +53,7 @@ const Favourites = () => {
         <Tab.Screen
           options={{title: 'Dịch vụ'}}
           name={FAVOURITE_SERVICES_SCREEN}
-          component={FavouritePets}
+          component={FavouriteServices}
         />
       </Tab.Navigator>
     </Block>

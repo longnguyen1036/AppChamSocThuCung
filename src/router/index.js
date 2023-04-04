@@ -111,7 +111,8 @@ function MainNavigation() {
   }, [checkLogin]);
   return (
     <NavigationContainer ref={navigationRef1}>
-     {authState == true ? <MainStack /> : <AuthStack />}
+     {/* {authState == true ? <MainStack /> : <AuthStack />} */}
+     <MainStack/>
     </NavigationContainer>
   );
 }

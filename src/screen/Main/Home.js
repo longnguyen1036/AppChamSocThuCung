@@ -54,7 +54,7 @@ const Home = () => {
         marginLeft={'8%'}
         backgroundColor={'#E6EAED'}
         width={160}
-        height={198}>
+        height={205}>
         <Image style={styles.ilist} source={item.images}></Image>
         <Block radius={10} paddingLeft={'5%'} margin={5} backgroundColor={'white'} height={80}>
           <Block paddingTop={5}>
@@ -157,9 +157,9 @@ const Home = () => {
         <Text style ={{fontSize: 20, fontWeight: '700', color: 'black'}}>Top bán chạy</Text>
       </View>
 
-      <View>
+      <Block width={'90%'}>
         <FlatGrid key={DATA.name} data={DATA} renderItem={renderItem} />
-      </View>
+      </Block>
     </SafeAreaView>
   );
 };
@@ -256,7 +256,7 @@ const styles = StyleSheet.create({
   },
   ilist: {
     width: 100,
-    height: 100,
+    height: 109,
     marginLeft: '19%',
     marginTop: '2%',
     marginBottom: '2%',

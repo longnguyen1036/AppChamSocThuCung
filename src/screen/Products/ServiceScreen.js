@@ -126,7 +126,7 @@ const ServiceScreen = ({navigation}) => {
         </Block>
       </Block>
 
-      <Block>
+      <Block >
         <FlatList key={DATA.name} data={DATA} renderItem={renderItem} />
       </Block>
 

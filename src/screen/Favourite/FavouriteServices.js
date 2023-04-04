@@ -88,22 +88,6 @@ import {
   
     return (
       <Block backgroundColor={'white'} flex={1}>
-        <Block row={1} paddingVertical={10} paddingHorizontal={10}>
-          <TouchableOpacity
-            style={{width: '40%'}}
-            onPress={() => navigation.goBack()}>
-            <Image
-              source={require('./../../assets/image/backpet.png')}
-              style={{marginTop: 8}}></Image>
-          </TouchableOpacity>
-          <Block width={'50%'}>
-            <Text size={20} color={'black'} bold>
-              Dịch vụ
-            </Text>
-          </Block>
-  
-          
-        </Block>
   
         <Block paddingHorizontal={10}>
           <Block
@@ -124,23 +108,6 @@ import {
           </Block>
         </Block>
         <Block row justifyCenter>
-        <TouchableOpacity>
-          <Text marginRight={25} size={18} onPress={() => navigation.navigate(FAVOURITE_PETS_SCREEN)} >
-            Sản phẩm
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={() => navigation.navigate(FAVOURITE_PETS_SCREEN)}>
-          <Text size={18}>Thú cưng</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          >
-          <Text bold marginLeft={25} size={18}>
-            Dịch vụ
-          </Text>
-        </TouchableOpacity>
       </Block>
   
         <Block>
