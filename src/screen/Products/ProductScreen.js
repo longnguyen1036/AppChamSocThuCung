@@ -21,7 +21,7 @@ const ProductScreen = ({navigation}) => {
 
   const getAllProducts = async () => {
       const res = await productApi.getAllProducts('productStore')
-      console.log('res nenene',res.data)
+      // console.log('res nenene',res.data)
       setListProduct(res.data.data)
   }
 

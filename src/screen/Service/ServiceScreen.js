@@ -7,46 +7,29 @@ import {
   Modal,
   FlatList,
 } from 'react-native';
-import React from 'react';
+import React,{useState, useEffect} from 'react';
 import Block from '../../components/Block';
 import Text from '../../components/Text';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {FlatGrid} from 'react-native-super-grid';
-import {useState} from 'react';
 import {SERVICES_DETAIL_SCREEN} from '../../router/ScreenName';
+import formatMoney from '../../components/FormatMoney';
+import productApi from '../../api/productApi';
 
 const ServiceScreen = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [listProduct, setListProduct] = useState([]);
 
-  const DATA = [
-    {
-      id: 1,
-      name: 'Tỉa lông chó',
-      price: 1800000 + ' VND',
-      sale: 1500000,
-      images: require('./../../assets/image/dog.png'),
-      store: 'Petmart',
-      address: '147/10 Nguyễn Sỹ Sách p15 Tân Bình',
-    },
-    {
-      id: 2,
-      name: 'BEAGLE CƯNG CƯNG',
-      price: 2000000 + ' VND',
-      sale: 1500000,
-      images: require('./../../assets/image/dog.png'),
-      store: 'Petmart',
-      address: '147/10 Nguyễn Sỹ Sách p15 Tân Bình',
-    },
-    {
-      id: 3,
-      name: 'BEAGLE CƯNG CƯNG',
-      price: '',
-      sale: 1500000,
-      images: require('./../../assets/image/dog.png'),
-      store: 'Petmart',
-      address: '147/10 Nguyễn Sỹ Sách p15 Tân Bình',
-    },
-  ];
+  const getAllProducts = async () => {
+      const res = await productApi.getAllProducts('serviceStore')
+      console.log('res nenene',res.data)
+      setListProduct(res.data.data)
+  }
+
+  useEffect(() => {
+      getAllProducts();
+  },[])
+
 
   const renderItem = ({item}) => {
     return (
@@ -60,7 +43,7 @@ const ServiceScreen = ({navigation}) => {
           row={1}
           marginTop={10} 
           radius={10}>
-          <Image style={styles.ilist} source={item.images}></Image>
+          <Image style={styles.ilist} source={{uri: item.imgService}}></Image>
           <Block
             paddingLeft={'5%'}
             margin={5}
@@ -71,10 +54,10 @@ const ServiceScreen = ({navigation}) => {
             <Block paddingTop={5}>
               <Text>{item.name}</Text>
               <Text color={'red'} size={12}>
-                {item.sale}
+                {item.nameService}
               </Text>
-              <Text size={12}>{item.price}</Text>
-              <Text size={12}>Cửa hàng{item.store}</Text>
+              <Text size={12}>{item.priceService}</Text>
+              <Text size={12}>Cửa hàng: {item.descriptionService}</Text>
               <Text size={12}> Địa chỉ:{item.address}</Text>
             </Block>
             <TouchableOpacity style={styles.nut}>
@@ -127,7 +110,7 @@ const ServiceScreen = ({navigation}) => {
       </Block>
 
       <Block>
-        <FlatList key={DATA.name} data={DATA} renderItem={renderItem} />
+        <FlatList key={listProduct._id} data={listProduct} renderItem={renderItem} />
       </Block>
 
       <Modal

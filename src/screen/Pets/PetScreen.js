@@ -6,33 +6,28 @@ import {
   TextInput,
   Modal,
 } from 'react-native';
-import React from 'react';
+import React,{useState, useEffect} from 'react';
 import Block from '../../components/Block';
 import Text from '../../components/Text';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {FlatGrid} from 'react-native-super-grid';
-import {useState} from 'react';
 import { PETS_DETAIL_SCREEN } from '../../router/ScreenName';
+import formatMoney from '../../components/FormatMoney';
+import productApi from '../../api/productApi';
 
 const PetScreen = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [listProduct, setListProduct] = useState([]);
 
-  const DATA = [
-    {
-      id: 1,
-      name: 'BEAGLE CƯNG CƯNG',
-      category: 'Thú cưng',
-      price: 1800000,
-      images: require('./../../assets/image/dog.png'),
-    },
-    {
-      id: 2,
-      name: 'BEAGLE CƯNG CƯNG',
-      category: 'Thú cưng',
-      price: 2000000,
-      images: require('./../../assets/image/dog.png'),
-    },
-  ];
+  const getAllProducts = async () => {
+      const res = await productApi.getAllProducts('petStore')
+      // console.log('res nenene',res.data)
+      setListProduct(res.data.data)
+  }
+
+  useEffect(() => {
+      getAllProducts();
+  },[])
 
   const renderItem = ({item}) => {
     return (
@@ -44,11 +39,11 @@ const PetScreen = ({navigation}) => {
         width={160}
         height={190} 
         radius={10}>
-        <Image style={styles.ilist} source={item.images}></Image>
+        <Image style={styles.ilist} source={{uri: item.imgPet}}></Image>
         <Block radius={10}   paddingLeft={'5%'} margin={5} backgroundColor={'white'} height={70}>
           <Block paddingTop={5}>
-            <Text>{item.name}</Text>
-            <Text marginTop={7} size={12}>{item.price} VND</Text>
+            <Text>{item.namePet}</Text>
+            <Text marginTop={7} size={12}>{formatMoney(item.pricePet)}</Text>
           </Block>
           <TouchableOpacity style={styles.nut}>
             <AntDesign name="right" size={25} />
@@ -100,7 +95,7 @@ const PetScreen = ({navigation}) => {
       </Block>
 
       <Block width={'90%'}>
-        <FlatGrid key={DATA.name} data={DATA} renderItem={renderItem} />
+        <FlatGrid key={listProduct._id} data={listProduct} renderItem={renderItem} />
       </Block>
 
       <Modal
