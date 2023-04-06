@@ -1,7 +1,11 @@
 import Cart from "./Cart";
-import ProfileShop1 from "./ProfileShop1";
+import PetProfileShop from "./PetProfileShop";
+import ProductProfileShop from "./ProductProfileShop";
+import ServiceProfileShop from "./ServiceProfileShop";
 
 export {
     Cart,
-    ProfileShop1
+    PetProfileShop,
+    ProductProfileShop,
+    ServiceProfileShop
 }

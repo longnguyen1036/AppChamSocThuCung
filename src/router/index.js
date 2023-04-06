@@ -48,6 +48,7 @@ import { PetDetail } from '../screen/Pets';
 import { ProductScreen, ServiceScreen } from '../screen/Products';
 import ProductsDetail from '../screen/Products/ProductsDetail';
 import { ServiceDetail } from '../screen/Service';
+import ProfileShop from './ProfileShop';
 
 
 function MainStack() {
@@ -79,7 +80,7 @@ function MainStack() {
       <Stack.Screen name={EDIT_PROFILE_ADDRESS} component={ChangeAddress} />
 
       <Stack.Screen name={CART_SCREEN} component={Cart} />
-      <Stack.Screen name={PROFILE_SHOP_SCREEN} component={ProfileShop1} />
+      <Stack.Screen name={PROFILE_SHOP_SCREEN} component={ProfileShop} />
       
 
     </Stack.Navigator>
