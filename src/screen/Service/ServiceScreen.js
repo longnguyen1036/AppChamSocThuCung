@@ -20,6 +20,7 @@ const ServiceScreen = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [listProduct, setListProduct] = useState([]);
 
+
   const getAllProducts = async () => {
       const res = await productApi.getAllProducts('serviceStore')
       console.log('res nenene',res.data)

@@ -20,6 +20,11 @@ import Block from '../../components/Block';
 const ServiceDetail = ({navigation}) => {
   const [date, setDate] = useState(new Date());
   const [modalVisible2, setModalVisible2] = useState(false);
+  const [isEnabled, setIsEnabled] = useState(true);
+  const [time, setTime] = useState();
+
+
+  
 
   const DATA = [
     {
@@ -58,8 +63,10 @@ const ServiceDetail = ({navigation}) => {
       time: '20:00',
     },
   ];
+
   const renderItem = ({item}) => {
     return (
+      <TouchableOpacity onPress={() => {setTime(item.time), setModalVisible2(false)}} disabled={!item.status}>
       <Block
         alignCenter
         margin={5}
@@ -75,6 +82,7 @@ const ServiceDetail = ({navigation}) => {
           {item.time}
         </Text>
       </Block>
+      </TouchableOpacity>
     );
   };
 
@@ -221,7 +229,7 @@ const ServiceDetail = ({navigation}) => {
               backgroundColor={'white'}
               paddingTop={'7%'}
               radius={5}>
-              <Text style={{fontSize: 18, color: 'black'}}>Chọn lịch</Text>
+              <Text style={{fontSize: 18, color: 'black'}}>{time ? time : 'Chọn lịch'}</Text>
             </Block>
           </TouchableOpacity>
         </View>
