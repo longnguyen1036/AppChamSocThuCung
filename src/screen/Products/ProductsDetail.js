@@ -18,13 +18,14 @@ const ProductsDetail = ({navigation}) => {
 
 
   const [listProduct, setListProduct] = useState([])
-
+  const [shop , setShop] = useState([])
+  const [address , setAddress] = useState()
 
   const getDetailProducts = async () => {
-    console.log('_id', _id)
     const res = await productApi.getDetailProduct(_id, 'productStore')
     setListProduct(res.data.data.dataProduct)
-    // console.log('res data ne',res.data.data.dataProduct)
+    setShop(res.data.data)
+    setAddress(res.data.data.adress[0])
 }
 
 useEffect(() => {
@@ -83,7 +84,11 @@ useEffect(() => {
         </View>
 
         <TouchableOpacity
-        onPress={() => navigation.navigate(PROFILE_SHOP_SCREEN)}
+        onPress={() => navigation.navigate(PROFILE_SHOP_SCREEN,{
+          _id: shop.id_store,
+          name: shop.name,
+          adress: address
+        })}
           style={{
             marginTop: '5%',
             flexDirection: 'row',
@@ -108,9 +113,12 @@ useEffect(() => {
 
             <View style={{marginLeft: '5%'}}>
               <Text style={{fontSize: 18, color: 'black', fontWeight: '500'}}>
-                matpetfamily
+                {shop?.name}
               </Text>
-              <Text>Store</Text>
+              {
+               !address ? <Text>shop</Text> : <Text style={{width: '40%'}} numberOfLines={1}>{address}</Text>
+              }
+              
             </View>
           </View>
 
@@ -122,6 +130,7 @@ useEffect(() => {
               justifyContent: 'center',
               padding: 5,
               height: 40,
+
             }}>
             <FontAwesome5 name="comments" size={20} color={'white'} />
           </TouchableOpacity>

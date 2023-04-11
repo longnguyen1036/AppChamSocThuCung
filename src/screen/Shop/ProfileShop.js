@@ -1,18 +1,22 @@
 import {Image, StyleSheet, View} from 'react-native';
 import React from 'react';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import { PET_PROFILE_SHOP_SCREEN, PRODUCT_PROFILE_SHOP_SCREEN, SERVICE_PROFILE_SHOP_SCREEN } from './ScreenName';
+import { PET_PROFILE_SHOP_SCREEN, PRODUCT_PROFILE_SHOP_SCREEN, SERVICE_PROFILE_SHOP_SCREEN } from '../../router/ScreenName';
 
-import Block from '../components/Block';
-import Text from '../components/Text';
+import Block from '../../components/Block';
+import Text from '../../components/Text';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { PetProfileShop, ProductProfileShop, ServiceProfileShop } from '../screen/Shop';
+import { PetProfileShop, ProductProfileShop, ServiceProfileShop } from '.';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 const Tab = createMaterialTopTabNavigator();
 
 const ProfileShop = () => {
+  const navigation = useNavigation()
+  const router = useRoute()
+  const {_id, name, adress} = router.params
   return (
     <Block flex={1} backgroundColor={'#dcdcdc'}>
       
@@ -29,7 +33,7 @@ const ProfileShop = () => {
               borderBottomLeftRadius: 20,
               borderBottomRightRadius: 20,
             }}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
               <FontAwesome5 name="chevron-left" size={25} color={'white'} />
             </TouchableOpacity>
 
@@ -50,17 +54,17 @@ const ProfileShop = () => {
                   }}>
                   <View style={{backgroundColor: '#18A2E1', borderRadius: 8}}>
                     <Image
-                      source={require('../assets/image/matpet.png')}
+                      source={require('./../../assets/image/matpet.png')}
                       style={{}}></Image>
                   </View>
                   <View style={{marginLeft: 10, justifyContent: 'center'}}>
                     <Text
                       style={{fontSize: 20, fontWeight: '700', color: 'black'}}>
-                      matpetfamily
+                      {name}
                     </Text>
                     <Text style={{marginTop: 10}}>Store</Text>
                     <Text style={{marginTop: 5}}>
-                      Hoàng Diệu - P Linh Trung - Thủ Đức
+                      {adress}
                     </Text>
                   </View>
                 </View>
@@ -125,17 +129,20 @@ const ProfileShop = () => {
           options={{title: 'Thú cưng'}}
           name={PET_PROFILE_SHOP_SCREEN}
           component={PetProfileShop}
+          initialParams={{_id: _id}}
         />
 
         <Tab.Screen
           options={{title: 'Sản phẩm'}}
           name={PRODUCT_PROFILE_SHOP_SCREEN}
           component={ProductProfileShop}
+          initialParams={{_id: _id}}
         />
         <Tab.Screen
           options={{title: 'Dịch vụ'}}
           name={SERVICE_PROFILE_SHOP_SCREEN}
           component={ServiceProfileShop}
+          initialParams={{_id: _id}}
         />
       </Tab.Navigator>
       </Block>

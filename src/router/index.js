@@ -1,54 +1,50 @@
-import React, {useEffect, useState} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import React, { useEffect, useState } from 'react';
 
+import AuthStack from './AuthStack';
+import { navigationRef1 } from './NavigationServices';
 import {
-  HANDBOOK_SCREEN,
+  CART_SCREEN,
+  EDIT_PROFILE_ACCOUNT,
+  EDIT_PROFILE_ADDRESS,
+  FAVOURITE_SCREEN,
   HANDBOOK_DETAIL_SCREEN,
-  MAIN_TAB,
-  HOME_SCREEN,
-  FAVOURITE_PRODUCTS_SCREEN,
-  PROFILE_SCREEN,
+  HANDBOOK_SCREEN,
   HISTORY_PRODUCTS,
   HISTORY_SERVICES,
-  PETS_SCREEN,
+  HOME_SCREEN,
+  MAIN_TAB,
   PETS_DETAIL_SCREEN,
-  PRODUCTS_SCREEN,
+  PETS_SCREEN,
   PRODUCTS_DETAIL_SCREEN,
-  SERVICES_SCREEN,
-  SERVICES_DETAIL_SCREEN,
+  PRODUCTS_SCREEN,
+  PROFILE_SCREEN,
   PROFILE_SHOP_SCREEN,
-  EDIT_PROFILE_ACCOUNT, 
-  EDIT_PROFILE_ADDRESS, 
-  CART_SCREEN,
-  FAVOURITE_PETS_SCREEN,
-  FAVOURITE_SERVICES_SCREEN,
-  FAVOURITE_SCREEN
+  SERVICES_DETAIL_SCREEN,
+  SERVICES_SCREEN
 } from './ScreenName';
 
 const Stack = createStackNavigator();
-import {navigationRef1} from './NavigationServices';
-import AuthStack from './AuthStack';
 
+import { Home } from '../screen/Main';
+import { ChangeAcount, ChangeAddress, Profile } from '../screen/Profile';
+import { Handbook, HandbookDetail } from './../screen/Handbook';
 import { MyTab } from './BottomNavigation';
-import {ChangeAcount, ChangeAddress, Profile} from '../screen/Profile';
-import {Home} from '../screen/Main';
-import {Handbook, HandbookDetail} from './../screen/Handbook';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { FavouritePets, FavouriteProducts, FavouriteServices } from '../screen/Favourite';
-import HistoryBought from '../screen/History/HistoryBought';
-import HistoryService from '../screen/History/HistoryService';
-import { Cart, ProfileShop1 } from '../screen/Shop';
 import { useDispatch, useSelector } from 'react-redux';
 import { loggedAction, logoutAction } from '../redux/actions/authAction';
-import Favourites from './Favourites';
-import PetScreen from '../screen/Pets/PetScreen';
+import HistoryBought from '../screen/History/HistoryBought';
+import HistoryService from '../screen/History/HistoryService';
 import { PetDetail } from '../screen/Pets';
+import PetScreen from '../screen/Pets/PetScreen';
 import { ProductScreen, ServiceScreen } from '../screen/Products';
 import ProductsDetail from '../screen/Products/ProductsDetail';
 import { ServiceDetail } from '../screen/Service';
-import ProfileShop from './ProfileShop';
+import { Cart } from '../screen/Shop';
+import ProfileShop from '../screen/Shop/ProfileShop';
+import Favourites from './Favourites';
 
 
 function MainStack() {
@@ -81,6 +77,7 @@ function MainStack() {
 
       <Stack.Screen name={CART_SCREEN} component={Cart} />
       <Stack.Screen name={PROFILE_SHOP_SCREEN} component={ProfileShop} />
+      
       
 
     </Stack.Navigator>

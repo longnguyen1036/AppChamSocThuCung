@@ -16,6 +16,7 @@ import Block from '../../components/Block';
 import productApi from '../../api/productApi';
 import { useRoute } from '@react-navigation/native';
 import formatMoney from '../../components/FormatMoney';
+import { PROFILE_SHOP_SCREEN, SERVICE_PROFILE_SHOP_SCREEN } from '../../router/ScreenName';
 
 const ServiceDetail = ({navigation}) => {
   const router = useRoute()
@@ -24,13 +25,15 @@ const ServiceDetail = ({navigation}) => {
   const [modalVisible2, setModalVisible2] = useState(false);
   const [time, setTime] = useState();
   const [listProduct, setListProduct] = useState([])
-
+  const [shop , setShop] = useState([])
+  const [address , setAddress] = useState()
 
 
   const getDetailProducts = async () => {
       const res = await productApi.getDetailProduct(_id, 'serviceStore')
-      console.log('res', res.data.data.dataProduct)
       setListProduct(res.data.data.dataProduct)
+      setShop(res.data.data)
+      setAddress(res.data.data.adress[0])
   }
 
   useEffect(() => {
@@ -94,7 +97,12 @@ const ServiceDetail = ({navigation}) => {
           <Text style={{fontSize: 24, fontWeight: '600'}}> {listProduct?.nameService}</Text>
         </View>
 
-        <View
+        <TouchableOpacity
+          onPress={() => navigation.navigate(PROFILE_SHOP_SCREEN,{
+            _id: shop.id_store,
+            name: shop.name,
+            adress: address
+          })}
           style={{
             marginTop: '3%',
             flexDirection: 'row',
@@ -136,7 +144,7 @@ const ServiceDetail = ({navigation}) => {
             }}>
             <FontAwesome5 name="comments" size={20} color={'white'} />
           </TouchableOpacity>
-        </View>
+        </TouchableOpacity>
 
         <View style={{width: '75%', flexDirection: 'row', marginTop: '3%'}}>
           <View>

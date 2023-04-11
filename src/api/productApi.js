@@ -74,7 +74,7 @@ const addFavorite = async (nameFavorite, _id) => {
 
 const getDetailProduct = async (_id, name) => {
     try {
-        console.log('log id name', _id, name)
+        // console.log('log id name', _id, name)
         const token = await getToken();
         const getDetail = await axios.get(`${BASE_URL_TEST}/getacart/${_id}/${name}`,{
             headers: {
@@ -88,10 +88,26 @@ const getDetailProduct = async (_id, name) => {
     }
 }
 
+const getAllProductStore = async (_id) => {
+    try {
+        const token = await getToken();
+        const getAll = await axios.get(`${BASE_URL_TEST}/getallproductstore/${_id}`,{
+            headers: {
+                token: `Bearer ${token}`,
+            },
+        })
+
+        return getAll
+    } catch (error) {
+        console.log('error', error);
+    }
+}
+
 export default {
     getAllFavorite,
     getAllProducts,
     getRandomProduct,
     addFavorite,
-    getDetailProduct
+    getDetailProduct,
+    getAllProductStore
 }
