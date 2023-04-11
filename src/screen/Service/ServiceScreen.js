@@ -23,7 +23,7 @@ const ServiceScreen = ({navigation}) => {
 
   const getAllProducts = async () => {
       const res = await productApi.getAllProducts('serviceStore')
-      console.log('res nenene',res.data)
+      // console.log('res nenene',res.data)
       setListProduct(res.data.data)
   }
 
@@ -35,7 +35,9 @@ const ServiceScreen = ({navigation}) => {
   const renderItem = ({item}) => {
     return (
       <TouchableOpacity
-        onPress={() => navigation.navigate(SERVICES_DETAIL_SCREEN)}>
+        onPress={() => navigation.navigate(SERVICES_DETAIL_SCREEN,{
+          _id : item._id
+        })}>
         <Block
           marginLeft={'5%'}
           backgroundColor={'#E6EAED'}

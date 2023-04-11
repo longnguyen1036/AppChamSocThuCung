@@ -6,21 +6,29 @@ import {
   Image,
   ScrollView,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {PROFILE_SHOP_SCREEN} from '../../router/ScreenName';
-
+import { useRoute } from '@react-navigation/native';
+import productApi from '../../api/productApi';
+import formatMoney from '../../components/FormatMoney';
 const PetDetail = ({navigation}) => {
-  const [ItemsImage, setItemsImage] = useState([
-    {key: 1, image: require('../../assets/image/detail1.png')},
-    {key: 2, image: require('../../assets/image/detail2.png')},
-    {key: 3, image: require('../../assets/image/detail1.png')},
-    {key: 4, image: require('../../assets/image/detail2.png')},
-  ]);
+  const router = useRoute()
+  const {_id} = router.params
 
-  const [selectedImage, setSelectedImage] = useState(
-    require('../../assets/image/detail1.png'),
-  );
+
+  const [listProduct, setListProduct] = useState([])
+
+
+
+  const getDetailProducts = async () => {
+      const res = await productApi.getDetailProduct(_id, 'petStore')
+      setListProduct(res.data.data.dataProduct)
+  }
+
+  useEffect(() => {
+    getDetailProducts()
+  },[])
 
   return (
     <View style={{backgroundColor: '#dcdcdc', height: '100%'}}>
@@ -44,42 +52,25 @@ const PetDetail = ({navigation}) => {
 
         <View>
           <Image
-            source={selectedImage}
+            source={{uri: listProduct?.imgPet}}
             style={{width: 200, height: 200, borderRadius: 8}}></Image>
         </View>
 
-        <ScrollView style={{width: '66%'}} horizontal={true}>
-          {ItemsImage.map(object => {
-            return (
-              <TouchableOpacity
-                onPress={() => setSelectedImage(object.image)}
-                key={object.key}
-                style={{
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  margin: 8,
-                }}>
-                <Image source={object.image}></Image>
-              </TouchableOpacity>
-            );
-          })}
-        </ScrollView>
+      
 
         <View>
           <View style={{marginTop: '3%', width: '73%'}}>
             <Text style={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>
-              BEAGLE CƯNG CƯNG
+              {listProduct?.namePet}
             </Text>
-            <Text style={{fontSize: 18, fontWeight: 'bold'}}>700.000đ</Text>
-            <Text style={{fontSize: 17, color: 'black', fontWeight: '600'}}>
-              Tình trạng: Còn hàng
-            </Text>
+            <Text style={{fontSize: 18, fontWeight: 'bold'}}>{formatMoney(listProduct?.pricePet)}</Text>
+       
           </View>
           <View style={{flexDirection: 'row', width: '73%', marginTop: '3%'}}>
             <TouchableOpacity
               style={{backgroundColor: 'white', padding: 8, borderRadius: 8}}>
               <Text style={{fontSize: 10,}}>
-                Gioi tinh
+                {listProduct?.genderPet}
               </Text>
               <Text style={{textAlign: 'center',fontSize: 12, color: 'black', fontWeight: '700'}}>Cái</Text>
             </TouchableOpacity>
@@ -96,22 +87,7 @@ const PetDetail = ({navigation}) => {
               <Text style={{fontSize: 10,}}>
                 Tuoi
               </Text>
-              <Text style={{textAlign: 'center',fontSize: 12, color: 'black', fontWeight: '700'}}>6 th</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={{
-                backgroundColor: 'white',
-                marginLeft: '5%',
-                padding: 8,
-                borderRadius: 8,
-                width: 55,
-                height: 55,
-              }}>
-              <Text style={{fontSize: 9,}}>
-                Can nang
-              </Text>
-              <Text style={{textAlign: 'center',fontSize: 12, color: 'black', fontWeight: '700'}}>4,7kg</Text>
+              <Text style={{textAlign: 'center',fontSize: 12, color: 'black', fontWeight: '700'}}>{listProduct?.agePet}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -126,7 +102,7 @@ const PetDetail = ({navigation}) => {
               <Text style={{fontSize: 10,}} >
                 Giong
               </Text>
-              <Text style={{textAlign: 'center', fontSize: 12, color: 'black', fontWeight: '700'}}>Mèo</Text>
+              <Text style={{textAlign: 'center', fontSize: 12, color: 'black', fontWeight: '700'}}>{listProduct?.typePet}</Text>
             </TouchableOpacity>
           </View>
         </View>

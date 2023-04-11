@@ -9,62 +9,39 @@ import {
   Modal,
   FlatList,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import DatePicker from 'react-native-date-picker';
-import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import {Button} from 'react-native';
 import Block from '../../components/Block';
+import productApi from '../../api/productApi';
+import { useRoute } from '@react-navigation/native';
+import formatMoney from '../../components/FormatMoney';
 
 const ServiceDetail = ({navigation}) => {
+  const router = useRoute()
+  const {_id} = router.params
   const [date, setDate] = useState(new Date());
   const [modalVisible2, setModalVisible2] = useState(false);
-  const [isEnabled, setIsEnabled] = useState(true);
   const [time, setTime] = useState();
+  const [listProduct, setListProduct] = useState([])
 
 
+
+  const getDetailProducts = async () => {
+      const res = await productApi.getDetailProduct(_id, 'serviceStore')
+      console.log('res', res.data.data.dataProduct)
+      setListProduct(res.data.data.dataProduct)
+  }
+
+  useEffect(() => {
+    getDetailProducts()
+  },[])
   
 
-  const DATA = [
-    {
-      id: 1,
-      status: false,
-      time: '10:00',
-    },
-    {
-      id: 2,
-      status: true,
-      time: '10:30',
-    },
-    {
-      id: 3,
-      status: true,
-      time: '12:00',
-    },
-    {
-      id: 4,
-      status: false,
-      time: '14:30',
-    },
-    {
-      id: 5,
-      status: false,
-      time: '17:00',
-    },
-    {
-      id: 6,
-      status: false,
-      time: '18:30',
-    },
-    {
-      id: 7,
-      status: true,
-      time: '20:00',
-    },
-  ];
+ 
 
   const renderItem = ({item}) => {
+    // console.log('renderItem', item)
     return (
       <TouchableOpacity onPress={() => {setTime(item.time), setModalVisible2(false)}} disabled={!item.status}>
       <Block
@@ -109,12 +86,12 @@ const ServiceDetail = ({navigation}) => {
 
         <View>
           <Image
-            source={require('../../assets/image/detail3.png')}
-            style={{borderRadius: 8}}></Image>
+            source={{uri: listProduct?.imgService}}
+            style={{width: 200, height: 200, borderRadius: 8}}></Image>
         </View>
 
         <View style={{marginTop: '3%'}}>
-          <Text style={{fontSize: 24, fontWeight: '600'}}>Tỉa lông chó</Text>
+          <Text style={{fontSize: 24, fontWeight: '600'}}> {listProduct?.nameService}</Text>
         </View>
 
         <View
@@ -163,7 +140,7 @@ const ServiceDetail = ({navigation}) => {
 
         <View style={{width: '75%', flexDirection: 'row', marginTop: '3%'}}>
           <View>
-            <Text
+            {/* <Text
               style={{
                 fontSize: 20,
                 fontWeight: '700',
@@ -172,31 +149,13 @@ const ServiceDetail = ({navigation}) => {
                 textDecorationStyle: 'solid',
               }}>
               150000đ
-            </Text>
+            </Text> */}
           </View>
           <View style={{marginLeft: '3%'}}>
             <Text style={{fontSize: 20, fontWeight: '700', color: '#F80202'}}>
-              100000đ
+              {formatMoney(listProduct?.priceService)}
             </Text>
           </View>
-        </View>
-
-        <View style={{flexDirection: 'row', width: '75%', marginTop: '2%'}}>
-          <TouchableOpacity>
-            <Ionicons name="star" size={18} color={'#F80202'} />
-          </TouchableOpacity>
-          <TouchableOpacity style={{marginLeft: '2%'}}>
-            <Ionicons name="star" size={18} color={'#F80202'} />
-          </TouchableOpacity>
-          <TouchableOpacity style={{marginLeft: '2%'}}>
-            <Ionicons name="star" size={18} color={'#F80202'} />
-          </TouchableOpacity>
-          <TouchableOpacity style={{marginLeft: '2%'}}>
-            <Ionicons name="star" size={18} color={'#F80202'} />
-          </TouchableOpacity>
-          <TouchableOpacity style={{marginLeft: '2%'}}>
-            <Ionicons name="star-outline" size={18} color={'#F80202'} />
-          </TouchableOpacity>
         </View>
 
         <View
@@ -259,14 +218,9 @@ const ServiceDetail = ({navigation}) => {
           setModalVisible2(!modalVisible2);
         }}>
         <View style={styles.modalView}>
-          <FlatList numColumns={4} data={DATA} renderItem={renderItem} />
+          <FlatList numColumns={4} data={listProduct?.timeService} renderItem={renderItem} />
 
           <Block row margin={10}>
-            <TouchableOpacity
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible2(!modalVisible2)}>
-              <Text style={styles.textStyle}>Đồng ý</Text>
-            </TouchableOpacity>
             <TouchableOpacity
               style={[styles.button, styles.buttonClose2]}
               onPress={() => setModalVisible2(!modalVisible2)}>

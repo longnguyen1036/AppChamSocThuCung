@@ -31,7 +31,9 @@ const PetScreen = ({navigation}) => {
 
   const renderItem = ({item}) => {
     return (
-      <TouchableOpacity  onPress={ ()=>navigation.navigate(PETS_DETAIL_SCREEN)}>
+      <TouchableOpacity  onPress={ ()=>navigation.navigate(PETS_DETAIL_SCREEN,{
+          _id : item._id
+      })}>
       <Block
      
         marginLeft={'8%'}

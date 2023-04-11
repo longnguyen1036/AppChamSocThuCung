@@ -32,7 +32,9 @@ const ProductScreen = ({navigation}) => {
   const renderItem = ({item}) => {
     return (
       <TouchableOpacity
-        onPress={() => navigation.navigate(PRODUCTS_DETAIL_SCREEN)}>
+        onPress={() => navigation.navigate(PRODUCTS_DETAIL_SCREEN,{
+          _id: item._id
+        })}>
         <Block
           marginLeft={'8%'}
           backgroundColor={'#E6EAED'}
