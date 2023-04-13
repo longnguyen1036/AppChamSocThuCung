@@ -29,6 +29,16 @@ const PetDetail = ({navigation}) => {
       setAddress(res.data.data.adress[0])
   }
 
+  const addCart = async (id, product, quantity) => {
+    const ProductId = {
+      product  : product,
+      quantity : quantity
+    }
+    const res = await productApi.addCartProduct(id, ProductId, "petStore")
+    console.log(res.data)
+    return res
+  }
+
   useEffect(() => {
     getDetailProducts()
   },[])
@@ -162,6 +172,7 @@ const PetDetail = ({navigation}) => {
         </TouchableOpacity>
 
         <TouchableOpacity
+        onPress={() => addCart(shop?.id_store, listProduct?._id, 1)}
           style={{
             marginTop: '5%',
             backgroundColor: '#18A2E1',

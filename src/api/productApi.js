@@ -74,7 +74,7 @@ const addFavorite = async (nameFavorite, _id) => {
 
 const getDetailProduct = async (_id, name) => {
     try {
-        // console.log('log id name', _id, name)
+        console.log('log id name', _id, name)
         const token = await getToken();
         const getDetail = await axios.get(`${BASE_URL_TEST}/getacart/${_id}/${name}`,{
             headers: {
@@ -103,11 +103,31 @@ const getAllProductStore = async (_id) => {
     }
 }
 
+const addCartProduct = async (id, ProductId, nameModel) => {
+    try {
+        const token = await getToken();
+        const addCartProductStore = await axios.post(`${BASE_URL_TEST}/addcart`,{
+            id, 
+            ProductId,
+            nameModel
+        },{
+            headers: {
+                token: `Bearer ${token}`,
+            },
+        })
+
+        return addCartProductStore
+    } catch (error) {
+        console.log('loi api addFavorite product error', error)
+    }
+}
+
 export default {
     getAllFavorite,
     getAllProducts,
     getRandomProduct,
     addFavorite,
     getDetailProduct,
-    getAllProductStore
+    getAllProductStore,
+    addCartProduct
 }

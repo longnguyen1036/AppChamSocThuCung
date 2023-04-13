@@ -36,6 +36,7 @@ const ServiceDetail = ({navigation}) => {
       setAddress(res.data.data.adress[0])
   }
 
+
   useEffect(() => {
     getDetailProducts()
   },[])

@@ -28,6 +28,17 @@ const ProductsDetail = ({navigation}) => {
     setAddress(res.data.data.adress[0])
 }
 
+const addCart = async (id, product, quantity) => {
+  const ProductId = {
+    product  : product,
+    quantity : quantity
+  }
+  
+  const res = await productApi.addCartProduct(id, ProductId, "productStore")
+  console.log(res.data)
+  return res
+}
+
 useEffect(() => {
   getDetailProducts()
 },[])
@@ -137,7 +148,7 @@ useEffect(() => {
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() => navigation.navigate(CART_SCREEN)}
+          onPress={() => addCart(shop?.id_store, listProduct?._id, 1)}
           style={{
             marginTop: '5%',
             backgroundColor: '#18A2E1',
