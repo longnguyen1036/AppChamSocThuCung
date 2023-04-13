@@ -11,7 +11,7 @@ import Block from '../../components/Block';
 import Text from '../../components/Text';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-const Cart = () => {
+const Cart = ({navigation}) => {
   const DATA = [
     {
       id: 1,
@@ -58,14 +58,14 @@ const Cart = () => {
     <Block backgroundColor={'#DADADA'} flex={1}>
 
       <Block row={1} paddingVertical={10} paddingHorizontal={10}>
-
+      <TouchableOpacity onPress={()=> navigation.goBack()}>
         <Block width={'40%'}>
           <Image
             source={require('./../../assets/image/backpet.png')}
             style={{marginTop: 8}}></Image>
         </Block>
-
-        <Block width={'50%'}>
+        </TouchableOpacity>
+        <Block width={'50%'} marginLeft={'40%'}>
           <Text size={20} color={'black'} bold>
             Giỏ hàng
           </Text>
@@ -78,6 +78,7 @@ const Cart = () => {
           <Text>Địa chỉ</Text>
         </Block>
         <FlatList key={DATA.name} data={DATA} renderItem={renderItem} />
+        <TouchableOpacity>
         <Block backgroundColor={'white'} row={1} border={0.5} height={70}>
             <Block backgroundColor={'#18A2E1'} width={'35%'} alignCenter paddingTop={20} >
                 <Text  size={15}  color={'white'}>Mua hàng</Text>
@@ -87,6 +88,8 @@ const Cart = () => {
                 <Text size={15} color={'#18A2E1'}>90000000đ</Text>
             </Block>
         </Block>
+
+        </TouchableOpacity>
       </Block>
 
     </Block>
