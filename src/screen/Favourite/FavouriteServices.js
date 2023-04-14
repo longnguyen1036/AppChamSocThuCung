@@ -40,7 +40,7 @@ import {
           <Block
             marginLeft={'5%'}
             backgroundColor={'#E6EAED'}
-            width={350}
+            width={'92%'}
             height={130}
             row={1}
             marginTop={10} 
@@ -51,7 +51,7 @@ import {
               margin={5}
               backgroundColor={'white'}
               height={120}
-              width={240}
+              width={'71%'}
               radius={10}>
               <Block paddingTop={5}>
                 <Text>{item.name}</Text>

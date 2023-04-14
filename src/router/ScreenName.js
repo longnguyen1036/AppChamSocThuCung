@@ -46,5 +46,10 @@ export const CART_SCREEN = 'CART_SCREEN';
 export const HISTORY_PRODUCTS = 'HISTORY_PRODUCTS';
 export const HISTORY_SERVICES = 'HISTORY_SERVICES';
 
+export const CHAT = 'CHAT';
+export const LIST_CHAT = 'LIST_CHAT';
+
+
+
 
 export const MAIN_TAB = 'MAIN_TAB';

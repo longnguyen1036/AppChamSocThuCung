@@ -36,9 +36,9 @@ const PetScreen = ({navigation}) => {
       })}>
       <Block
      
-        marginLeft={'8%'}
+        marginLeft={'15%'}
         backgroundColor={'#E6EAED'}
-        width={160}
+        width={'91%'}
         height={190} 
         radius={10}>
         <Image style={styles.ilist} source={{uri: item.imgPet}}></Image>
@@ -96,7 +96,7 @@ const PetScreen = ({navigation}) => {
         </Block>
       </Block>
 
-      <Block width={'90%'}>
+      <Block width={'95%'}>
         <FlatGrid key={listProduct._id} data={listProduct} renderItem={renderItem} />
       </Block>
 

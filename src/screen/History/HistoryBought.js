@@ -11,7 +11,7 @@ import Block from '../../components/Block';
 import Text from '../../components/Text';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-const HistoryBought = () => {
+const HistoryBought = ({navigation}) => {
   const DATA = [
     {
       id: 1,
@@ -57,9 +57,11 @@ const HistoryBought = () => {
     <Block backgroundColor={'#DADADA'} flex={1}>
       <Block row={1} paddingVertical={10} paddingHorizontal={10}>
         <Block width={'40%'}>
+          <TouchableOpacity onPress={()=> navigation.goBack()}>
           <Image
             source={require('./../../assets/image/backpet.png')}
             style={{marginTop: 8}}></Image>
+            </TouchableOpacity>
         </Block>
 
         <Block width={'50%'}>

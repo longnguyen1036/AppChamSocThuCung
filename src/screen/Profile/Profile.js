@@ -14,7 +14,7 @@ import Block from '../../components/Block';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { EDIT_PROFILE_ACCOUNT, EDIT_PROFILE_ADDRESS, HISTORY_PRODUCTS, HISTORY_SERVICES } from '../../router/ScreenName';
+import { CHAT, EDIT_PROFILE_ACCOUNT, EDIT_PROFILE_ADDRESS, HISTORY_PRODUCTS, HISTORY_SERVICES, LIST_CHAT } from '../../router/ScreenName';
 import { useDispatch, useSelector } from 'react-redux';
 import { loggedAction, logoutAction } from '../../redux/actions/authAction';
 import authApi from '../../api/authApi';
@@ -129,7 +129,7 @@ const Profile = ({navigation}) => {
               <Text style={{marginTop: 10}}>{profileUser?.emailAccount}</Text>
               <TouchableOpacity onPress={() => getLocation()}>
 
-              <Text style={{marginTop: 5, color: 'blue'}}>
+              <Text style={{marginTop: 5, color: 'blue', width: '60%', height: 40}}>
                 {profileUser?.address[0]}
               </Text>
               </TouchableOpacity>
@@ -160,6 +160,7 @@ const Profile = ({navigation}) => {
             <FontAwesome5 name="camera-retro" size={25} color={'white'} />
           </TouchableOpacity>
           <TouchableOpacity
+            onPress={()=> navigation.navigate(LIST_CHAT)}
             style={{
               backgroundColor: '#18A2E1',
               width: '30%',

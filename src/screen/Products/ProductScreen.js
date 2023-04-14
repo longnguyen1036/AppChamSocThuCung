@@ -36,7 +36,7 @@ const ProductScreen = ({navigation}) => {
           _id: item._id
         })}>
         <Block
-          marginLeft={'8%'}
+          marginLeft={'15%'}
           backgroundColor={'#E6EAED'}
           width={160}
           height={190}
@@ -49,8 +49,8 @@ const ProductScreen = ({navigation}) => {
             height={70}
             radius={10}>
             <Block paddingTop={5}>
-              <Text>{item.nameProduct}</Text>
-              <Text marginTop={7} size={12}>
+              <Text width={'90%'} height={20}>{item.nameProduct}</Text>
+              <Text width={'90%'} marginTop={17} size={12}>
                 {formatMoney(item.priceProduct)}
               </Text>
             </Block>
@@ -104,7 +104,7 @@ const ProductScreen = ({navigation}) => {
         </Block>
       </Block>
 
-      <Block width={'90%'}>
+      <Block width={'95%'}>
         <FlatGrid key={listProduct._id} data={listProduct} renderItem={renderItem} />
       </Block>
 

@@ -54,14 +54,16 @@ const Home = () => {
       <Block
        radius={10}
         backgroundColor={'#E6EAED'}
+
         marginLeft={10}
         marginBottom={10}
+        width={180}
         >
         <Image style={styles.ilist} source={{uri: item.image}}></Image>
-        <Block radius={10} paddingLeft={'5%'} margin={5} backgroundColor={'white'} height={80}>
+        <Block width={'95%'} radius={10} paddingLeft={'5%'} margin={5} backgroundColor={'white'} height={80}>
           <Block paddingTop={5}>
-            <Text >{item.name}</Text>
-            <Text color={'#'}>{item.description}</Text>
+            <Text style={{color: 'black', fontSize: 18}} width={'90%'} height={20}>{item.name}</Text>
+            <Text width={'80%'} height={20} color={'blue'}>{item.description}</Text>
             <Text marginTop={7} size={15}>{formatMoney(item.price)}</Text>
           </Block>
           <TouchableOpacity style={styles.nut}>
@@ -158,7 +160,7 @@ const Home = () => {
           </TouchableOpacity>
         </Block>
       </View>
-      <View style={{paddingHorizontal: '5%', marginTop: '3%'}}>
+      <View style={{paddingHorizontal: '5%', marginTop: '3%', marginBottom: '2%'}}>
         <Text style ={{fontSize: 20, fontWeight: '700', color: 'black'}}>Top bán chạy</Text>
       </View>
 

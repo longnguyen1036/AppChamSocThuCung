@@ -39,7 +39,7 @@ const ServiceScreen = ({navigation}) => {
           _id : item._id
         })}>
         <Block
-          marginLeft={'5%'}
+          marginLeft={'8%'}
           backgroundColor={'#E6EAED'}
           width={350}
           height={130}
@@ -52,16 +52,16 @@ const ServiceScreen = ({navigation}) => {
             margin={5}
             backgroundColor={'white'}
             height={120}
-            width={240}
+            width={245}
             radius={10}>
             <Block paddingTop={5}>
-              <Text>{item.name}</Text>
+              <Text size={16} bold>{item.nameService}</Text>
               <Text color={'red'} size={12}>
-                {item.nameService}
+              {item.priceService*80/100}
               </Text>
               <Text size={12}>{item.priceService}</Text>
-              <Text size={12}>Cửa hàng: {item.descriptionService}</Text>
-              <Text size={12}> Địa chỉ:{item.address}</Text>
+              <Text size={12}>Cửa hàng: {item.address}</Text>
+              <Text height={30} size={12}>Mô tả: {item.descriptionService}</Text>
             </Block>
             <TouchableOpacity style={styles.nut}>
               <AntDesign name="right" size={25} />
@@ -112,7 +112,7 @@ const ServiceScreen = ({navigation}) => {
         </Block>
       </Block>
 
-      <Block>
+      <Block width={'100%'}>
         <FlatList key={listProduct._id} data={listProduct} renderItem={renderItem} />
       </Block>
 

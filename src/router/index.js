@@ -6,6 +6,7 @@ import AuthStack from './AuthStack';
 import { navigationRef1 } from './NavigationServices';
 import {
   CART_SCREEN,
+  CHAT,
   EDIT_PROFILE_ACCOUNT,
   EDIT_PROFILE_ADDRESS,
   FAVOURITE_SCREEN,
@@ -14,6 +15,7 @@ import {
   HISTORY_PRODUCTS,
   HISTORY_SERVICES,
   HOME_SCREEN,
+  LIST_CHAT,
   MAIN_TAB,
   PETS_DETAIL_SCREEN,
   PETS_SCREEN,
@@ -45,6 +47,7 @@ import { ServiceDetail } from '../screen/Service';
 import { Cart } from '../screen/Shop';
 import ProfileShop from '../screen/Shop/ProfileShop';
 import Favourites from './Favourites';
+import { Chat, ListChat } from '../screen/Messenger';
 
 
 function MainStack() {
@@ -77,6 +80,10 @@ function MainStack() {
 
       <Stack.Screen name={CART_SCREEN} component={Cart} />
       <Stack.Screen name={PROFILE_SHOP_SCREEN} component={ProfileShop} />
+      <Stack.Screen name={LIST_CHAT} component={ListChat} />
+      <Stack.Screen name={CHAT} component={Chat} />
+
+
       
       
 
