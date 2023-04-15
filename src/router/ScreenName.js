@@ -50,6 +50,4 @@ export const CHAT = 'CHAT';
 export const LIST_CHAT = 'LIST_CHAT';
 
 
-
-
 export const MAIN_TAB = 'MAIN_TAB';
