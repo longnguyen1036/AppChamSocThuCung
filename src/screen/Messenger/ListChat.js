@@ -85,7 +85,7 @@ const ListChat = ({navigation}) => {
         </Block>
       </Block>
 
-      <Block marginTop={5}>
+      <Block marginTop={5} paddingHorizontal={10}>
         <FlatList key={DATA.name} data={DATA} renderItem={renderItem} />
       </Block>
     </Block>

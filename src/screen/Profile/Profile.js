@@ -129,7 +129,7 @@ const Profile = ({navigation}) => {
               <Text style={{marginTop: 10}}>{profileUser?.emailAccount}</Text>
               <TouchableOpacity onPress={() => getLocation()}>
 
-              <Text style={{marginTop: 5, color: 'blue', width: '60%', height: 40}}>
+              <Text style={{marginTop: 5, color: 'blue', width: '100%', height: 40}}>
                 {profileUser?.address[0]}
               </Text>
               </TouchableOpacity>
