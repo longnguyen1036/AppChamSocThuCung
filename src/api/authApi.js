@@ -117,11 +117,30 @@ const UpdateTokenFCM = async (tokenFCM) => {
     }
 
 }
+
+const getMessengerApi = async () => {
+    try {
+        const token = await getToken();
+        const getMess = await axios.get(`${BASE_URL_TEST}/listmess`, {
+            headers: {
+                token: `Bearer ${token}`,
+            },
+        });
+        console.log('getProfile', getMess)
+        return getMess
+
+    } catch (error) {
+        console('loi api getMess error', error);
+
+    }
+
+}
 export default{
     Register,
     OTPRegister, 
     Login,
     getProfile,
     UpdateProfile,
-    UpdateTokenFCM
+    UpdateTokenFCM,
+    getMessengerApi
 }

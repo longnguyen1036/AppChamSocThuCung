@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   View,
   FlatList,
@@ -10,34 +10,43 @@ import {
 } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Block from '../../components/Block';
+import authApi from '../../api/authApi';
+import { useRoute } from '@react-navigation/native';
+import { io } from 'socket.io-client';
 
 
 const Chat = ({navigation}) => {
-  const [message, setMessage] = useState('');
-  const [message2, setMessage2] = useState([
-    {
-      id: '1',
-      text: 'Hello there!',
-      sender: 'other',
-    },
-    {
-      id: '2',
-      text: 'Hi, how are you?',
-      sender: 'me',
-    },
-    {
-      id: '3',
-      text: 'I am doing well, thanks. And you?',
-      sender: 'other',
-    },
-  ]);
+  const [message, setMessage] = useState([]);
+  const [inputmess, SetInputMess] = useState('');
+  const router = useRoute();
 
+  const {data , id, idSocketStore} = router.params;
+ 
+  
+  const sendMessage = () =>{
+    try {
+      const data = {
+        id: id,
+        socketId: idSocketStore,
+        mess: inputmess,
+        table: 'user'
+      }
+      const socket = io(`http://192.168.1.6:9999/`);
+      socket.on('mgs', (msg) => {
+        console.log('mafsdfdssd', msg);
+      })
+      socket.on('checkerror', (error) => {
+        console.log('error socket', error);
+      })
+      const res =  socket.emit('Login', data);
+      console.log('ress', res);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
-
-  const sendMessage = () => {
-      setMessage(message);
-    
-  };
+  useEffect(() => {
+  },[])
 
   const renderItem = ({ item }) => {
     const isMe = item.sender === 'me';
@@ -87,7 +96,7 @@ const Chat = ({navigation}) => {
       </Block>
       <FlatList
         
-        data={message2}
+        data={message}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
         
@@ -95,11 +104,9 @@ const Chat = ({navigation}) => {
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
-          value={message}
-          onChangeText={setMessage}
           placeholder="Type your message here"
         />
-        <TouchableOpacity style={styles.sendButton} onPress={()=> sendMessage(setMessage())} >
+        <TouchableOpacity style={styles.sendButton}  >
           <FontAwesome name={'send'} size={25}/>
         </TouchableOpacity>
       </View>
