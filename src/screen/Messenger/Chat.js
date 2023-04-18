@@ -69,13 +69,28 @@ const Chat = ({navigation}) => {
   }, []);
 
 
-  
+  useEffect(() => {
+    console.log('i73');
+    // Tạo một đối tượng socket mới và thiết lập kết nối
+    const socket = io(`http://192.168.1.6:9999/`);
+    // Lắng nghe sự kiện 'message' từ máy chủ WebSocket
+    socket.on('mgs', (data) => {
+      console.log('data', data);
+      setMessage2(data);
+    });
+
+    // Lệnh return trong useEffect được sử dụng để ngăn chặn xoá lệnh lắng nghe khi component bị xoá khỏi màn hình
+    return () => {
+      socket.disconnect();
+      socket.off();
+    };
+  });
+const [message2, setMessage2] = useState('');
   
 
 
 
   const renderItem = ({item}) => {
-    console.log('item', item);
     const key = Object.keys(item)[0];
     const value = item[key];
     
