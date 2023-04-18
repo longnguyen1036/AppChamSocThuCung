@@ -6,29 +6,35 @@ import {
   TextInput,
   FlatList,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import Block from '../../components/Block';
 import Text from '../../components/Text';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {CHAT} from '../../router/ScreenName';
 import authApi from '../../api/authApi';
+import { useFocusEffect } from '@react-navigation/native';
 
 const ListChat = ({navigation}) => {
   const [message, setMessage] = useState([]);
-  const [id, setId] = useState([]);
   const getListMess = async () => {
     try {
       const res = await authApi.getMessengerApi();
       setMessage(res?.data?.data?.chatId);
-      setId(res?.data?.data?.id);
+
+      console.log('res', res.data);
+
     } catch (error) {
       console.log('error', error);
     }
   };
 
-  useEffect(() => {
-    getListMess();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      getListMess();
+    }, []),
+  );
+
+
 
   const renderItem = ({item}) => {
     return (
@@ -36,7 +42,7 @@ const ListChat = ({navigation}) => {
         onPress={() =>
           navigation.navigate(CHAT, {
             data: item.data,
-            id: id,
+            id: item._id,
             idSocketStore: item._id_idSocketStore.idSocketStore
           })
         }>

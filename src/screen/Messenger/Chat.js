@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {
   View,
   FlatList,
@@ -11,69 +11,79 @@ import {
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Block from '../../components/Block';
 import authApi from '../../api/authApi';
-import { useRoute } from '@react-navigation/native';
-import { io } from 'socket.io-client';
-
+import {useRoute} from '@react-navigation/native';
+import {io} from 'socket.io-client';
 
 const Chat = ({navigation}) => {
   const [message, setMessage] = useState([]);
   const [inputmess, SetInputMess] = useState('');
   const router = useRoute();
-
-  const {data , id, idSocketStore} = router.params;
- 
   
-  const sendMessage = () =>{
+  const {data, id, idSocketStore} = router.params;
+
+  const sendMessage = () => {
     try {
+      SetInputMess('')
       const data = {
         id: id,
         socketId: idSocketStore,
         mess: inputmess,
-        table: 'user'
-      }
+        table: 'user',
+      };
       const socket = io(`http://192.168.1.6:9999/`);
-      socket.on('mgs', (msg) => {
+      socket.on('mgs', msg => {
         console.log('mafsdfdssd', msg);
-      })
-      socket.on('checkerror', (error) => {
+      });
+      socket.on('checkerror', error => {
         console.log('error socket', error);
-      })
-      const res =  socket.emit('Login', data);
+      });
+      const res = socket.emit('sendmess', data);
       console.log('ress', res);
     } catch (error) {
       console.log(error);
     }
-  }
+  };
+
+  const CutArray = () => {
+   const cutarray = data.map(item => {
+      const [key, value] = item.split(':');
+      return {[key]: value};
+    });
+    setMessage(cutarray);
+
+    const socket = io(`http://192.168.1.6:9999/`);
+    socket.on('mgs', (data) => {
+      console.log('dataaaaaaaaaaaaaaaaaaaaa', data);
+      // Cập nhật mảng tin nhắn với tin nhắn mới nhất
+      setMessage(prevMessages => [...prevMessages, { [data.key]: data.value }]);
+    });
+  };
+
+  const socket = io(`http://192.168.1.6:9999/`);
+  socket.on('mgs', msg => {
+    console.log('toi la toan', msg);
+  });
 
   useEffect(() => {
-  },[])
+    CutArray();
+  }, []);
 
-  const renderItem = ({ item }) => {
-    const isMe = item.sender === 'me';
-    const align = isMe ? 'flex-end' : 'flex-start';
-    const backgroundColor = isMe ? '#DCF8C5' : '#FFFFFF';
 
+  
+  
+
+
+
+  const renderItem = ({item}) => {
+    console.log('item', item);
+    const key = Object.keys(item)[0];
+    const value = item[key];
+    
     return (
-      <View style={[styles.messageContainer, { alignItems: align }]}>
-        {/* {!isMe && ( */}
-          {/* <Image
-          source={require('../../assets/image/phonenumber.png')} 
-            style={styles.avatar}
-          /> */}
-        {/* )} */}
-        
-        <View style={[styles.messageBubble, { backgroundColor, }]}>
-          
-          <Text style={styles.messageText}>{item.text}</Text>
-          
+      <View style={styles.messageContainer}>
+        <View style={[styles.messageBubble, {backgroundColor: key === '1' ? 'pink' : 'cyan' , marginLeft: key === '1' ? 'auto' : 0 , marginRight:key === '2' ? 'auto' : 0  }]}>
+          <Text style={styles.messageText}>{value}</Text>
         </View>
-       
-        {/* {isMe && (
-          <Image
-          source={require('../../assets/image/phonenumber.png')} 
-            style={styles.avatar}
-          /> 
-        )}  */}
       </View>
     );
   };
@@ -81,33 +91,35 @@ const Chat = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Block row={1} paddingVertical={10} paddingHorizontal={10}>
-      <TouchableOpacity style={{width: '40%'}} onPress={() => navigation.goBack()}>
-          
+        <TouchableOpacity
+          style={{width: '40%'}}
+          onPress={() => navigation.goBack()}>
           <Image
             source={require('./../../assets/image/backpet.png')}
             style={{marginTop: 8}}></Image>
-        
-      </TouchableOpacity>
+        </TouchableOpacity>
         <Block width={'50%'}>
           <Text style={{color: 'black', fontWeight: 'bold', fontSize: 20}}>
-           Username
+            Username
           </Text>
         </Block>
       </Block>
       <FlatList
-        
         data={message}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-        
+        keyExtractor={item => item.id}
       />
       <View style={styles.inputContainer}>
         <TextInput
+          value={inputmess}
           style={styles.input}
           placeholder="Type your message here"
+          onChangeText={text => SetInputMess(text)}
         />
-        <TouchableOpacity style={styles.sendButton}  >
-          <FontAwesome name={'send'} size={25}/>
+        <TouchableOpacity
+          style={styles.sendButton}
+          onPress={() => sendMessage()}>
+          <FontAwesome name={'send'} size={25} />
         </TouchableOpacity>
       </View>
     </View>
@@ -123,7 +135,7 @@ const styles = StyleSheet.create({
   },
   messageContainer: {
     flexDirection: 'row',
-    justifyContent:'space-between',
+    justifyContent: 'space-between',
     alignItems: 'center',
     marginVertical: 5,
   },
@@ -135,23 +147,20 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
   messageBubble: {
-    width:'auto', 
+    width: 'auto',
     height: '100%',
     borderRadius: 20,
     paddingHorizontal: 10,
     paddingVertical: 5,
-    maxWidth: '100%', 
+    maxWidth: '100%',
     marginEnd: 'auto',
-    
   },
   messageText: {
     fontSize: 16,
-    
-
   },
   inputContainer: {
     flexDirection: 'row',
-    justifyContent:'space-between',
+    justifyContent: 'space-between',
     alignItems: 'center',
   },
   sendButton: {
@@ -160,7 +169,6 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     justifyContent: 'center',
     alignItems: 'center',
-    
   },
   input: {
     flex: 1,
@@ -168,6 +176,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     fontSize: 16,
     borderWidth: 1,
-  }
- 
-})
+  },
+});
