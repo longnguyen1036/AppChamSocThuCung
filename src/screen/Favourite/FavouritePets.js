@@ -18,16 +18,43 @@ import {
   const FavouritePets = ({navigation}) => {
   
     const [listfavorite, setListFavorite] = useState([])
+    const [search, setSearch] = useState('');
+    const [masterDataSource, setMasterDataSource] = useState([]);
     
     const getFavoritePets = async () => {
         const res = await productApi.getAllFavorite()
         console.log('res' ,res.data.data.favoritePetId)
         setListFavorite(res.data.data.favoritePetId)
+        setMasterDataSource(res.data.data.favoritePetId)
     }
 
     useEffect(() => {
         getFavoritePets()
     },[])
+
+    const searchFilterFunction = (text) => {
+      // Check if searched text is not blank
+      if (text) {
+        // Inserted text is not blank
+        // Filter the masterDataSource
+        // Update FilteredDataSource
+        const newData = masterDataSource.filter(
+          function (item) {
+            const itemData = item.title
+              ? item.title.toUpperCase()
+              : ''.toUpperCase();
+            const textData = text.toUpperCase();
+            return itemData.indexOf(textData) > -1;
+        });
+        setListFavorite(newData);
+        setSearch(text);
+      } else {
+        // Inserted text is blank
+        // Update FilteredDataSource with masterDataSource
+        setListFavorite(masterDataSource);
+        setSearch(text);
+      }
+    };
   
     const renderItem = ({item}) => {
       // console.log('item', item)
@@ -82,6 +109,8 @@ import {
             <TextInput
               placeholder="Tìm kiếm"
               style={{flex: 1}}
+              onChangeText={(text) => searchFilterFunction(text)}
+              value={search}
               underlineColorAndroid="transparent"></TextInput>
           </Block>
         </Block>
