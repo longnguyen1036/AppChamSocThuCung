@@ -19,15 +19,43 @@ const PetScreen = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [listProduct, setListProduct] = useState([]);
 
+  const [search, setSearch] = useState('');
+  const [masterDataSource, setMasterDataSource] = useState([]);
+
   const getAllProducts = async () => {
       const res = await productApi.getAllProducts('petStore')
       // console.log('res nenene',res.data)
       setListProduct(res.data.data)
+      setMasterDataSource(res.data.data);
   }
 
   useEffect(() => {
       getAllProducts();
   },[])
+
+  const searchFilterFunction = (text) => {
+    // Check if searched text is not blank
+    if (text) {
+      // Inserted text is not blank
+      // Filter the masterDataSource
+      // Update FilteredDataSource
+      const newData = masterDataSource.filter(
+        function (item) {
+          const itemData = item.title
+            ? item.title.toUpperCase()
+            : ''.toUpperCase();
+          const textData = text.toUpperCase();
+          return itemData.indexOf(textData) > -1;
+      });
+      setListProduct(newData);
+      setSearch(text);
+    } else {
+      // Inserted text is blank
+      // Update FilteredDataSource with masterDataSource
+      setListProduct(masterDataSource);
+      setSearch(text);
+    }
+  };
 
   const renderItem = ({item}) => {
     return (
@@ -92,6 +120,8 @@ const PetScreen = ({navigation}) => {
           <TextInput
             placeholder="Tìm kiếm"
             style={{flex: 1}}
+            onChangeText={(text) => searchFilterFunction(text)}
+            value={search}
             underlineColorAndroid="transparent"></TextInput>
         </Block>
       </Block>
