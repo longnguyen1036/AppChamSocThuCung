@@ -24,14 +24,18 @@ const Home = () => {
   const navigation = useNavigation();
   const [listRandom, setListRandom] = useState()
 
+
+
   const getAllRandom = async () => {
       const res = await productApi.getRandomProduct()
-      setListRandom(res.data.data)
+      setListRandom(res.data.data);
   }
 
   useEffect(() => {
       getAllRandom()
   },[])
+
+
 
   const ChangeScreen = (item) => {
         if(item.code === 1) {

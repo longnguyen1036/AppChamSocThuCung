@@ -68,6 +68,7 @@ const Login = ({navigation}) => {
   
   const Login = async () => {
     try {
+    
       if ( emailAccount == '' || passWordAccount == '') {
         setModalVisible(true);
       }
