@@ -75,7 +75,7 @@ const Login = ({navigation}) => {
         emailAccount, 
         passWordAccount,
       );
-      // console.log('resssssssssssssssssssssssssssss',res.status);
+      console.log('resssssssssssssssssssssssssssss',res);
       if (res.status != 200) {
         setModalVisible(true);
       } else {

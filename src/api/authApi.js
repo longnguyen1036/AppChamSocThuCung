@@ -46,7 +46,7 @@ const Login = async(emailAccount, passWordAccount)=>{
             emailAccount,
             passWordAccount,
         } );
-        // console.log('api login',login);
+        console.log('api login',login);
         return login;
 
     } catch (error) {
