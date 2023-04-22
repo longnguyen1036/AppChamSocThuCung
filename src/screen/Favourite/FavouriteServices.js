@@ -7,75 +7,59 @@ import {
     Modal,
     FlatList,
   } from 'react-native';
-  import React from 'react';
+  import React,{useState, useEffect} from 'react';
   import Block from '../../components/Block';
   import Text from '../../components/Text';
   import AntDesign from 'react-native-vector-icons/AntDesign';
   import {FlatGrid} from 'react-native-super-grid';
-  import {useState} from 'react';
   import {FAVOURITE_PETS_SCREEN, FAVOURITE_SERVICES_SCREEN, SERVICES_DETAIL_SCREEN} from '../../router/ScreenName';
+  import productApi from '../../api/productApi';
+  import formatMoney from '../../components/FormatMoney';
   
   const FavouriteServices = ({navigation}) => {
-    const [modalVisible, setModalVisible] = useState(false);
+    const [listfavorite, setListFavorite] = useState([])
+
   
-    const DATA = [
-      {
-        id: 1,
-        name: 'Tỉa lông chó',
-        price: 1800000 + ' VND',
-        sale: 1500000,
-        images: require('./../../assets/image/dog.png'),
-        store: 'Petmart',
-        address: '147/10 Nguyễn Sỹ Sách p15 Tân Bình',
-      },
-      {
-        id: 2,
-        name: 'BEAGLE CƯNG CƯNG',
-        price: 2000000 + ' VND',
-        sale: 1500000,
-        images: require('./../../assets/image/dog.png'),
-        store: 'Petmart',
-        address: '147/10 Nguyễn Sỹ Sách p15 Tân Bình',
-      },
-      {
-        id: 3,
-        name: 'BEAGLE CƯNG CƯNG',
-        price: '',
-        sale: 1500000,
-        images: require('./../../assets/image/dog.png'),
-        store: 'Petmart',
-        address: '147/10 Nguyễn Sỹ Sách p15 Tân Bình',
-      },
-    ];
+
+    const getFavoritePets = async () => {
+      const res = await productApi.getAllFavorite()
+      console.log('res' ,res.data.data)
+      setListFavorite(res.data.data.favoriteServiceId)
+  }
+  
+    useEffect(() => {
+      getFavoritePets()
+    },[])
+  
   
     const renderItem = ({item}) => {
+    // console.log('item', item)
       return (
         <TouchableOpacity
           onPress={() => navigation.navigate(SERVICES_DETAIL_SCREEN)}>
           <Block
             marginLeft={'5%'}
             backgroundColor={'#E6EAED'}
-            width={350}
+            width={'92%'}
             height={130}
             row={1}
             marginTop={10} 
             radius={10}>
-            <Image style={styles.ilist} source={item.images}></Image>
+            <Image style={styles.ilist} source={{uri: item.imgService}}></Image>
             <Block
               paddingLeft={'5%'}
               margin={5}
               backgroundColor={'white'}
               height={120}
-              width={240}
+              width={'71%'}
               radius={10}>
               <Block paddingTop={5}>
                 <Text>{item.name}</Text>
                 <Text color={'red'} size={12}>
-                  {item.sale}
+                 Dịch vụ: {item.nameService}
                 </Text>
-                <Text size={12}>{item.price}</Text>
-                <Text size={12}>Cửa hàng{item.store}</Text>
-                <Text size={12}> Mô tả:{item.address}</Text>
+                <Text size={12}>Giá: {formatMoney(item.priceService)}</Text>
+                <Text size={12}> Mô tả: {item.descriptionService}</Text>
               </Block>
               <TouchableOpacity style={styles.nut}>
                 <AntDesign name="right" size={25} />
@@ -88,22 +72,6 @@ import {
   
     return (
       <Block backgroundColor={'white'} flex={1}>
-        <Block row={1} paddingVertical={10} paddingHorizontal={10}>
-          <TouchableOpacity
-            style={{width: '40%'}}
-            onPress={() => navigation.goBack()}>
-            <Image
-              source={require('./../../assets/image/backpet.png')}
-              style={{marginTop: 8}}></Image>
-          </TouchableOpacity>
-          <Block width={'50%'}>
-            <Text size={20} color={'black'} bold>
-              Dịch vụ
-            </Text>
-          </Block>
-  
-          
-        </Block>
   
         <Block paddingHorizontal={10}>
           <Block
@@ -124,27 +92,10 @@ import {
           </Block>
         </Block>
         <Block row justifyCenter>
-        <TouchableOpacity>
-          <Text marginRight={25} size={18} onPress={() => navigation.navigate(FAVOURITE_PETS_SCREEN)} >
-            Sản phẩm
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={() => navigation.navigate(FAVOURITE_PETS_SCREEN)}>
-          <Text size={18}>Thú cưng</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          >
-          <Text bold marginLeft={25} size={18}>
-            Dịch vụ
-          </Text>
-        </TouchableOpacity>
       </Block>
   
         <Block>
-          <FlatList key={DATA.name} data={DATA} renderItem={renderItem} />
+          <FlatList key={listfavorite._id} data={listfavorite} renderItem={renderItem} />
         </Block>
   
        

@@ -11,16 +11,16 @@ import Block from '../../components/Block';
 import Text from '../../components/Text';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {FlatGrid} from 'react-native-super-grid';
-import {PRODUCTS_DETAIL_SCREEN} from '../../router/ScreenName';
-import productApi from '../../api/productApi';
+import { PETS_DETAIL_SCREEN } from '../../router/ScreenName';
 import formatMoney from '../../components/FormatMoney';
+import productApi from '../../api/productApi';
 
-const ProductScreen = ({navigation}) => {
+const PetScreen = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [listProduct, setListProduct] = useState([]);
 
   const getAllProducts = async () => {
-      const res = await productApi.getAllProducts('productStore')
+      const res = await productApi.getAllProducts('petStore')
       // console.log('res nenene',res.data)
       setListProduct(res.data.data)
   }
@@ -31,52 +31,44 @@ const ProductScreen = ({navigation}) => {
 
   const renderItem = ({item}) => {
     return (
-      <TouchableOpacity
-        onPress={() => navigation.navigate(PRODUCTS_DETAIL_SCREEN,{
-          _id: item._id
-        })}>
-        <Block
-          marginLeft={'15%'}
-          backgroundColor={'#E6EAED'}
-          width={160}
-          height={190}
-          radius={10}>
-          <Image style={styles.ilist} source={{uri: item.imgProduct}}></Image>
-          <Block
-            paddingLeft={'5%'}
-            margin={5}
-            backgroundColor={'white'}
-            height={70}
-            radius={10}>
-            <Block paddingTop={5}>
-              <Text width={'90%'} height={20}>{item.nameProduct}</Text>
-              <Text width={'90%'} marginTop={17} size={12}>
-                {formatMoney(item.priceProduct)}
-              </Text>
-            </Block>
-            <TouchableOpacity style={styles.nut}>
-              <AntDesign name="right" size={25} />
-            </TouchableOpacity>
+      <TouchableOpacity  onPress={ ()=>navigation.navigate(PETS_DETAIL_SCREEN,{
+          _id : item._id
+      })}>
+      <Block
+     
+        marginLeft={'15%'}
+        backgroundColor={'#E6EAED'}
+        width={'91%'}
+        height={190} 
+        radius={10}>
+        <Image style={styles.ilist} source={{uri: item.imgPet}}></Image>
+        <Block radius={10}   paddingLeft={'5%'} margin={5} backgroundColor={'white'} height={70}>
+          <Block paddingTop={5}>
+            <Text>{item.namePet}</Text>
+            <Text marginTop={7} size={12}>{formatMoney(item.pricePet)}</Text>
           </Block>
+          <TouchableOpacity style={styles.nut}>
+            <AntDesign name="right" size={25} />
+          </TouchableOpacity>
         </Block>
+      </Block>
       </TouchableOpacity>
     );
   };
 
   return (
-    <Block backgroundColor={'white'} flex={1}>
+    <Block flex={1} backgroundColor={'white'} >
       <Block row={1} paddingVertical={10} paddingHorizontal={10}>
-        <TouchableOpacity style={{width: '40%'}} onPress={() => navigation.goBack()}>
+      <TouchableOpacity style={{width: '40%'}} onPress={() => navigation.goBack()}>
           
-            <Image
-              source={require('./../../assets/image/backpet.png')}
-              style={{marginTop: 8}}></Image>
-          
-        </TouchableOpacity>
-
+          <Image
+            source={require('./../../assets/image/backpet.png')}
+            style={{marginTop: 8}}></Image>
+        
+      </TouchableOpacity>
         <Block width={'50%'}>
           <Text size={20} color={'black'} bold>
-            Sản phẩm
+            Thú cưng
           </Text>
         </Block>
 
@@ -150,8 +142,31 @@ const ProductScreen = ({navigation}) => {
             </Block>
           </View>
 
-          <View marginTop={30}>
-            <Text marginLeft={10}>Theo danh mục</Text>
+          <View marginTop={20}>
+            <Text marginLeft={10}>Theo giới tính</Text>
+            <Block marginTop={5} row={1}>
+              <Block
+                marginLeft={20}
+                padding={5}
+                width={80}
+                height={30}
+                backgroundColor={'#F2F3F2'}>
+                <Text marginLeft={20}>Đực</Text>
+              </Block>
+
+              <Block
+                marginLeft={20}
+                padding={5}
+                width={80}
+                height={30}
+                backgroundColor={'#F2F3F2'}>
+                <Text marginLeft={20}>Cái</Text>
+              </Block>
+            </Block>
+          </View>
+
+          <View marginTop={20}>
+            <Text marginLeft={10}>Theo tuổi</Text>
             <Block marginTop={5} row={1}>
               <Block
                 marginLeft={20}
@@ -159,7 +174,7 @@ const ProductScreen = ({navigation}) => {
                 width={90}
                 height={30}
                 backgroundColor={'#F2F3F2'}>
-                <Text marginLeft={15}>Thức ăn</Text>
+                <Text marginLeft={15}>3 tháng</Text>
               </Block>
 
               <Block
@@ -168,7 +183,7 @@ const ProductScreen = ({navigation}) => {
                 width={90}
                 height={30}
                 backgroundColor={'#F2F3F2'}>
-                <Text marginLeft={15}>Vệ sinh</Text>
+                <Text marginLeft={15}>6 tháng</Text>
               </Block>
               <Block
                 marginLeft={20}
@@ -176,13 +191,23 @@ const ProductScreen = ({navigation}) => {
                 width={90}
                 height={30}
                 backgroundColor={'#F2F3F2'}>
-                <Text marginLeft={15}>Phụ kiện</Text>
+                <Text marginLeft={15}>9 tháng</Text>
               </Block>
+            </Block>
+
+            <Block
+              marginTop={10}
+              marginLeft={20}
+              padding={5}
+              width={90}
+              height={30}
+              backgroundColor={'#F2F3F2'}>
+              <Text marginLeft={12}>12 tháng</Text>
             </Block>
           </View>
 
-          <View marginTop={30}>
-            <Text marginLeft={10}>Theo phân loại dành cho</Text>
+          <View marginTop={20}>
+            <Text marginLeft={10}>Theo giống</Text>
 
             <Block marginTop={5} row={1}>
               <Block
@@ -233,7 +258,7 @@ const ProductScreen = ({navigation}) => {
             </Block>
           </View>
 
-          <View marginTop={30}>
+          <View marginTop={20}>
             <Text marginLeft={10}>Theo khu vực</Text>
 
             <Block marginTop={5} row={1}>
@@ -311,7 +336,7 @@ const ProductScreen = ({navigation}) => {
             </Block>
           </View>
 
-          <Block marginTop={20} row={1} bottom={-100}>
+          <Block marginTop={20} row={1}>
             <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
               <Block
                 marginLeft={20}
@@ -345,7 +370,7 @@ const ProductScreen = ({navigation}) => {
   );
 };
 
-export default ProductScreen;
+export default PetScreen;
 
 const styles = StyleSheet.create({
   seachImage: {

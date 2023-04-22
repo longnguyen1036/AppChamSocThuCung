@@ -6,21 +6,42 @@ import {
   Image,
   ScrollView,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import {PROFILE_SHOP_SCREEN} from '../../router/ScreenName';
+import { CART_SCREEN, PROFILE_SHOP_SCREEN } from '../../router/ScreenName';
+import { useRoute } from '@react-navigation/native';
+import productApi from '../../api/productApi';
+import formatMoney from '../../components/FormatMoney';
+const ProductsDetail = ({navigation}) => {
+  const router = useRoute()
+  const {_id} = router.params
 
-const PetDetail = ({navigation}) => {
-  const [ItemsImage, setItemsImage] = useState([
-    {key: 1, image: require('../../assets/image/detail1.png')},
-    {key: 2, image: require('../../assets/image/detail2.png')},
-    {key: 3, image: require('../../assets/image/detail1.png')},
-    {key: 4, image: require('../../assets/image/detail2.png')},
-  ]);
 
-  const [selectedImage, setSelectedImage] = useState(
-    require('../../assets/image/detail1.png'),
-  );
+  const [listProduct, setListProduct] = useState([])
+  const [shop , setShop] = useState([])
+  const [address , setAddress] = useState()
+
+  const getDetailProducts = async () => {
+    const res = await productApi.getDetailProduct(_id, 'productStore')
+    setListProduct(res.data.data.dataProduct)
+    setShop(res.data.data)
+    setAddress(res.data.data.adress[0])
+}
+
+const addCart = async (id, product, quantity) => {
+  const ProductId = {
+    product  : product,
+    quantity : quantity
+  }
+  
+  const res = await productApi.addCartProduct(id, ProductId, "productStore")
+  console.log(res.data)
+  return res
+}
+
+useEffect(() => {
+  getDetailProducts()
+},[])
 
   return (
     <View style={{backgroundColor: '#dcdcdc', height: '100%'}}>
@@ -44,95 +65,41 @@ const PetDetail = ({navigation}) => {
 
         <View>
           <Image
-            source={selectedImage}
+            source={{uri: listProduct?.imgProduct}}
             style={{width: 200, height: 200, borderRadius: 8}}></Image>
         </View>
 
-        <ScrollView style={{width: '66%'}} horizontal={true}>
-          {ItemsImage.map(object => {
-            return (
-              <TouchableOpacity
-                onPress={() => setSelectedImage(object.image)}
-                key={object.key}
-                style={{
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  margin: 8,
-                }}>
-                <Image source={object.image}></Image>
-              </TouchableOpacity>
-            );
-          })}
-        </ScrollView>
+       
 
         <View>
-          <View style={{marginTop: '3%', width: '73%'}}>
+          <View style={{marginTop: '3%'}}>
             <Text style={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>
-              BEAGLE CƯNG CƯNG
+              {listProduct?.nameProduct}
             </Text>
-            <Text style={{fontSize: 18, fontWeight: 'bold'}}>700.000đ</Text>
+            <Text style={{fontSize: 18, fontWeight: 'bold'}}>{formatMoney(listProduct?.priceProduct)}</Text>
             <Text style={{fontSize: 17, color: 'black', fontWeight: '600'}}>
-              Tình trạng: Còn hàng
+              {listProduct?.descriptionProduct}
             </Text>
           </View>
           <View style={{flexDirection: 'row', width: '73%', marginTop: '3%'}}>
             <TouchableOpacity
               style={{backgroundColor: 'white', padding: 8, borderRadius: 8}}>
               <Text style={{fontSize: 10,}}>
-                Gioi tinh
+                Danh mục
               </Text>
-              <Text style={{textAlign: 'center',fontSize: 12, color: 'black', fontWeight: '700'}}>Cái</Text>
+              <Text style={{fontSize: 12, color: 'black', fontWeight: '700'}}>{listProduct?.typeProduct}</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity
-              style={{
-                backgroundColor: 'white',
-                marginLeft: '5%',
-                padding: 8,
-                borderRadius: 8,
-                width: 55,
-                height: 55,
-              }}>
-              <Text style={{fontSize: 10,}}>
-                Tuoi
-              </Text>
-              <Text style={{textAlign: 'center',fontSize: 12, color: 'black', fontWeight: '700'}}>6 th</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={{
-                backgroundColor: 'white',
-                marginLeft: '5%',
-                padding: 8,
-                borderRadius: 8,
-                width: 55,
-                height: 55,
-              }}>
-              <Text style={{fontSize: 9,}}>
-                Can nang
-              </Text>
-              <Text style={{textAlign: 'center',fontSize: 12, color: 'black', fontWeight: '700'}}>4,7kg</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={{
-                backgroundColor: 'white',
-                marginLeft: '5%',
-                padding: 8,
-                borderRadius: 8,
-                width: 55,
-                height: 55,
-              }}>
-              <Text style={{fontSize: 10,}} >
-                Giong
-              </Text>
-              <Text style={{textAlign: 'center', fontSize: 12, color: 'black', fontWeight: '700'}}>Mèo</Text>
-            </TouchableOpacity>
+        
           </View>
         </View>
 
         <TouchableOpacity
-          onPress={() => navigation.navigate(PROFILE_SHOP_SCREEN)}
+        onPress={() => navigation.navigate(PROFILE_SHOP_SCREEN,{
+          _id: shop.id_store,
+          name: shop.name,
+          adress: address
+        })}
           style={{
             marginTop: '5%',
             flexDirection: 'row',
@@ -142,7 +109,7 @@ const PetDetail = ({navigation}) => {
             alignItems: 'center',
             padding: 8,
             borderRadius: 8,
-            borderWidth: 1,
+            borderWidth: 1
           }}>
           <View style={{flexDirection: 'row'}}>
             <View
@@ -157,9 +124,12 @@ const PetDetail = ({navigation}) => {
 
             <View style={{marginLeft: '5%'}}>
               <Text style={{fontSize: 18, color: 'black', fontWeight: '500'}}>
-                matpetfamily
+                {shop?.name}
               </Text>
-              <Text>Store</Text>
+              {
+               !address ? <Text>shop</Text> : <Text style={{width: '40%'}} numberOfLines={1}>{address}</Text>
+              }
+              
             </View>
           </View>
 
@@ -171,12 +141,14 @@ const PetDetail = ({navigation}) => {
               justifyContent: 'center',
               padding: 5,
               height: 40,
+
             }}>
             <FontAwesome5 name="comments" size={20} color={'white'} />
           </TouchableOpacity>
         </TouchableOpacity>
 
         <TouchableOpacity
+          onPress={() => addCart(shop?.id_store, listProduct?._id, 1)}
           style={{
             marginTop: '5%',
             backgroundColor: '#18A2E1',
@@ -192,6 +164,6 @@ const PetDetail = ({navigation}) => {
   );
 };
 
-export default PetDetail;
+export default ProductsDetail;
 
 const styles = StyleSheet.create({});

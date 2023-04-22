@@ -20,6 +20,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { loggedAction } from '../../redux/actions/authAction';
 import {setToken, getToken} from '../../helper/auth';
 import messaging from '@react-native-firebase/messaging';
+import { io } from 'socket.io-client';
+import { BASE_URL_TEST } from '../../api/BASE_URL';
 
 const Login = ({navigation}) => {
   const dispatch = useDispatch()
@@ -39,6 +41,27 @@ const Login = ({navigation}) => {
 
   };
 
+  const connectSocket = async () => {
+    try {
+      const data = {
+        emailAccount: emailAccount,
+        table: 'user'
+      }
+      const socket = io(`http://192.168.1.6:9999/`);
+      socket.on('connect', () => {
+        console.log('connected to server');
+      });
+  
+      const res =  socket.emit('Login', data);
+      console.log('ressss', res);
+      socket.on('checkLogin', (data) => {
+          console.log('data socket', data);
+      })
+    } catch (error) {
+      console.log(error)
+    }
+    }
+
   useEffect(() => {
     registerAppWithFCM()
   },[])
@@ -52,7 +75,7 @@ const Login = ({navigation}) => {
         emailAccount, 
         passWordAccount,
       );
-      console.log('resssssssssssssssssssssssssssss',res.status);
+      // console.log('resssssssssssssssssssssssssssss',res.status);
       if (res.status != 200) {
         setModalVisible(true);
       } else {
@@ -60,10 +83,11 @@ const Login = ({navigation}) => {
         const checkLogin = await AsyncStorage.getItem('checkLogin'); 
         dispatch(loggedAction(res.data));
         
-        console.log('fcm token',fcmTokenFireBase);
+        // console.log('fcm token',fcmTokenFireBase);
         navigation.navigate(MAIN_TAB);
         await setToken(res.data.token)
-
+        await authApi.UpdateTokenFCM(fcmTokenFireBase)
+        connectSocket();
       }
     } catch (e) {
       console.log('login error: ', e);

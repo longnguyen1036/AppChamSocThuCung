@@ -5,73 +5,86 @@ import {
   TouchableOpacity,
   TextInput,
   Modal,
+  FlatList,
 } from 'react-native';
-import React from 'react';
+import React,{useState, useEffect} from 'react';
 import Block from '../../components/Block';
 import Text from '../../components/Text';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {FlatGrid} from 'react-native-super-grid';
-import {useState} from 'react';
-import { PETS_DETAIL_SCREEN } from '../../router/ScreenName';
+import {SERVICES_DETAIL_SCREEN} from '../../router/ScreenName';
+import formatMoney from '../../components/FormatMoney';
+import productApi from '../../api/productApi';
 
-const PetScreen = ({navigation}) => {
+const ServiceScreen = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [listProduct, setListProduct] = useState([]);
 
-  const DATA = [
-    {
-      id: 1,
-      name: 'BEAGLE CƯNG CƯNG',
-      category: 'Thú cưng',
-      price: 1800000,
-      images: require('./../../assets/image/dog.png'),
-    },
-    {
-      id: 2,
-      name: 'BEAGLE CƯNG CƯNG',
-      category: 'Thú cưng',
-      price: 2000000,
-      images: require('./../../assets/image/dog.png'),
-    },
-  ];
+
+  const getAllProducts = async () => {
+      const res = await productApi.getAllProducts('serviceStore')
+      // console.log('res nenene',res.data)
+      setListProduct(res.data.data)
+  }
+
+  useEffect(() => {
+      getAllProducts();
+  },[])
+
 
   const renderItem = ({item}) => {
     return (
-      <TouchableOpacity  onPress={ ()=>navigation.navigate(PETS_DETAIL_SCREEN)}>
-      <Block
-     
-        marginLeft={'8%'}
-        backgroundColor={'#E6EAED'}
-        width={160}
-        height={190} 
-        radius={10}>
-        <Image style={styles.ilist} source={item.images}></Image>
-        <Block radius={10}   paddingLeft={'5%'} margin={5} backgroundColor={'white'} height={70}>
-          <Block paddingTop={5}>
-            <Text>{item.name}</Text>
-            <Text marginTop={7} size={12}>{item.price} VND</Text>
+      <TouchableOpacity
+        onPress={() => navigation.navigate(SERVICES_DETAIL_SCREEN,{
+          _id : item._id
+        })}>
+        <Block
+          marginLeft={'8%'}
+          backgroundColor={'#E6EAED'}
+          width={350}
+          height={130}
+          row={1}
+          marginTop={10} 
+          radius={10}>
+          <Image style={styles.ilist} source={{uri: item.imgService}}></Image>
+          <Block
+            paddingLeft={'5%'}
+            margin={5}
+            backgroundColor={'white'}
+            height={120}
+            width={245}
+            radius={10}>
+            <Block paddingTop={5}>
+              <Text size={16} bold>{item.nameService}</Text>
+              <Text color={'red'} size={12}>
+              {item.priceService*80/100}
+              </Text>
+              <Text size={12}>{item.priceService}</Text>
+              <Text size={12}>Cửa hàng: {item.address}</Text>
+              <Text height={30} size={12}>Mô tả: {item.descriptionService}</Text>
+            </Block>
+            <TouchableOpacity style={styles.nut}>
+              <AntDesign name="right" size={25} />
+            </TouchableOpacity>
           </Block>
-          <TouchableOpacity style={styles.nut}>
-            <AntDesign name="right" size={25} />
-          </TouchableOpacity>
         </Block>
-      </Block>
       </TouchableOpacity>
     );
   };
 
   return (
-    <Block flex={1} backgroundColor={'white'} >
+    <Block backgroundColor={'white'} flex={1}>
       <Block row={1} paddingVertical={10} paddingHorizontal={10}>
-      <TouchableOpacity style={{width: '40%'}} onPress={() => navigation.goBack()}>
-          
+        <TouchableOpacity
+          style={{width: '40%'}}
+          onPress={() => navigation.goBack()}>
           <Image
             source={require('./../../assets/image/backpet.png')}
             style={{marginTop: 8}}></Image>
-        
-      </TouchableOpacity>
+        </TouchableOpacity>
         <Block width={'50%'}>
           <Text size={20} color={'black'} bold>
-            Thú cưng
+            Dịch vụ
           </Text>
         </Block>
 
@@ -99,8 +112,8 @@ const PetScreen = ({navigation}) => {
         </Block>
       </Block>
 
-      <Block>
-        <FlatGrid key={DATA.name} data={DATA} renderItem={renderItem} />
+      <Block width={'100%'}>
+        <FlatList key={listProduct._id} data={listProduct} renderItem={renderItem} />
       </Block>
 
       <Modal
@@ -145,31 +158,8 @@ const PetScreen = ({navigation}) => {
             </Block>
           </View>
 
-          <View marginTop={20}>
-            <Text marginLeft={10}>Theo giới tính</Text>
-            <Block marginTop={5} row={1}>
-              <Block
-                marginLeft={20}
-                padding={5}
-                width={80}
-                height={30}
-                backgroundColor={'#F2F3F2'}>
-                <Text marginLeft={20}>Đực</Text>
-              </Block>
-
-              <Block
-                marginLeft={20}
-                padding={5}
-                width={80}
-                height={30}
-                backgroundColor={'#F2F3F2'}>
-                <Text marginLeft={20}>Cái</Text>
-              </Block>
-            </Block>
-          </View>
-
-          <View marginTop={20}>
-            <Text marginLeft={10}>Theo tuổi</Text>
+          <View marginTop={30}>
+            <Text marginLeft={10}>Theo danh mục</Text>
             <Block marginTop={5} row={1}>
               <Block
                 marginLeft={20}
@@ -177,7 +167,7 @@ const PetScreen = ({navigation}) => {
                 width={90}
                 height={30}
                 backgroundColor={'#F2F3F2'}>
-                <Text marginLeft={15}>3 tháng</Text>
+                <Text marginLeft={15}>Thú y</Text>
               </Block>
 
               <Block
@@ -186,7 +176,7 @@ const PetScreen = ({navigation}) => {
                 width={90}
                 height={30}
                 backgroundColor={'#F2F3F2'}>
-                <Text marginLeft={15}>6 tháng</Text>
+                <Text marginLeft={15}>Cắt tỉa</Text>
               </Block>
               <Block
                 marginLeft={20}
@@ -194,22 +184,21 @@ const PetScreen = ({navigation}) => {
                 width={90}
                 height={30}
                 backgroundColor={'#F2F3F2'}>
-                <Text marginLeft={15}>9 tháng</Text>
+                <Text marginLeft={15}>Tắm gội</Text>
               </Block>
             </Block>
-
             <Block
-              marginTop={10}
-              marginLeft={20}
-              padding={5}
-              width={90}
-              height={30}
-              backgroundColor={'#F2F3F2'}>
-              <Text marginLeft={12}>12 tháng</Text>
-            </Block>
+                marginTop={10}
+                marginLeft={20}
+                padding={5}
+                width={90}
+                height={30}
+                backgroundColor={'#F2F3F2'}>
+                <Text marginLeft={15}>Khách sạn</Text>
+              </Block>
           </View>
 
-          <View marginTop={20}>
+          <View marginTop={30}>
             <Text marginLeft={10}>Theo giống</Text>
 
             <Block marginTop={5} row={1}>
@@ -261,7 +250,7 @@ const PetScreen = ({navigation}) => {
             </Block>
           </View>
 
-          <View marginTop={20}>
+          <View marginTop={30}>
             <Text marginLeft={10}>Theo khu vực</Text>
 
             <Block marginTop={5} row={1}>
@@ -339,7 +328,7 @@ const PetScreen = ({navigation}) => {
             </Block>
           </View>
 
-          <Block marginTop={20} row={1}>
+          <Block marginTop={20} row={1} bottom={-100}>
             <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
               <Block
                 marginLeft={20}
@@ -373,7 +362,7 @@ const PetScreen = ({navigation}) => {
   );
 };
 
-export default PetScreen;
+export default ServiceScreen;
 
 const styles = StyleSheet.create({
   seachImage: {
@@ -385,9 +374,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   ilist: {
-    width: 100,
-    height: 110,
-    marginLeft: '18%',
+    width: 90,
+    height: 100,
+    marginLeft: '2%',
+    marginTop: '2%',
   },
   nut: {
     width: 32,
@@ -395,7 +385,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F2F3F2',
     position: 'absolute',
     right: '5%',
-    bottom: '8%',
+    top: '10%',
     alignItems: 'center',
     borderRadius: 4,
     paddingTop: '15%',

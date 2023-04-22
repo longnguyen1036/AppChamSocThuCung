@@ -6,61 +6,65 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
+  FlatList
 } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import PagerView from 'react-native-pager-view';
-import {FlatList} from 'react-native-gesture-handler';
-import {FlatGrid} from 'react-native-super-grid';
 import {useNavigation} from '@react-navigation/native';
 import Block from '../../components/Block';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import { PETS_SCREEN, PRODUCTS_SCREEN, PROFILE_SCREEN, SERVICES_SCREEN } from '../../router/ScreenName';
+import { CART_SCREEN, PETS_DETAIL_SCREEN, PETS_SCREEN, PRODUCTS_DETAIL_SCREEN, PRODUCTS_SCREEN, PROFILE_SCREEN, SERVICES_DETAIL_SCREEN, SERVICES_SCREEN } from '../../router/ScreenName';
+import productApi from '../../api/productApi';
+import formatMoney from '../../components/FormatMoney';
 
 const Home = () => {
   const navigation = useNavigation();
+  const [listRandom, setListRandom] = useState()
 
-  const DATA = [
-    {
-      id: 1,
-      name: 'BEAGLE CƯNG CƯNG',
-      category: 'Thú cưng',
-      price: 1800000,
-      images: require('./../../assets/image/dog.png'),
-    },
-    {
-      id: 2,
-      name: 'BEAGLE CƯNG CƯNG',
-      category: 'Thú cưng',
-      price: 2000000,
-      images: require('./../../assets/image/dog.png'),
-    },
-    {
-      id: 2,
-      name: 'BEAGLE CƯNG CƯNG',
-      category: 'Thú cưng',
-      price: 2000000,
-      images: require('./../../assets/image/dog.png'),
-    },
-  ];
+  const getAllRandom = async () => {
+      const res = await productApi.getRandomProduct()
+      setListRandom(res.data.data)
+  }
 
+  useEffect(() => {
+      getAllRandom()
+  },[])
+
+  const ChangeScreen = (item) => {
+        if(item.code === 1) {
+          navigation.navigate(PRODUCTS_DETAIL_SCREEN,{
+            _id: item._id
+          })
+        }else if(item.code === 2) {
+          navigation.navigate(PETS_DETAIL_SCREEN,{
+            _id: item._id 
+          })
+        }else{
+          navigation.navigate(SERVICES_DETAIL_SCREEN,{
+            _id: item._id
+          })
+        }
+  }
   const renderItem = ({item}) => {
     return (
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => ChangeScreen(item)}>
       <Block
        radius={10}
-        marginLeft={'8%'}
         backgroundColor={'#E6EAED'}
-        width={160}
-        height={198}>
-        <Image style={styles.ilist} source={item.images}></Image>
-        <Block radius={10} paddingLeft={'5%'} margin={5} backgroundColor={'white'} height={80}>
+
+        marginLeft={10}
+        marginBottom={10}
+        width={180}
+        >
+        <Image style={styles.ilist} source={{uri: item.image}}></Image>
+        <Block width={'95%'} radius={10} paddingLeft={'5%'} margin={5} backgroundColor={'white'} height={80}>
           <Block paddingTop={5}>
-            <Text >{item.name}</Text>
-            <Text color={'#'}>Cate</Text>
-            <Text marginTop={7} size={15}>{item.price} VND</Text>
+            <Text style={{color: 'black', fontSize: 18}} width={'90%'} height={20}>{item.name}</Text>
+            <Text width={'80%'} height={20} color={'blue'}>{item.description}</Text>
+            <Text marginTop={7} size={15}>{formatMoney(item.price)}</Text>
           </Block>
           <TouchableOpacity style={styles.nut}>
             <AntDesign color={'white'} name="right" size={25} />
@@ -79,12 +83,15 @@ const Home = () => {
           <Text style={styles.t2}>Home</Text>
         </View>
         <View style={styles.h2}>
+
+          <TouchableOpacity onPress={() => navigation.navigate(CART_SCREEN)}>
           <FontAwesome5
             style={styles.ic}
             color={'black'}
             name="shopping-bag"
             size={25}
           />
+            </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate(PROFILE_SCREEN)}>
           <Image
             style={styles.i1}
@@ -153,13 +160,13 @@ const Home = () => {
           </TouchableOpacity>
         </Block>
       </View>
-      <View style={{paddingHorizontal: '5%', marginTop: '3%'}}>
+      <View style={{paddingHorizontal: '5%', marginTop: '3%', marginBottom: '2%'}}>
         <Text style ={{fontSize: 20, fontWeight: '700', color: 'black'}}>Top bán chạy</Text>
       </View>
 
-      <View>
-        <FlatGrid key={DATA.name} data={DATA} renderItem={renderItem} />
-      </View>
+      <Block  flex={1} paddingHorizontal={15} justifySpaceBetween>
+        <FlatList  data={listRandom} renderItem={renderItem} numColumns={2} />
+      </Block>
     </SafeAreaView>
   );
 };
@@ -256,7 +263,7 @@ const styles = StyleSheet.create({
   },
   ilist: {
     width: 100,
-    height: 100,
+    height: 109,
     marginLeft: '19%',
     marginTop: '2%',
     marginBottom: '2%',
