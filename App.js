@@ -3,7 +3,6 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import React, { useEffect } from 'react';
 import messaging from '@react-native-firebase/messaging';
 
-
 import MainNavigation from './src/router'
 
 
