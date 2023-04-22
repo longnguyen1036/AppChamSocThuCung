@@ -40,8 +40,8 @@ import {
         // Update FilteredDataSource
         const newData = masterDataSource.filter(
           function (item) {
-            const itemData = item.title
-              ? item.title.toUpperCase()
+            const itemData = item.namePet
+              ? item.namePet.toUpperCase()
               : ''.toUpperCase();
             const textData = text.toUpperCase();
             return itemData.indexOf(textData) > -1;

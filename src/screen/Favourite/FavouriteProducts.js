@@ -45,8 +45,8 @@ const FavouriteProducts = ({navigation}) => {
       // Update FilteredDataSource
       const newData = masterDataSource.filter(
         function (item) {
-          const itemData = item.title
-            ? item.title.toUpperCase()
+          const itemData = item.nameProduct
+            ? item.nameProduct.toUpperCase()
             : ''.toUpperCase();
           const textData = text.toUpperCase();
           return itemData.indexOf(textData) > -1;
