@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import Block from '../Block';
-import Text from '../Text';
+import Block from '../../../../AppChamSocThuCung/src/components/Block';
+import Text from '../../../../AppChamSocThuCung/src/components/Text';
 import {useNavigation} from '@react-navigation/native';
 import MTIcon from 'react-native-vector-icons/MaterialIcons';
 
