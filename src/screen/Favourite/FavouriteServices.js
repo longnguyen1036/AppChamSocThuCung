@@ -26,7 +26,6 @@ import {
 
     const getFavoritePets = async () => {
       const res = await productApi.getAllFavorite()
-      console.log('res' ,res.data.data)
       setListFavorite(res.data.data.favoriteServiceId)
       setMasterDataSource(res.data.data.favoriteServiceId)
   }

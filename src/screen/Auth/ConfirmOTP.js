@@ -23,7 +23,6 @@ const ConfirmOTP = ({navigation}) => {
       const res = await authApi.OTPRegister(
         otp
       );
-      console.log('res',res);
       if (res.status != 200) {
         setModalVisible(true);
       } else {

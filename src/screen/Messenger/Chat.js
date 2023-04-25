@@ -38,7 +38,6 @@ const Chat = ({navigation}) => {
         console.log('error socket', error);
       });
       const res = socket.emit('sendmess', data);
-      console.log('ress', res);
     } catch (error) {
       console.log(error);
     }

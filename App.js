@@ -6,7 +6,7 @@ import messaging from '@react-native-firebase/messaging';
 import MainNavigation from './src/router'
 
 
-import { Provider, useDispatch, useSelector } from 'react-redux';
+import { Provider } from 'react-redux';
 import { store } from './src/redux/store';
 import notifee, { AndroidImportance, AndroidStyle } from '@notifee/react-native';
 

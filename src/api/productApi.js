@@ -122,6 +122,42 @@ const addCartProduct = async (id, ProductId, nameModel) => {
     }
 }
 
+const getCartProduct = async () => {
+    try {
+        const token = await getToken();
+        const getCart = await axios.get(`${BASE_URL_TEST}/getlistcart/`,{
+            headers: {
+                token: `Bearer ${token}`,
+            },
+        })
+
+        return getCart
+    } catch (error) {
+        console.log('error', error);
+    }
+}
+
+const BuyCart = async (id, ProductId, PetId, ServiceId) => {
+    try {
+        console.log('truyen vao buy cart', id, ProductId, PetId, ServiceId);
+        const token = await getToken();
+        const buyCart = await axios.post(`${BASE_URL_TEST}/buyproduct`,{
+            id, 
+            ProductId,
+            PetId,
+            ServiceId
+        },{
+            headers: {
+                token: `Bearer ${token}`,
+            },
+        })
+
+        return buyCart
+    } catch (error) {
+        console.log('loi api addFavorite product error', error)
+    }
+}
+
 export default {
     getAllFavorite,
     getAllProducts,
@@ -129,5 +165,7 @@ export default {
     addFavorite,
     getDetailProduct,
     getAllProductStore,
-    addCartProduct
+    addCartProduct,
+    getCartProduct,
+    BuyCart
 }

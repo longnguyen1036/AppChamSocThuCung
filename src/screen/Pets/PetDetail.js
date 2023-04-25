@@ -35,7 +35,6 @@ const PetDetail = ({navigation}) => {
       quantity : quantity
     }
     const res = await productApi.addCartProduct(id, ProductId, "petStore")
-    console.log(res.data)
     return res
   }
 

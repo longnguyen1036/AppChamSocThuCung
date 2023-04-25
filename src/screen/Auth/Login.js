@@ -21,7 +21,6 @@ import { loggedAction } from '../../redux/actions/authAction';
 import {setToken, getToken} from '../../helper/auth';
 import messaging from '@react-native-firebase/messaging';
 import { io } from 'socket.io-client';
-import { BASE_URL_TEST } from '../../api/BASE_URL';
 
 const Login = ({navigation}) => {
   const dispatch = useDispatch()

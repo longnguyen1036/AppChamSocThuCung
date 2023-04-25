@@ -35,7 +35,6 @@ const addCart = async (id, product, quantity) => {
   }
   
   const res = await productApi.addCartProduct(id, ProductId, "productStore")
-  console.log(res.data)
   return res
 }
 

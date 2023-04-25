@@ -21,7 +21,6 @@ const ListChat = ({navigation}) => {
       const res = await authApi.getMessengerApi();
       setMessage(res?.data?.data?.chatId);
 
-      console.log('res', res.data);
 
     } catch (error) {
       console.log('error', error);

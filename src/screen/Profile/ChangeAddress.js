@@ -15,7 +15,6 @@ const ChangeAddress = ({navigation}) => {
   const SubmitUpdateProfile =async () => {
     try {
       const res = await authApi.UpdateProfile(address)
-      console.log('res', res)
       if(res.status === 200) {
         navigation.goBack()
       }else{

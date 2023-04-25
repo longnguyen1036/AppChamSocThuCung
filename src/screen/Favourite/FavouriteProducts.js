@@ -28,7 +28,6 @@ const FavouriteProducts = ({navigation}) => {
 
   const getFavoritePets = async () => {
     const res = await productApi.getAllFavorite()
-    console.log('res' ,res.data.data)
     setListFavorite(res.data.data.favoriteProductId)
     setMasterDataSource(res.data.data.favoriteProductId)
 }
