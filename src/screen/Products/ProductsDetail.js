@@ -45,6 +45,7 @@ const addCart = async (id, product, quantity) => {
       alertType: 'success',
     },
   });
+  navigation.goBack()
   return res
 }
 

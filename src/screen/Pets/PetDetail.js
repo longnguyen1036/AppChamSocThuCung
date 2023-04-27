@@ -45,6 +45,7 @@ const PetDetail = ({navigation}) => {
         alertType: 'success',
       },
     });
+    navigation.goBack()
     return res
   }
 
@@ -64,6 +65,7 @@ const PetDetail = ({navigation}) => {
         alertType: 'success',
       },
     });
+    
     return res
     
   }
