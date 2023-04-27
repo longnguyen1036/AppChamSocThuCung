@@ -106,7 +106,7 @@ const Chat = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Block row={1} paddingVertical={10} paddingHorizontal={10}>
+      <Block row={1} paddingVertical={10} paddingHorizontal={10} backgroundColor={'white'}>
         <TouchableOpacity
           style={{width: '40%'}}
           onPress={() => navigation.goBack()}>
@@ -129,13 +129,13 @@ const Chat = ({navigation}) => {
         <TextInput
           value={inputmess}
           style={styles.input}
-          placeholder="Type your message here"
+          placeholder="Nhập tin nhắn"
           onChangeText={text => SetInputMess(text)}
         />
         <TouchableOpacity
           style={styles.sendButton}
           onPress={() => sendMessage()}>
-          <FontAwesome name={'send'} size={25} />
+          <FontAwesome name={'send'} size={25} color={'skyblue'} />
         </TouchableOpacity>
       </View>
     </View>
@@ -147,7 +147,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F2F2F2',
-    padding: 10,
   },
   messageContainer: {
     flexDirection: 'row',
@@ -193,6 +192,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     fontSize: 16,
     borderWidth: 0.4,
-    borderRadius: 12
+    borderRadius: 12,
+    marginLeft: 10,
   },
 });

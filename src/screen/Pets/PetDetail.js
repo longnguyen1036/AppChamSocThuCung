@@ -166,7 +166,7 @@ const PetDetail = ({navigation}) => {
               {shop?.name}
               </Text>
               {
-               !address ? <Text>shop</Text> : <Text style={{width: '64%'}} numberOfLines={1}>{address}</Text>
+               !address ? <Text>shop</Text> : <Text style={{width: '44%'}} numberOfLines={1}>{address}</Text>
               }
             </View>
           </View>

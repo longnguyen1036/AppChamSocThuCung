@@ -13,6 +13,8 @@ import Text from '../../components/Text';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import productApi from '../../api/productApi';
 import formatMoney from '../../components/FormatMoney';
+import {Notifier, Easing, NotifierComponents} from 'react-native-notifier';
+
 const Cart = ({navigation}) => {
   const [listCart, setListCart] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -45,7 +47,14 @@ const Cart = ({navigation}) => {
           quantity: item.PetId[i].quantity,
         });
       }
-
+      Notifier.showNotification({
+        title: 'Thông báo',
+        description: 'Thanh toán thành công',
+        Component: NotifierComponents.Alert,
+        componentProps: {
+          alertType: 'success',
+        },
+      });
       const res = await productApi.BuyCart(item._id, ProductId, PetId, []);
       navigation.goBack();
     } catch (error) {
@@ -59,7 +68,7 @@ const Cart = ({navigation}) => {
   const renderItem = ({item}) => {
     console.log('item', item);
     const sumPet = item.PetId.reduce(
-      (a, b) =>  a + Number(b.product.pricePet) * Number(b.quantity),
+      (a, b) => a + Number(b.product.pricePet) * Number(b.quantity),
       0,
     );
     const sumProduct = item.ProductId.reduce(
@@ -70,17 +79,17 @@ const Cart = ({navigation}) => {
     console.log('sum', sumProduct, totalSum);
 
     return (
-      <Block
-        backgroundColor={'white'}
-        width={'100%'}
-        marginBottom={10}
-        padding={10}>
-        <Block backgroundColor={'white'} paddingLeft={15}>
-          <Text>Cửa hàng: {item.idAccountStore.nameStore}</Text>
-          <Text>Địa chỉ: {item.idAccountStore.addressStore}</Text>
+      <Block backgroundColor={'#F2F3F2'} width={'100%'} marginBottom={10}>
+        <Block backgroundColor={'#18A2E1'} paddingLeft={15}>
+          <Text color={'white'} bold>
+            Cửa hàng: {item.idAccountStore.nameStore}
+          </Text>
+          <Text color={'white'}>
+            Địa chỉ: {item.idAccountStore.addressStore}
+          </Text>
         </Block>
         {item.PetId.map((item, index) => (
-          <Block marginTop={10} row>
+          <Block marginTop={4} row backgroundColor={'white'}>
             <Image
               style={styles.ilist}
               source={{uri: item.product.imgPet}}></Image>
@@ -97,7 +106,7 @@ const Cart = ({navigation}) => {
           </Block>
         ))}
         {item.ProductId.map(item => (
-          <Block marginTop={10} row>
+          <Block marginTop={4} row backgroundColor={'white'}>
             <Image
               style={styles.ilist}
               source={{uri: item.product.imgProduct}}></Image>
@@ -113,9 +122,11 @@ const Cart = ({navigation}) => {
             </Block>
           </Block>
         ))}
-        <Block marginTop={10}>
-          <TouchableOpacity onPress={() => buyCart(item)}>
-            <Block backgroundColor={'white'} row={1} border={0.5} height={70}>
+        <Block marginTop={4} backgroundColor={'white'}>
+          <TouchableOpacity
+            style={{borderWidth: 0.4}}
+            onPress={() => buyCart(item)}>
+            <Block backgroundColor={'white'} row={1} height={70}>
               <Block
                 backgroundColor={'#18A2E1'}
                 width={'35%'}

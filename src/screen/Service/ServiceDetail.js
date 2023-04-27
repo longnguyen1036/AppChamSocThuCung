@@ -192,7 +192,7 @@ const ServiceDetail = ({navigation}) => {
               <Text style={{fontSize: 18, color: 'black', fontWeight: '500'}}>
                 {shop?.name}
               </Text>
-              <Text numberOfLines={1} style={{width: '74%'}} >{address}</Text>
+              <Text numberOfLines={1} style={{width: '48%'}} >{address}</Text>
             </View>
           </View>
 
