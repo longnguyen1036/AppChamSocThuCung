@@ -9,6 +9,7 @@ import MainNavigation from './src/router'
 import { Provider } from 'react-redux';
 import { store } from './src/redux/store';
 import notifee, { AndroidImportance, AndroidStyle } from '@notifee/react-native';
+import { NotifierWrapper } from 'react-native-notifier';
 
 
 const createChannel = async () => {
@@ -52,9 +53,11 @@ const App = () => {
   }, []);
   return (
     <SafeAreaProvider>
+      <NotifierWrapper>
       <Provider store={store}>
         <MainNavigation></MainNavigation>
       </Provider>
+      </NotifierWrapper>
     </SafeAreaProvider>
   )
 }

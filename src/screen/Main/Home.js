@@ -1,6 +1,5 @@
 import {
   StyleSheet,
-  Text,
   View,
   SafeAreaView,
   Image,
@@ -15,6 +14,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import PagerView from 'react-native-pager-view';
 import {useNavigation} from '@react-navigation/native';
 import Block from '../../components/Block';
+import Text from '../../components/Text';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { CART_SCREEN, PETS_DETAIL_SCREEN, PETS_SCREEN, PRODUCTS_DETAIL_SCREEN, PRODUCTS_SCREEN, PROFILE_SCREEN, SERVICES_DETAIL_SCREEN, SERVICES_SCREEN } from '../../router/ScreenName';
 import productApi from '../../api/productApi';
@@ -55,26 +55,34 @@ const Home = () => {
   const renderItem = ({item}) => {
     return (
       <TouchableOpacity onPress={() => ChangeScreen(item)}>
-      <Block
-       radius={10}
-        backgroundColor={'#E6EAED'}
-
-        marginLeft={10}
-        marginBottom={10}
-        width={180}
-        >
-        <Image style={styles.ilist} source={{uri: item.image}}></Image>
-        <Block width={'95%'} radius={10} paddingLeft={'5%'} margin={5} backgroundColor={'white'} height={80}>
-          <Block paddingTop={5}>
-            <Text style={{color: 'black', fontSize: 18}} width={'90%'} height={20}>{item.name}</Text>
-            <Text width={'80%'} height={20} color={'blue'}>{item.description}</Text>
-            <Text marginTop={7} size={15}>{formatMoney(item.price)}</Text>
+     <Block
+          marginLeft={'8%'}
+          backgroundColor={'white'}
+          width={160}
+         marginTop={12}
+          radius={10}
+          >
+          <Image style={styles.ilist} source={{uri: item.image}}></Image>
+          <Block
+            paddingLeft={'5%'}
+            padding={3}
+            marginTop={8}
+            height={70}
+      
+            >
+            <Block width={140} paddingTop={5}>
+              <Block width={'100%'} height={20} > 
+              <Text bold>{item.name}</Text>
+              </Block>
+              <Block width={100} marginTop={10}>
+                <Text color={'#18A2E1'} bold size={16}>
+                  {formatMoney(item.price)}
+                </Text>
+              </Block>
+            </Block>
+            
           </Block>
-          <TouchableOpacity style={styles.nut}>
-            <AntDesign color={'white'} name="right" size={25} />
-          </TouchableOpacity>
         </Block>
-      </Block>
       </TouchableOpacity>
     );
   };
@@ -266,22 +274,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   ilist: {
-    width: 100,
-    height: 109,
-    marginLeft: '19%',
-    marginTop: '2%',
-    marginBottom: '2%',
-
+    width: '100%',
+      height: 150,
+      borderTopRightRadius: 10,
+      borderTopLeftRadius: 10,
   },
-  nut: {
-    width: 32,
-    height: 32,
-    backgroundColor: '#18A2E1',
-    position: 'absolute',
-    right: '5%',
-    bottom: '8%',
-    alignItems: 'center',
-    borderRadius: 4,
-    paddingTop: '15%',
-  },
+  
 });

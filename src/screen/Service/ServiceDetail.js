@@ -17,6 +17,8 @@ import productApi from '../../api/productApi';
 import { useRoute } from '@react-navigation/native';
 import formatMoney from '../../components/FormatMoney';
 import { PROFILE_SHOP_SCREEN, SERVICE_PROFILE_SHOP_SCREEN } from '../../router/ScreenName';
+import {Notifier, Easing, NotifierComponents} from 'react-native-notifier';
+
 
 const ServiceDetail = ({navigation}) => {
   const router = useRoute()
@@ -37,10 +39,22 @@ const ServiceDetail = ({navigation}) => {
   }
 
 
-  useEffect(() => {
-    getDetailProducts()
-  },[])
   
+
+  const addFavorite = async () => {
+    
+    const res = await productApi.addFavorite('favoriteServiceId', _id)
+    Notifier.showNotification({
+      title: 'Thông báo',
+      description: 'Đã thêm vào yêu thích',
+      Component: NotifierComponents.Alert,
+      componentProps: {
+        alertType: 'success',
+      },
+    });
+    return res
+    
+  }
 
  
 
@@ -69,7 +83,7 @@ const ServiceDetail = ({navigation}) => {
 
   return (
     <ScrollView
-      style={{backgroundColor: '#dcdcdc', height: '100%', width: '100%'}}>
+      style={{backgroundColor: '#F2F3F2', height: '100%', width: '100%'}}>
       <View style={{alignItems: 'center'}}>
         <View
           style={{
@@ -83,19 +97,19 @@ const ServiceDetail = ({navigation}) => {
             <FontAwesome5 name="chevron-left" size={30} color={'black'} />
           </TouchableOpacity>
 
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=> addFavorite()}>
             <FontAwesome5 name="heart" size={30} color={'black'} />
           </TouchableOpacity>
         </View>
 
-        <View>
+        <View style={{width: '100%', padding: 12}}>
           <Image
             source={{uri: listProduct?.imgService}}
-            style={{width: 200, height: 200, borderRadius: 8}}></Image>
+            style={{width:  '100%', height: 300, borderRadius: 8,}}></Image>
         </View>
 
         <View style={{marginTop: '3%'}}>
-          <Text style={{fontSize: 24, fontWeight: '600'}}> {listProduct?.nameService}</Text>
+          <Text style={{fontSize: 24, fontWeight: '600', color:'black'}}> Teen{listProduct?.nameService}</Text>
         </View>
 
         <TouchableOpacity
@@ -113,7 +127,7 @@ const ServiceDetail = ({navigation}) => {
             alignItems: 'center',
             padding: 8,
             borderRadius: 8,
-            borderWidth: 1,
+            borderWidth: 0.4,
           }}>
           <View style={{flexDirection: 'row'}}>
             <View

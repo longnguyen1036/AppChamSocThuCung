@@ -183,7 +183,7 @@ const Login = ({navigation}) => {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Image style={{width: 60, height: 60}}  source={require('../../assets/image/warning.png')}></Image>
-            <Text style={styles.modalText}>Chua nhap dung tài khoản hoặc mật khẩu!</Text>
+            <Text style={styles.modalText}>Chưa nhập đúng email hoặc mật khẩu!</Text>
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => setModalVisible(!modalVisible)}

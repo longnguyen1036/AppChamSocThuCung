@@ -12,6 +12,8 @@ import { CART_SCREEN, PROFILE_SHOP_SCREEN } from '../../router/ScreenName';
 import { useRoute } from '@react-navigation/native';
 import productApi from '../../api/productApi';
 import formatMoney from '../../components/FormatMoney';
+import {Notifier, Easing, NotifierComponents} from 'react-native-notifier';
+
 const ProductsDetail = ({navigation}) => {
   const router = useRoute()
   const {_id} = router.params
@@ -35,6 +37,14 @@ const addCart = async (id, product, quantity) => {
   }
   
   const res = await productApi.addCartProduct(id, ProductId, "productStore")
+  Notifier.showNotification({
+    title: 'Thông báo',
+    description: 'Đã thêm vào giỏ hàng',
+    Component: NotifierComponents.Alert,
+    componentProps: {
+      alertType: 'success',
+    },
+  });
   return res
 }
 
@@ -42,9 +52,24 @@ useEffect(() => {
   getDetailProducts()
 },[])
 
+const addFavorite = async () => {
+    
+  const res = await productApi.addFavorite('favoriteProductId', _id)
+  Notifier.showNotification({
+    title: 'Thông báo',
+    description: 'Đã thêm vào yêu thích',
+    Component: NotifierComponents.Alert,
+    componentProps: {
+      alertType: 'success',
+    },
+  });
+  return res
+  
+}
+
   return (
     <View style={{backgroundColor: '#dcdcdc', height: '100%'}}>
-      <View style={{alignItems: 'center'}}>
+      <View>
         <View
           style={{
             flexDirection: 'row',
@@ -57,42 +82,50 @@ useEffect(() => {
             <FontAwesome5 name="chevron-left" size={30} color={'black'} />
           </TouchableOpacity>
 
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=> addFavorite()}>
             <FontAwesome5 name="heart" size={30} color={'black'} />
           </TouchableOpacity>
         </View>
 
-        <View>
+        <View style={{width: '100%', padding: 12}}>
           <Image
             source={{uri: listProduct?.imgProduct}}
-            style={{width: 200, height: 200, borderRadius: 8}}></Image>
+            style={{width:  '100%', height: 300, borderRadius: 8,}}></Image>
         </View>
 
        
 
         <View>
-          <View style={{marginTop: '3%'}}>
+        <View style={{marginTop: '3%', width: '73%', paddingLeft: 12}}>
             <Text style={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>
               {listProduct?.nameProduct}
             </Text>
-            <Text style={{fontSize: 18, fontWeight: 'bold'}}>{formatMoney(listProduct?.priceProduct)}</Text>
-            <Text style={{fontSize: 17, color: 'black', fontWeight: '600'}}>
-              {listProduct?.descriptionProduct}
-            </Text>
+            <Text style={{fontSize: 18, fontWeight: 'bold', color: '#18A2E1'}}>{formatMoney(listProduct?.priceProduct)}</Text>
+       
           </View>
-          <View style={{flexDirection: 'row', width: '73%', marginTop: '3%'}}>
+          
+          <View style={{ width: '100%', marginTop: '3%', alignItems: 'center', flexDirection: 'row', paddingHorizontal: 12}}>
+            
+
             <TouchableOpacity
-              style={{backgroundColor: 'white', padding: 8, borderRadius: 8}}>
-              <Text style={{fontSize: 10,}}>
-                Danh mục
+              style={{backgroundColor: 'white', width: 70, height: 70, borderRadius: 5, alignItems: 'center', justifyContent: 'center'}}>
+              <Text style={{fontSize: 15, color: 'black', fontWeight: '700'}}>
+               Phận loại
               </Text>
-              <Text style={{fontSize: 12, color: 'black', fontWeight: '700'}}>{listProduct?.typeProduct}</Text>
+              <Text style={{textAlign: 'center',fontSize: 12, color: 'black'}}> {listProduct?.typeProduct}</Text>
             </TouchableOpacity>
 
-        
+            <View
+              style={{backgroundColor: 'white', width: '76%', height: 70, borderRadius: 5, padding: 5, marginLeft: 12}}>
+              <Text style={{fontSize: 15, color: 'black', fontWeight: '700'}}>
+               Mô tả:
+              </Text>
+              <Text style={{ numberOfLines: 2 ,fontSize: 12, color: 'black',}}> {listProduct?.descriptionProduct}</Text>
+            </View>
           </View>
         </View>
 
+        <View style={{alignItems: 'center'}}>
         <TouchableOpacity
         onPress={() => navigation.navigate(PROFILE_SHOP_SCREEN,{
           _id: shop.id_store,
@@ -108,8 +141,9 @@ useEffect(() => {
             alignItems: 'center',
             padding: 8,
             borderRadius: 8,
-            borderWidth: 1
+            borderWidth: 0.4,
           }}>
+
           <View style={{flexDirection: 'row'}}>
             <View
               style={{
@@ -145,6 +179,7 @@ useEffect(() => {
             <FontAwesome5 name="comments" size={20} color={'white'} />
           </TouchableOpacity>
         </TouchableOpacity>
+        
 
         <TouchableOpacity
           onPress={() => addCart(shop?.id_store, listProduct?._id, 1)}
@@ -158,6 +193,7 @@ useEffect(() => {
             Thêm vào giỏ hàng
           </Text>
         </TouchableOpacity>
+        </View>
       </View>
     </View>
   );

@@ -7,7 +7,7 @@ import {
     Modal,
     FlatList,
   } from 'react-native';
-  import React,{useState, useEffect} from 'react';
+  import React,{useState, useEffect, useCallback} from 'react';
   import Block from '../../components/Block';
   import Text from '../../components/Text';
   import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -15,6 +15,7 @@ import {
   import {FAVOURITE_PETS_SCREEN, FAVOURITE_SERVICES_SCREEN, SERVICES_DETAIL_SCREEN} from '../../router/ScreenName';
   import productApi from '../../api/productApi';
   import formatMoney from '../../components/FormatMoney';
+import { useFocusEffect } from '@react-navigation/native';
   
   const FavouriteServices = ({navigation}) => {
     const [listfavorite, setListFavorite] = useState([])
@@ -30,10 +31,11 @@ import {
       setMasterDataSource(res.data.data.favoriteServiceId)
   }
   
-    useEffect(() => {
+  useFocusEffect(
+    useCallback(() => {
       getFavoritePets()
-    },[])
-
+    }, []),
+  );
     const searchFilterFunction = (text) => {
       // Check if searched text is not blank
       if (text) {
@@ -63,49 +65,45 @@ import {
     // console.log('item', item)
       return (
         <TouchableOpacity
-          onPress={() => navigation.navigate(SERVICES_DETAIL_SCREEN)}>
+          onPress={() => navigation.navigate(SERVICES_DETAIL_SCREEN, {
+            _id: item._id,
+          })}>
           <Block
-            marginLeft={'5%'}
-            backgroundColor={'#E6EAED'}
+            marginLeft={'4%'}
+            backgroundColor={'white'}
             width={'92%'}
-            height={130}
-            row={1}
+            // height={130}
+            row
             marginTop={10} 
-            radius={10}>
+            radius={10}
+            // alignCenter
+            padding={12}
+            >
             <Image style={styles.ilist} source={{uri: item.imgService}}></Image>
-            <Block
-              paddingLeft={'5%'}
-              margin={5}
-              backgroundColor={'white'}
-              height={120}
-              width={'71%'}
-              radius={10}>
-              <Block paddingTop={5}>
-                <Text>{item.name}</Text>
-                <Text color={'red'} size={12}>
+            
+              <Block marginLeft={'2%'} width={'74%'} >
+                <Text numberOfLines={1} color={'#18A2E1'} size={18}>
                  Dịch vụ: {item.nameService}
                 </Text>
-                <Text size={12}>Giá: {formatMoney(item.priceService)}</Text>
-                <Text size={12}> Mô tả: {item.descriptionService}</Text>
+                <Text  marginTop={4} size={16}>Giá: {formatMoney(item.priceService)}</Text>
+                <Text numberOfLines={2} marginTop={4} size={14}>Mô tả: {item.descriptionService}</Text>
               </Block>
-              <TouchableOpacity style={styles.nut}>
-                <AntDesign name="right" size={25} />
-              </TouchableOpacity>
+             
             </Block>
-          </Block>
+          
         </TouchableOpacity>
       );
     };
   
     return (
-      <Block backgroundColor={'white'} flex={1}>
+      <Block backgroundColor={'#F2F3F2'} flex={1}>
   
         <Block paddingHorizontal={10}>
           <Block
             row={1}
             justifyCenter
             alignCenter
-            backgroundColor={'#F2F3F2'}
+            backgroundColor={'white'}
             height={40}
             borderRadius={15}
             margin={10}>
@@ -146,19 +144,9 @@ import {
     ilist: {
       width: 90,
       height: 100,
-      marginLeft: '2%',
-      marginTop: '2%',
+      borderRadius: 6,
+      
     },
-    nut: {
-      width: 32,
-      height: 32,
-      backgroundColor: '#F2F3F2',
-      position: 'absolute',
-      right: '5%',
-      top: '10%',
-      alignItems: 'center',
-      borderRadius: 4,
-      paddingTop: '15%',
-    },
+    
   });
   

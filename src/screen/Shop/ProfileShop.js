@@ -1,7 +1,7 @@
 import {Image, StyleSheet, View} from 'react-native';
 import React from 'react';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import { PET_PROFILE_SHOP_SCREEN, PRODUCT_PROFILE_SHOP_SCREEN, SERVICE_PROFILE_SHOP_SCREEN } from '../../router/ScreenName';
+import { LIST_CHAT, PET_PROFILE_SHOP_SCREEN, PRODUCT_PROFILE_SHOP_SCREEN, SERVICE_PROFILE_SHOP_SCREEN } from '../../router/ScreenName';
 
 import Block from '../../components/Block';
 import Text from '../../components/Text';
@@ -101,6 +101,7 @@ const ProfileShop = () => {
                   </TouchableOpacity>
                 </View>
                 <TouchableOpacity
+                onPress={()=> navigation.navigate(LIST_CHAT)}
                   style={{
                     marginLeft: '40%',
                     backgroundColor: '#18A2E1',

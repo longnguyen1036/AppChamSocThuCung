@@ -53,18 +53,18 @@ const Cart = ({navigation}) => {
     getCart();
   }, []);
   const renderItem = ({item}) => {
-    const sumPet = item.PetId.reduce((a, b) => a + (Number(b.product.pricePet) * Number(b.product.quantityPet)), 0);
-    const sumProduct = item.ProductId.reduce((a, b) => a +(Number(b.product.priceProduct) * Number(b.product.quantityProduct)), 0);
+    const sumPet = item.PetId.reduce((a, b) => a + (Number(b.product.pricePet) * Number(b.quantity)), 0);
+    const sumProduct = item.ProductId.reduce((a, b) => a +(Number(b.product.priceProduct) * Number(b.quantity)), 0);
     const totalSum = Number(sumPet) + Number(sumProduct);
-
+    console.log('sum', sumProduct, totalSum);
   
     return (
       <Block
         backgroundColor={'white'}
-        border={0.5}
+        width={'100%'}
         marginBottom={10}
         padding={10}>
-        <Block backgroundColor={'white'} paddingLeft={15} border={1}>
+        <Block backgroundColor={'white'} paddingLeft={15} >
           <Text>Cửa hàng: {item.idAccountStore.nameStore}</Text>
           <Text>Địa chỉ: {item.idAccountStore.addressStore}</Text>
         </Block>
@@ -77,19 +77,10 @@ const Cart = ({navigation}) => {
               <Text color={'skyblue'} size={15}>
               {formatMoney(item.product.pricePet)}
               </Text>
-              <Block
-                border={0.5}
-                row
-                width={90}
-                height={30}
-                justifySpaceBetween>
-                <TouchableOpacity style={styles.ip} >
-                  <Text size={15}>-</Text>
-                </TouchableOpacity>
-                <Text size={15}>{item.quantity}</Text>
-                <TouchableOpacity style={styles.ip2}>
-                  <Text size={15}>+</Text>
-                </TouchableOpacity>
+              <Block>
+               
+                <Text size={15}>Số lượng:  x{item.quantity}</Text>
+                
               </Block>
             </Block>
           </Block>
@@ -103,20 +94,9 @@ const Cart = ({navigation}) => {
               <Text color={'skyblue'} size={15}>
               {formatMoney(item.product.priceProduct)}
               </Text>
-              <Block
-                border={0.5}
-                row
-                width={90}
-                height={30}
-                justifySpaceBetween>
-                <TouchableOpacity style={styles.ip}>
-                  <Text size={15}>-</Text>
-                </TouchableOpacity>
-                <Text size={15}>{item.quantity}</Text>
-                <TouchableOpacity style={styles.ip2}>
-                  <Text size={15}>+</Text>
-                </TouchableOpacity>
-              </Block>
+              <Block>
+               <Text size={15}>Số lượng:  x{item.quantity}</Text>
+             </Block>
             </Block>
           </Block>
         ))}
@@ -145,7 +125,7 @@ const Cart = ({navigation}) => {
     );
   };
   return (
-    <Block backgroundColor={'#DADADA'} flex={1}>
+    <Block backgroundColor={'#F2F3F2'} flex={1}>
       <Block row={1} paddingVertical={10} paddingHorizontal={10}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Block width={'40%'}>
