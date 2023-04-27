@@ -21,7 +21,7 @@ import authApi from '../../api/authApi';
 import { useFocusEffect } from '@react-navigation/native';
 
 const Profile = ({navigation}) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const [profileUser, setProfileUser] = useState()
 

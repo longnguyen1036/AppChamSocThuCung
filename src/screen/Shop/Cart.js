@@ -5,6 +5,7 @@ import {
   Image,
   FlatList,
   TextInput,
+  ActivityIndicator,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Block from '../../components/Block';
@@ -14,112 +15,124 @@ import productApi from '../../api/productApi';
 import formatMoney from '../../components/FormatMoney';
 const Cart = ({navigation}) => {
   const [listCart, setListCart] = useState([]);
-
+  const [loading, setLoading] = useState(false);
 
   const getCart = async () => {
+    setLoading(true);
     try {
       const res = await productApi.getCartProduct();
       setListCart(res.data.data);
+      setLoading(false);
     } catch (error) {
       console.log('error loading cart', error);
+      setLoading(false);
     }
   };
 
-  const buyCart = async (item) => {
+  const buyCart = async item => {
     try {
       const ProductId = [];
       const PetId = [];
       for (let i = 0; i < item.ProductId.length; i++) {
         ProductId.push({
           product: item.ProductId[i]._id,
-          quantity: item.ProductId[i].quantity
-        })
+          quantity: item.ProductId[i].quantity,
+        });
       }
       for (let i = 0; i < item.PetId.length; i++) {
         PetId.push({
           product: item.PetId[i]._id,
-          quantity: item.PetId[i].quantity
-        })
+          quantity: item.PetId[i].quantity,
+        });
       }
-    
-      const res = await productApi.BuyCart(item._id, ProductId, PetId, [])
+
+      const res = await productApi.BuyCart(item._id, ProductId, PetId, []);
       navigation.goBack();
     } catch (error) {
       console.log('error buy cart', error);
     }
-  }
+  };
 
   useEffect(() => {
     getCart();
   }, []);
   const renderItem = ({item}) => {
-    const sumPet = item.PetId.reduce((a, b) => a + (Number(b.product.pricePet) * Number(b.quantity)), 0);
-    const sumProduct = item.ProductId.reduce((a, b) => a +(Number(b.product.priceProduct) * Number(b.quantity)), 0);
+    console.log('item', item);
+    const sumPet = item.PetId.reduce(
+      (a, b) =>  a + Number(b.product.pricePet) * Number(b.quantity),
+      0,
+    );
+    const sumProduct = item.ProductId.reduce(
+      (a, b) => a + Number(b.product.priceProduct) * Number(b.quantity),
+      0,
+    );
     const totalSum = Number(sumPet) + Number(sumProduct);
     console.log('sum', sumProduct, totalSum);
-  
+
     return (
       <Block
         backgroundColor={'white'}
         width={'100%'}
         marginBottom={10}
         padding={10}>
-        <Block backgroundColor={'white'} paddingLeft={15} >
+        <Block backgroundColor={'white'} paddingLeft={15}>
           <Text>Cửa hàng: {item.idAccountStore.nameStore}</Text>
           <Text>Địa chỉ: {item.idAccountStore.addressStore}</Text>
         </Block>
         {item.PetId.map((item, index) => (
           <Block marginTop={10} row>
-            <Image style={styles.ilist} source={{uri: item.product.imgPet}}></Image>
+            <Image
+              style={styles.ilist}
+              source={{uri: item.product.imgPet}}></Image>
             <Block paddingLeft={10}>
               <Text width={'90%'}>{item.product.namePet}</Text>
               <Text>{item.product.descriptionPet}</Text>
               <Text color={'skyblue'} size={15}>
-              {formatMoney(item.product.pricePet)}
+                {formatMoney(item.product.pricePet)}
               </Text>
               <Block>
-               
-                <Text size={15}>Số lượng:  x{item.quantity}</Text>
-                
+                <Text size={15}>Số lượng: x{item.quantity}</Text>
               </Block>
             </Block>
           </Block>
         ))}
-          {item.ProductId.map(item => (
+        {item.ProductId.map(item => (
           <Block marginTop={10} row>
-            <Image style={styles.ilist} source={{uri: item.product.imgProduct}}></Image>
+            <Image
+              style={styles.ilist}
+              source={{uri: item.product.imgProduct}}></Image>
             <Block paddingLeft={10}>
               <Text width={'90%'}>{item.product.nameProduct}</Text>
               <Text>{item.product.descriptionProduct}</Text>
               <Text color={'skyblue'} size={15}>
-              {formatMoney(item.product.priceProduct)}
+                {formatMoney(item.product.priceProduct)}
               </Text>
               <Block>
-               <Text size={15}>Số lượng:  x{item.quantity}</Text>
-             </Block>
+                <Text size={15}>Số lượng: x{item.quantity}</Text>
+              </Block>
             </Block>
           </Block>
         ))}
         <Block marginTop={10}>
           <TouchableOpacity onPress={() => buyCart(item)}>
-          <Block backgroundColor={'white'} row={1} border={0.5} height={70}>
-            <Block
-              backgroundColor={'#18A2E1'}
-              width={'35%'}
-              alignCenter
-              paddingTop={20}>
-              <Text size={15} color={'white'}>
-                Mua hàng
-              </Text>
+            <Block backgroundColor={'white'} row={1} border={0.5} height={70}>
+              <Block
+                backgroundColor={'#18A2E1'}
+                width={'35%'}
+                alignCenter
+                paddingTop={20}>
+                <Text size={15} color={'white'}>
+                  Mua hàng
+                </Text>
+              </Block>
+              <Block paddingLeft={90} paddingTop={15} alignCenter>
+                <Text>Thành tiền</Text>
+                <Text size={15} color={'#18A2E1'}>
+                  {formatMoney(totalSum)}
+                </Text>
+              </Block>
             </Block>
-            <Block paddingLeft={90} paddingTop={15} alignCenter>
-              <Text>Thành tiền</Text>
-              <Text size={15} color={'#18A2E1'}>
-              {formatMoney(totalSum)}
-              </Text>
-            </Block>
-          </Block>
-        </TouchableOpacity>
+          </TouchableOpacity>
         </Block>
       </Block>
     );
@@ -134,6 +147,7 @@ const Cart = ({navigation}) => {
               style={{marginTop: 8}}></Image>
           </Block>
         </TouchableOpacity>
+
         <Block width={'50%'} marginLeft={'40%'}>
           <Text size={20} color={'black'} bold>
             Giỏ hàng
@@ -141,11 +155,13 @@ const Cart = ({navigation}) => {
         </Block>
       </Block>
 
-      <Block flex={1}>
-        <FlatList data={listCart} renderItem={renderItem} />
-
-      
-      </Block>
+      {loading ? (
+        <ActivityIndicator size={'large'} color={'red'} />
+      ) : (
+        <Block flex={1}>
+          <FlatList data={listCart} renderItem={renderItem} />
+        </Block>
+      )}
     </Block>
   );
 };

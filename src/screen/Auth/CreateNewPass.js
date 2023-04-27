@@ -10,17 +10,57 @@ import {
 import React, {useState} from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { LOGIN_SCREEN } from '../../router/ScreenName';
+import { Notifier, NotifierComponents } from 'react-native-notifier';
+import authApi from '../../api/authApi';
+import {useRoute} from '@react-navigation/native';
 
 const CreateNewPass = ({navigation}) => {
   const [hidden, setHidden] = useState(true);
   const [hidden1, setHidden1] = useState(true);
+  const [pass, setPass] = useState('');
+  const [comfirmPass, setComfirmPass] = useState('');
+  const route = useRoute();
+  const {id} = route.params;
 
-  const hiddenPassWord = () => {
-    setHidden(!hidden);
-  };
-  const hiddenPassWord1 = () => {
-    setHidden1(!hidden1);
-  };
+  const submit = async () => {
+    try {
+      if(pass !== comfirmPass) {
+        Notifier.showNotification({
+          title: 'Thông báo',
+          description: 'mật khẩu không trùng nhau',
+          Component: NotifierComponents.Alert,
+          componentProps: {
+            alertType: 'error',
+          },
+        });
+      }else{
+        const res = await authApi.UpdatePass(id, pass)
+        if(res.status === 200){
+          Notifier.showNotification({
+            title: 'Thông báo',
+            description: 'đổi mật khẩu thành công',
+            Component: NotifierComponents.Alert,
+            componentProps: {
+              alertType: 'success',
+            },
+          });
+          navigation.navigate(LOGIN_SCREEN)
+        }else{
+          Notifier.showNotification({
+            title: 'Thông báo',
+            description: 'đổi mật khẩu không thành công',
+            Component: NotifierComponents.Alert,
+            componentProps: {
+              alertType: 'error',
+            },
+          });
+        }
+      }
+    } catch (error) {
+      console.log('error', error);
+    }
+  }
+
   return (
     <View style={styles.container}>
       <View>
@@ -43,8 +83,9 @@ const CreateNewPass = ({navigation}) => {
         <TextInput
           style={styles.ip}
           placeholder="Nhập mật khẩu mới"
+          onChangeText={(text) => setPass(text)}
           secureTextEntry={hidden}></TextInput>
-        <TouchableOpacity onPress={hiddenPassWord}>
+        <TouchableOpacity onPress={() => setHidden(hidden)}>
           {hidden ? (
             <Image
               style={styles.icon}
@@ -68,9 +109,10 @@ const CreateNewPass = ({navigation}) => {
         <Text style={styles.t3}>Xác nhận mật khẩu</Text>
         <TextInput
           style={styles.ip}
+          onChangeText={(text) => setComfirmPass(text)}
           placeholder="Xác nhận mật khẩu mới"
           secureTextEntry={hidden1}></TextInput>
-        <TouchableOpacity onPress={hiddenPassWord1}>
+        <TouchableOpacity onPress={() => setHidden1(!hidden1)}>
           {hidden1 ? (
             <Image
               style={styles.icon}
@@ -92,7 +134,7 @@ const CreateNewPass = ({navigation}) => {
       </View>
       <View style={styles.v4}>
         <TouchableOpacity
-        onPress={() =>navigation.navigate(LOGIN_SCREEN)}
+        onPress={() => submit()}
           style={styles.btn}>
           <Text style={styles.t4}>Xác nhận</Text>
         </TouchableOpacity>
