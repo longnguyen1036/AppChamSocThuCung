@@ -37,7 +37,7 @@ const Chat = ({navigation}) => {
         table: 'user',
       };
       console.log(idSocketStore,'------------------------->')
-      const socket = io(`http://192.168.100.64:9999/`);
+      const socket = io(`http://192.168.1.8:9999/`);
       // socket.on('mgs', msg => {
       //   console.log('mafsdfdssd', msg);
       // });
@@ -178,6 +178,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    backgroundColor: 'white',
   },
   sendButton: {
     width: 50,
@@ -191,6 +192,7 @@ const styles = StyleSheet.create({
     height: 40,
     paddingHorizontal: 10,
     fontSize: 16,
-    borderWidth: 1,
+    borderWidth: 0.4,
+    borderRadius: 12
   },
 });

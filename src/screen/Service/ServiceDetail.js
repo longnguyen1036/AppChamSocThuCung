@@ -192,21 +192,10 @@ const ServiceDetail = ({navigation}) => {
               <Text style={{fontSize: 18, color: 'black', fontWeight: '500'}}>
                 {shop?.name}
               </Text>
-              <Text numberOfLines={3}>{address}</Text>
+              <Text numberOfLines={1} style={{width: '74%'}} >{address}</Text>
             </View>
           </View>
 
-          <TouchableOpacity
-            style={{
-              backgroundColor: '#18A2E1',
-              borderRadius: 8,
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: 5,
-              height: 40,
-            }}>
-            <FontAwesome5 name="comments" size={20} color={'white'} />
-          </TouchableOpacity>
         </TouchableOpacity>
 
         <View style={{width: '75%', flexDirection: 'row', marginTop: '3%'}}>

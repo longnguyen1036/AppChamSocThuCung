@@ -88,7 +88,7 @@ const Home = () => {
   };
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: '#DADADA'}}>
+    <ScrollView style={{flex: 1, backgroundColor: '#DADADA'}}>
       <View style={styles.header}>
         <View style={styles.h1}>
           <Text style={styles.t1}>Welcome to</Text>
@@ -176,10 +176,10 @@ const Home = () => {
         <Text style ={{fontSize: 20, fontWeight: '700', color: 'black'}}>Top bán chạy</Text>
       </View>
 
-      <Block  flex={1} paddingHorizontal={15} justifySpaceBetween>
+      <Block width={'100%'} paddingHorizontal={'2%'}>
         <FlatList  data={listRandom} renderItem={renderItem} numColumns={2} />
       </Block>
-    </SafeAreaView>
+    </ScrollView>
   );
 };
 

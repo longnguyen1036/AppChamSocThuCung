@@ -129,7 +129,7 @@ const FavouriteProducts = ({navigation}) => {
         </Block>
       </Block>
 
-      <Block width={'90%'}>
+      <Block width={'100%'} paddingHorizontal={'2%'}>
         <FlatGrid
           key={listfavorite._id}
           data={listfavorite}

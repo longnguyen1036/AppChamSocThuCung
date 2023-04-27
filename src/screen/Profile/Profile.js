@@ -83,27 +83,23 @@ const Profile = ({navigation}) => {
           borderBottomRightRadius: 20,
         }}>
         <Block
-          row={1}
           alignCenter
-          width={'100%'}
-          justifySpaceBetween
-          paddingHorizontal={10}
-          marginTop={'2%'}>
-          <FontAwesome5 name="chevron-left" size={30} />
+          marginLeft={'24%'}
+          marginTop={'8%'}>
           <Text
             style={{
-              width: '60%',
+              width: '100%',
               color: 'white',
-              fontSize: 20,
+              fontSize: 26,
               fontWeight: 'bold',
             }}>
-            Tài khoản
+            Thông tin tài khoản
           </Text>
         </Block>
       </View>
       <View
         style={{
-          height: '27%',
+          height: '22%',
           width: '90%',
           backgroundColor: '#FFFFFF',
           borderRadius: 10,
@@ -143,24 +139,8 @@ const Profile = ({navigation}) => {
         </View>
         <View
           style={{
-            flexDirection: 'row',
-            justifyContent: 'space-around',
             marginTop: '1%',
           }}>
-          <TouchableOpacity
-            style={{
-              backgroundColor: '#18A2E1',
-              width: '30%',
-              flexDirection: 'row',
-              justifyContent: 'space-around',
-              alignItems: 'center',
-              padding: 10,
-              borderRadius: 10,
-            }}
-            onPress={() => signOut()}>
-            <Text style={{color: 'white', fontWeight: 'bold'}}>Camera</Text>
-            <FontAwesome5 name="camera-retro" size={25} color={'white'} />
-          </TouchableOpacity>
           <TouchableOpacity
             onPress={()=> navigation.navigate(LIST_CHAT)}
             style={{
@@ -171,6 +151,7 @@ const Profile = ({navigation}) => {
               alignItems: 'center',
               padding: 10,
               borderRadius: 10,
+              marginLeft: 10,
             }}>
             <Text style={{color: 'white', fontWeight: 'bold'}}>Chat</Text>
             <FontAwesome5 name="sms" size={25} color={'white'} />

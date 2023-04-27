@@ -67,7 +67,7 @@ const PetProfileShop = () => {
     )
   }
   return (
-    <Block backgroundColor={'#dcdcdc'} flex={1}>
+    <Block backgroundColor={'#dcdcdc'} flex={1} paddingHorizontal={'1%'}>
       <FlatGrid 
 
         data={listProduct}

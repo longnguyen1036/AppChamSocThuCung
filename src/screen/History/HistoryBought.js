@@ -37,16 +37,17 @@ const HistoryBought = ({navigation}) => {
   
     return (
       <Block
-        backgroundColor={'white'}
+        backgroundColor={'#F2F3F2'}
         width={'100%'}
         marginBottom={10}
-        padding={10}>
-        <Block backgroundColor={'white'} paddingLeft={15} >
-          <Text>Cửa hàng: {item.idAccountStore.nameStore}</Text>
-          <Text>Địa chỉ: {item.idAccountStore.addressStore}</Text>
+        
+        >
+        <Block backgroundColor={'#18A2E1'} paddingLeft={12} >
+          <Text color={'white'}>Cửa hàng: {item.idAccountStore.nameStore}</Text>
+          <Text color={'white'}>Địa chỉ: {item.idAccountStore.addressStore}</Text>
         </Block>
         {item.PetId.map((item, index) => (
-          <Block marginTop={10} row>
+          <Block marginTop={4} row backgroundColor={'white'}>
             <Image style={styles.ilist} source={{uri: item.product.imgPet}}></Image>
             <Block paddingLeft={10}>
               <Text width={'90%'}>{item.product.namePet}</Text>
@@ -63,7 +64,7 @@ const HistoryBought = ({navigation}) => {
           </Block>
         ))}
           {item.ProductId.map(item => (
-          <Block marginTop={10} row>
+          <Block marginTop={4} row backgroundColor={'white'}>
             <Image style={styles.ilist} source={{uri: item.product.imgProduct}}></Image>
             <Block paddingLeft={10}>
               <Text width={'90%'}>{item.product.nameProduct}</Text>
@@ -77,15 +78,17 @@ const HistoryBought = ({navigation}) => {
             </Block>
           </Block>
         ))}
-        <Block marginTop={10}>
+        <Block marginTop={4} backgroundColor={'white'}>
           <TouchableOpacity onPress={() => buyCart(item)}>
-          <Block backgroundColor={'white'} row={1} border={0.5} height={70}>
+          <Block backgroundColor={'white'} row={1} height={70}>
            
-            <Block paddingLeft={90} paddingTop={15} alignCenter>
-              <Text>Thành tiền</Text>
-              <Text size={15} color={'#18A2E1'}>
+            <Block>
+              <Block row paddingVertical={12}>
+              <Text marginLeft={12} size={24}>Thành tiền:</Text>
+              <Text marginLeft={12} marginTop={'3%'} size={18} color={'#18A2E1'}>
               {formatMoney(totalSum)}
               </Text>
+              </Block>
             </Block>
           </Block>
         </TouchableOpacity>
@@ -94,9 +97,9 @@ const HistoryBought = ({navigation}) => {
     );
   };
   return (
-    <Block backgroundColor={'#DADADA'} flex={1}>
+    <Block backgroundColor={'#F2F3F2'} flex={1}>
       <Block row={1} paddingVertical={10} paddingHorizontal={10}>
-        <Block width={'40%'}>
+        <Block width={'30%'}>
           <TouchableOpacity onPress={()=> navigation.goBack()}>
           <Image
             source={require('./../../assets/image/backpet.png')}
@@ -104,7 +107,7 @@ const HistoryBought = ({navigation}) => {
             </TouchableOpacity>
         </Block>
 
-        <Block width={'50%'}>
+        <Block width={'100%'}>
           <Text size={20} color={'black'} bold>
             Lịch sử mua hàng
           </Text>

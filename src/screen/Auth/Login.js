@@ -45,7 +45,7 @@ const Login = ({navigation}) => {
     registerAppWithFCM();
   },[])
 
-  let socketClient = io(`http://192.168.100.64:9999/`);
+  let socketClient = io(`http://1192.168.1.8:9999/`);
   socketClient.on('connect', () => {
     console.log('connected to server');
   });

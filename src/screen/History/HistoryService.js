@@ -35,20 +35,19 @@ const HistoryService = ({navigation}) => {
       <Block
       marginTop={5}
         backgroundColor={'white'}
-        border={0.5}
-        height={160}
+        height={100}
         row
         paddingTop={5}>
-        <Block backgroundColor={'white'} paddingLeft={15}>
-          <Text>{item.date}</Text>
-          <Text>{item.time}</Text>
+        <Block backgroundColor={'white'} paddingLeft={15} justifyCenter>
+          <Text size={16} bold>{item.date}</Text>
+          <Text size={16} bold>{item.time}</Text>
         </Block>
 
         <Block row marginLeft={10}>
           <Block paddingLeft={10}>
-            <Text>{item.nameService}</Text>
+            <Text color={'skyblue'} size={20}>{item.nameService}</Text>
             <Text>{item.nameStore}</Text>
-            <Text color={'#7C7C7C'}>{item.address}</Text>
+            <Text style={{width: 300}} color={'blue'}>{item.address}</Text>
           
           </Block>
         </Block>
@@ -58,7 +57,7 @@ const HistoryService = ({navigation}) => {
   return (
     <Block backgroundColor={'#DADADA'} flex={1}>
       <Block row={1} paddingVertical={10} paddingHorizontal={10}>
-        <Block width={'40%'}>
+        <Block width={'36%'}>
           <TouchableOpacity onPress={()=> navigation.goBack()}>
           <Image
             source={require('./../../assets/image/backpet.png')}

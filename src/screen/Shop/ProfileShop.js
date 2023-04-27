@@ -63,7 +63,7 @@ const ProfileShop = () => {
                       {name}
                     </Text>
                     <Text style={{marginTop: 10}}>Store</Text>
-                    <Text style={{marginTop: 5, width: '40%'}}>
+                    <Text  style={{marginTop: 5, width: '70%'}} color={'blue'} numberOfLines={2}>
                       {adress}
                     </Text>
                   </View>
