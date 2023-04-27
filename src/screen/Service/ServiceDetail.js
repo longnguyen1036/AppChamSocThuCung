@@ -57,7 +57,7 @@ const ServiceDetail = ({navigation}) => {
         });
       }else{
         const res = await productApi.BookingService(authState.id, _id, date.toLocaleDateString(), time, listProduct?.nameService, shop.name, address);
-        console.log('ress', res.data);
+        // console.log('ress', res.data);
         if(res.status === 200){
           Notifier.showNotification({
             title: 'Thông báo',
