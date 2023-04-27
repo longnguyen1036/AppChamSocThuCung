@@ -22,6 +22,7 @@ import {setToken} from '../../helper/auth';
 import {loggedAction} from '../../redux/actions/authAction';
 import {MAIN_TAB} from './../../router/ScreenName';
 import {sendMessenger} from '../../redux/actions/messAction';
+import { io } from 'socket.io-client';
 
 const Login = ({navigation}) => {
   const dispatch = useDispatch();
@@ -191,6 +192,8 @@ const Login = ({navigation}) => {
             <Text style={styles.modalText}>
               Chua nhap dung tài khoản hoặc mật khẩu!
             </Text>
+            <Image style={{width: 60, height: 60}}  source={require('../../assets/image/warning.png')}></Image>
+            <Text style={styles.modalText}>Chưa nhập đúng email hoặc mật khẩu!</Text>
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => setModalVisible(!modalVisible)}>

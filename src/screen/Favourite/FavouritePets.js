@@ -6,65 +6,99 @@ import {
     TextInput,
     Modal,
   } from 'react-native';
-  import React,{useState, useEffect} from 'react';
+  import React,{useState, useEffect, useCallback} from 'react';
   import Block from '../../components/Block';
   import Text from '../../components/Text';
   import AntDesign from 'react-native-vector-icons/AntDesign';
   import {FlatGrid} from 'react-native-super-grid';
-  import {FAVOURITE_PETS_SCREEN, FAVOURITE_PRODUCTS_SCREEN, FAVOURITE_SERVICES_SCREEN, PRODUCTS_DETAIL_SCREEN} from '../../router/ScreenName';
+  import {FAVOURITE_PETS_SCREEN, FAVOURITE_PRODUCTS_SCREEN, FAVOURITE_SERVICES_SCREEN, PETS_DETAIL_SCREEN, PRODUCTS_DETAIL_SCREEN} from '../../router/ScreenName';
   import productApi from '../../api/productApi';
   import formatMoney from '../../components/FormatMoney';
+import { useFocusEffect } from '@react-navigation/native';
   
   const FavouritePets = ({navigation}) => {
   
     const [listfavorite, setListFavorite] = useState([])
+    const [search, setSearch] = useState('');
+    const [masterDataSource, setMasterDataSource] = useState([]);
     
     const getFavoritePets = async () => {
         const res = await productApi.getAllFavorite()
-        console.log('res' ,res.data.data.favoritePetId)
         setListFavorite(res.data.data.favoritePetId)
+        setMasterDataSource(res.data.data.favoritePetId)
     }
-
-    useEffect(() => {
+    useFocusEffect(
+      useCallback(() => {
         getFavoritePets()
-    },[])
+      }, []),
+    );
+
+
+    const searchFilterFunction = (text) => {
+      // Check if searched text is not blank
+      if (text) {
+        // Inserted text is not blank
+        // Filter the masterDataSource
+        // Update FilteredDataSource
+        const newData = masterDataSource.filter(
+          function (item) {
+            const itemData = item.namePet
+              ? item.namePet.toUpperCase()
+              : ''.toUpperCase();
+            const textData = text.toUpperCase();
+            return itemData.indexOf(textData) > -1;
+        });
+        setListFavorite(newData);
+        setSearch(text);
+      } else {
+        // Inserted text is blank
+        // Update FilteredDataSource with masterDataSource
+        setListFavorite(masterDataSource);
+        setSearch(text);
+      }
+    };
   
     const renderItem = ({item}) => {
-      // console.log('item', item)
+      console.log('item', item)
       return (
         <TouchableOpacity
-          onPress={() => navigation.navigate(PRODUCTS_DETAIL_SCREEN)}>
+          onPress={() => navigation.navigate(PETS_DETAIL_SCREEN,{
+            _id: item._id,
+          })}>
           <Block
-            marginLeft={'8%'}
-            backgroundColor={'#E6EAED'}
-            width={160}
-            height={190}
-            radius={10}>
-            <Image style={styles.ilist} source={{uri: item.imgPet}}></Image>
-            <Block
-              paddingLeft={'5%'}
-              margin={5}
-              backgroundColor={'white'}
-              height={70}
-              width={150}
-              radius={10}>
-              <Block paddingTop={5}  >
-                <Text>{item.namePet}</Text>
-                <Text marginTop={17} size={12}>
+          marginLeft={'8%'}
+          backgroundColor={'white'}
+          width={160}
+         marginTop={12}
+          radius={10}
+          >
+          <Image style={styles.ilist} source={{uri: item.imgPet}}></Image>
+          <Block
+            paddingLeft={'5%'}
+            padding={3}
+            marginTop={8}
+            height={70}
+      
+            >
+            <Block width={140} paddingTop={5}>
+              <Block width={'100%'} height={20} > 
+              <Text bold>{item.namePet}</Text>
+              </Block>
+              <Block width={100} marginTop={10}>
+                <Text color={'#18A2E1'} bold size={16}>
                   {formatMoney(item.pricePet)}
                 </Text>
               </Block>
-              <TouchableOpacity style={styles.nut}>
-                <AntDesign name="right" size={25} />
-              </TouchableOpacity>
             </Block>
+            
           </Block>
+        </Block>
         </TouchableOpacity>
       );
     };
   
     return (
-      <Block backgroundColor={'white'} flex={1}>
+      <Block backgroundColor={'#F2F3F2'} flex={1}>
         
   
         <Block paddingHorizontal={10}>
@@ -72,7 +106,7 @@ import {
             row={1}
             justifyCenter
             alignCenter
-            backgroundColor={'#F2F3F2'}
+            backgroundColor={'white'}
             height={40}
             borderRadius={15}
             margin={10}>
@@ -82,6 +116,8 @@ import {
             <TextInput
               placeholder="Tìm kiếm"
               style={{flex: 1}}
+              onChangeText={(text) => searchFilterFunction(text)}
+              value={search}
               underlineColorAndroid="transparent"></TextInput>
           </Block>
         </Block>
@@ -110,9 +146,10 @@ import {
       alignItems: 'center',
     },
     ilist: {
-      width: 100,
-      height: 110,
-      marginLeft: '18%',
+      width: '100%',
+      height: 150,
+      borderTopRightRadius: 10,
+      borderTopLeftRadius: 10,
     },
     nut: {
       width: 32,

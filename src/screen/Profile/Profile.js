@@ -131,7 +131,7 @@ const Profile = ({navigation}) => {
               <Text style={{marginTop: '2%'}}>{profileUser?.emailAccount}</Text>
               <TouchableOpacity onPress={() => getLocation()}>
 
-              <Text style={{marginTop: '2%', color: 'blue', width: '90%', height: 20}}>
+              <Text style={{marginTop: 5, color: 'blue', width: '60%', height: 40}}>
                 {profileUser?.address[0]}
               </Text>
               </TouchableOpacity>
@@ -185,6 +185,7 @@ const Profile = ({navigation}) => {
         </TouchableOpacity>
         <View style={{marginLeft: '3%'}}>
           <Text style={{fontSize: 18, color: 'black', fontWeight: 'bold'}}>
+
             Chỉnh sửa tài khoản
           </Text>
           <Text>Chỉnh sửa và quản lý tài khoản của bạn</Text>
@@ -196,7 +197,7 @@ const Profile = ({navigation}) => {
           width: '90%',
           marginTop: '3%',
           backgroundColor: '#18A2E1',
-          height: '18%',
+          height: '12%',
           borderRadius: 8,
           alignItems: 'center',
           justifyContent: 'center',
@@ -217,7 +218,7 @@ const Profile = ({navigation}) => {
             }}>
             Thay đổi mật khẩu
           </Text>
-          <FontAwesome5 style={{width: '10%'}} name="chevron-right" size={18} />
+          <FontAwesome5 style={{width: '10%'}} name="chevron-right" size={18} color={'white'}/>
         </TouchableOpacity>
         <View
           style={{
@@ -245,9 +246,10 @@ const Profile = ({navigation}) => {
             }}>
             Thay địa chỉ
           </Text>
-          <FontAwesome5 style={{width: '10%'}} name="chevron-right" size={18} />
+          <FontAwesome5 style={{width: '10%'}} name="chevron-right" size={18} color={'white'}/>
         </TouchableOpacity>
       </View>
+
       <View style={{width: '90%', marginTop: '3%', flexDirection: 'row'}}>
         <TouchableOpacity
           style={{backgroundColor: '#18A2E1', padding: 8, borderRadius: 8}}>
@@ -266,7 +268,7 @@ const Profile = ({navigation}) => {
           width: '90%',
           marginTop: '3%',
           backgroundColor: '#18A2E1',
-          height: '22%',
+          height: '18%',
           borderRadius: 8,
           alignItems: 'center',
           justifyContent: 'center',
