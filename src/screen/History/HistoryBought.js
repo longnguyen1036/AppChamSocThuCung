@@ -6,49 +6,89 @@ import {
   FlatList,
   TextInput,
 } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Block from '../../components/Block';
 import Text from '../../components/Text';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import productApi from '../../api/productApi';
+import formatMoney from '../../components/FormatMoney';
 
 const HistoryBought = ({navigation}) => {
-  const DATA = [
-    {
-      id: 1,
-      name: 'BEAGLE CƯNG CƯNG',
-      category: 'Thú cưng',
-      price: 1800000,
-      images: require('./../../assets/image/dog.png'),
-    },
-    {
-      id: 2,
-      name: 'BEAGLE CƯNG CƯNG',
-      category: 'Thú cưng',
-      price: 2000000,
-      images: require('./../../assets/image/dog.png'),
-    },
-  ];
+  const [data, setData] = useState([]);
+ 
+  const getList = async () => {
+    try {
+      const res = await productApi.getListHistory();
+      setData(res.data.data)
+
+    } catch (error) {
+      console.log('error', error);
+    }
+  }
+
+  useEffect(() => {
+    getList();
+  },[])
+
   const renderItem = ({item}) => {
+    const sumPet = item.PetId.reduce((a, b) => a + (Number(b.product.pricePet) * Number(b.quantity)), 0);
+    const sumProduct = item.ProductId.reduce((a, b) => a +(Number(b.product.priceProduct) * Number(b.quantity)), 0);
+    const totalSum = Number(sumPet) + Number(sumProduct);
+  
     return (
-      <Block backgroundColor={'white'} border={0.5} height={120}>
-        <Block marginTop={10} row>
-          <Image style={styles.ilist} source={item.images}></Image>
-          <Block paddingLeft={10}>
-            <Text width={'90%'}>Tên sản phẩmaaaaaaaaaaaaaaaaaaaaaa</Text>
-            <Text>Loại sản phẩm</Text>
-            <Text color={'skyblue'} size={15}>
-              Giá sản phẩm
-            </Text>
-            <Block border={0.5} row width={90} height={30} justifySpaceBetween>
-              <TouchableOpacity style={styles.ip}>
-                <Text size={15}>-</Text>
-              </TouchableOpacity>
-              <Text size={15}>1</Text>
-              <TouchableOpacity style={styles.ip2}>
-                <Text size={15}>+</Text>
-              </TouchableOpacity>
+      <Block
+        backgroundColor={'white'}
+        width={'100%'}
+        marginBottom={10}
+        padding={10}>
+        <Block backgroundColor={'white'} paddingLeft={15} >
+          <Text>Cửa hàng: {item.idAccountStore.nameStore}</Text>
+          <Text>Địa chỉ: {item.idAccountStore.addressStore}</Text>
+        </Block>
+        {item.PetId.map((item, index) => (
+          <Block marginTop={10} row>
+            <Image style={styles.ilist} source={{uri: item.product.imgPet}}></Image>
+            <Block paddingLeft={10}>
+              <Text width={'90%'}>{item.product.namePet}</Text>
+              <Text>{item.product.descriptionPet}</Text>
+              <Text color={'skyblue'} size={15}>
+              {formatMoney(item.product.pricePet)}
+              </Text>
+              <Block>
+               
+                <Text size={15}>Số lượng:  x{item.quantity}</Text>
+                
+              </Block>
             </Block>
           </Block>
+        ))}
+          {item.ProductId.map(item => (
+          <Block marginTop={10} row>
+            <Image style={styles.ilist} source={{uri: item.product.imgProduct}}></Image>
+            <Block paddingLeft={10}>
+              <Text width={'90%'}>{item.product.nameProduct}</Text>
+              <Text>{item.product.descriptionProduct}</Text>
+              <Text color={'skyblue'} size={15}>
+              {formatMoney(item.product.priceProduct)}
+              </Text>
+              <Block>
+               <Text size={15}>Số lượng:  x{item.quantity}</Text>
+             </Block>
+            </Block>
+          </Block>
+        ))}
+        <Block marginTop={10}>
+          <TouchableOpacity onPress={() => buyCart(item)}>
+          <Block backgroundColor={'white'} row={1} border={0.5} height={70}>
+           
+            <Block paddingLeft={90} paddingTop={15} alignCenter>
+              <Text>Thành tiền</Text>
+              <Text size={15} color={'#18A2E1'}>
+              {formatMoney(totalSum)}
+              </Text>
+            </Block>
+          </Block>
+        </TouchableOpacity>
         </Block>
       </Block>
     );
@@ -71,39 +111,9 @@ const HistoryBought = ({navigation}) => {
         </Block>
       </Block>
 
-      <Block>
-        <Block
-          backgroundColor={'white'}
-          paddingLeft={15}
-          border={1}
-          justifySpaceBetween
-          row>
-          <Block>
-            <Text>Tên cửa hàng</Text>
-            <Text>Địa chỉ</Text>
-          </Block>
-          <Block marginRight={15} marginTop={10}>
-            <Text color={'#18A2E1'}>Hoàn thành</Text>
-          </Block>
-        </Block>
-        <FlatList key={DATA.name} data={DATA} renderItem={renderItem} />
-        <Block backgroundColor={'white'} row={1} border={0.5} height={70}>
-          <Block
-            backgroundColor={'#18A2E1'}
-            width={'35%'}
-            alignCenter
-            paddingTop={20}>
-            <Text size={15} color={'white'}>
-              Mua lại
-            </Text>
-          </Block>
-          <Block paddingLeft={90} paddingTop={15} alignCenter>
-            <Text>Thành tiền</Text>
-            <Text size={15} color={'#18A2E1'}>
-              90000000đ
-            </Text>
-          </Block>
-        </Block>
+      <Block flex={1}>
+      
+        <FlatList  data={data} renderItem={renderItem} style={{flex: 1}}/>
       </Block>
     </Block>
   );

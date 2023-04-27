@@ -22,7 +22,6 @@ import {setToken} from '../../helper/auth';
 import {loggedAction} from '../../redux/actions/authAction';
 import {MAIN_TAB} from './../../router/ScreenName';
 import {sendMessenger} from '../../redux/actions/messAction';
-import { io } from 'socket.io-client';
 
 const Login = ({navigation}) => {
   const dispatch = useDispatch();
@@ -38,9 +37,13 @@ const Login = ({navigation}) => {
 
     // Lấy token FCM cho thiết bị hiện tại
     const fcmToken = await messaging().getToken();
-    // console.log('FCM Token:', fcmToken);
+    console.log('FCM Token:', fcmToken);
     setFcmTokenFireBase(fcmToken);
   };
+
+  useEffect(() => {
+    registerAppWithFCM();
+  },[])
 
   let socketClient = io(`http://192.168.100.64:9999/`);
   socketClient.on('connect', () => {
@@ -186,12 +189,6 @@ const Login = ({navigation}) => {
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Image
-              style={{width: 60, height: 60}}
-              source={require('../../assets/image/warning.png')}></Image>
-            <Text style={styles.modalText}>
-              Chua nhap dung tài khoản hoặc mật khẩu!
-            </Text>
             <Image style={{width: 60, height: 60}}  source={require('../../assets/image/warning.png')}></Image>
             <Text style={styles.modalText}>Chưa nhập đúng email hoặc mật khẩu!</Text>
             <Pressable
