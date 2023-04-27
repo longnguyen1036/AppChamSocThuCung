@@ -94,7 +94,7 @@ function MainStack() {
 function MainNavigation() {
   const [checkLogin, setCheckLogin] = useState('');
   const authState = useSelector(state => state.authState.logged);
-  console.log('authStatedasdasd', authState);
+ 
 
   const dispatch = useDispatch();
   

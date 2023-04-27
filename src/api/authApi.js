@@ -126,7 +126,7 @@ const getMessengerApi = async () => {
                 token: `Bearer ${token}`,
             },
         });
-        console.log('getProfile', getMess)
+        // console.log('getProfile', getMess)
         return getMess
 
     } catch (error) {

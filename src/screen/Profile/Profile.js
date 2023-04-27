@@ -28,7 +28,6 @@ const Profile = ({navigation}) => {
   const getProfileUser = async () => {
     const user = await authApi.getProfile()
     setProfileUser(user.data.data)
-    console.log('user profile', user.data.data)
   }
 
   useEffect(() => {
@@ -114,10 +113,13 @@ const Profile = ({navigation}) => {
           <View
             style={{
               flexDirection: 'row',
-              paddingHorizontal: 10,
-              paddingVertical: 10,
+              // paddingHorizontal: 5,
+
             }}>
-            <View>
+            <View  style={{
+               paddingHorizontal: 5,
+               paddingVertical: 5,
+            }}>
               <Image
                 source={require('../../assets/image/profileavatar.png')}
                 style={{}}></Image>
@@ -126,14 +128,14 @@ const Profile = ({navigation}) => {
               <Text style={{fontSize: 20, fontWeight: '700', color: 'black'}}>
                 {profileUser?.nameAccount}
               </Text>
-              <Text style={{marginTop: 10}}>{profileUser?.emailAccount}</Text>
+              <Text style={{marginTop: '2%'}}>{profileUser?.emailAccount}</Text>
               <TouchableOpacity onPress={() => getLocation()}>
 
-              <Text style={{marginTop: 5, color: 'blue', width: '100%', height: 40}}>
+              <Text style={{marginTop: '2%', color: 'blue', width: '90%', height: 20}}>
                 {profileUser?.address[0]}
               </Text>
               </TouchableOpacity>
-              <Text style={{marginTop: 0}}>
+              <Text style={{marginTop: '2%'}}>
                 {profileUser?.numberphone[0]}
               </Text>
             </View>

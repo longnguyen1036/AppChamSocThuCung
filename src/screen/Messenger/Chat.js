@@ -12,91 +12,92 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Block from '../../components/Block';
 import authApi from '../../api/authApi';
 import {useRoute} from '@react-navigation/native';
-import {io} from 'socket.io-client';
+import { useDispatch, useSelector } from 'react-redux';
+import { sendMessenger } from '../../redux/actions/messAction';
+import { io } from 'socket.io-client';
 
 const Chat = ({navigation}) => {
   const [message, setMessage] = useState([]);
+  const dispatch = useDispatch();
   const [inputmess, SetInputMess] = useState('');
+  const [arrMessage, SetArrMessage] = useState([]);
+  const [newArr, setNewArr] = useState([]);
   const router = useRoute();
-  
+  const authMess = useSelector(state =>  state.authMess.messages);
+
   const {data, id, idSocketStore} = router.params;
+
 
   const sendMessage = () => {
     try {
-      SetInputMess('')
       const data = {
         id: id,
         socketId: idSocketStore,
         mess: inputmess,
         table: 'user',
       };
-      const socket = io(`http://192.168.1.6:9999/`);
-      socket.on('mgs', msg => {
-        console.log('mafsdfdssd', msg);
-      });
+      console.log(idSocketStore,'------------------------->')
+      const socket = io(`http://192.168.100.64:9999/`);
+      // socket.on('mgs', msg => {
+      //   console.log('mafsdfdssd', msg);
+      // });
       socket.on('checkerror', error => {
         console.log('error socket', error);
       });
-      const res = socket.emit('sendmess', data);
-      console.log('ress', res);
+      socket.emit('sendmess', data);
+      const format = '1:'+inputmess
+      let arr = []
+      arr.push(format);
+      const newMessages = [...arr];
+      dispatch(sendMessenger(newMessages));
+      SetInputMess('')
     } catch (error) {
       console.log(error);
     }
   };
 
   const CutArray = () => {
-   const cutarray = data.map(item => {
-      const [key, value] = item.split(':');
-      return {[key]: value};
-    });
-    setMessage(cutarray);
+    if(authMess == 1){
+      // const cutarray = data.map(item => {
+      //   const [key, value] = item.split(':');
+      //   return {[key]: value};
+      // });
+      // console.log('cutarray', cutarray);
+      // SetArrMessage(cutarray)
+      console.log('61')
+    }
+    else{
+      let arr = data.concat(authMess);
+      setNewArr(arr);
+      const cutarray = arr.map(item => {
+        const [key, value] = item.split(':');
+        return {[key]: value};
+      });
+      // console.log('22222', cutarray);
+      SetArrMessage(cutarray);
+    }
 
-    const socket = io(`http://192.168.1.6:9999/`);
-    socket.on('mgs', (data) => {
-      console.log('dataaaaaaaaaaaaaaaaaaaaa', data);
-      // Cập nhật mảng tin nhắn với tin nhắn mới nhất
-      setMessage(prevMessages => [...prevMessages, { [data.key]: data.value }]);
-    });
+    
   };
-
-  const socket = io(`http://192.168.1.6:9999/`);
-  socket.on('mgs', msg => {
-    console.log('toi la toan', msg);
-  });
 
   useEffect(() => {
     CutArray();
-  }, []);
+  }, [authMess]);
 
-
-  useEffect(() => {
-    console.log('i73');
-    // Tạo một đối tượng socket mới và thiết lập kết nối
-    const socket = io(`http://192.168.1.6:9999/`);
-    // Lắng nghe sự kiện 'message' từ máy chủ WebSocket
-    socket.on('mgs', (data) => {
-      console.log('data', data);
-      setMessage2(data);
-    });
-
-    // Lệnh return trong useEffect được sử dụng để ngăn chặn xoá lệnh lắng nghe khi component bị xoá khỏi màn hình
-    return () => {
-      socket.disconnect();
-      socket.off();
-    };
-  });
-const [message2, setMessage2] = useState('');
-  
-
-
-
-  const renderItem = ({item}) => {
+  const renderItem = ({item, index}) => {
     const key = Object.keys(item)[0];
     const value = item[key];
-    
     return (
       <View style={styles.messageContainer}>
-        <View style={[styles.messageBubble, {backgroundColor: key === '1' ? 'pink' : 'cyan' , marginLeft: key === '1' ? 'auto' : 0 , marginRight:key === '2' ? 'auto' : 0  }]}>
+        <View
+          style={[
+            styles.messageBubble,
+            {
+              backgroundColor: key === '1' ? 'pink' : 'cyan',
+              marginLeft: key === '1' ? 'auto' : 0,
+              marginRight: key === '2' ? 'auto' : 0,
+            },
+          ]}>
           <Text style={styles.messageText}>{value}</Text>
         </View>
       </View>
@@ -120,9 +121,9 @@ const [message2, setMessage2] = useState('');
         </Block>
       </Block>
       <FlatList
-        data={message}
+        data={arrMessage}
         renderItem={renderItem}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.index}
       />
       <View style={styles.inputContainer}>
         <TextInput
