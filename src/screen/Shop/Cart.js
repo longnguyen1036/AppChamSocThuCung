@@ -66,7 +66,7 @@ const Cart = ({navigation}) => {
     getCart();
   }, []);
   const renderItem = ({item}) => {
-    console.log('item', item);
+    // console.log('item', item);
     const sumPet = item.PetId.reduce(
       (a, b) => a + Number(b.product.pricePet) * Number(b.quantity),
       0,
@@ -76,7 +76,7 @@ const Cart = ({navigation}) => {
       0,
     );
     const totalSum = Number(sumPet) + Number(sumProduct);
-    console.log('sum', sumProduct, totalSum);
+    // console.log('sum', sumProduct, totalSum);
 
     return (
       <Block backgroundColor={'#F2F3F2'} width={'100%'} marginBottom={10}>

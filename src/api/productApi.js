@@ -74,7 +74,7 @@ const addFavorite = async (nameFavorite, _id) => {
 
 const getDetailProduct = async (_id, name) => {
     try {
-        console.log('log id name', _id, name)
+        // console.log('log id name', _id, name)
         const token = await getToken();
         const getDetail = await axios.get(`${BASE_URL_TEST}/getacart/${_id}/${name}`,{
             headers: {
@@ -139,7 +139,7 @@ const getCartProduct = async () => {
 
 const BuyCart = async (id, ProductId, PetId, ServiceId) => {
     try {
-        console.log('truyen vao buy cart', id, ProductId, PetId, ServiceId);
+        // console.log('truyen vao buy cart', id, ProductId, PetId, ServiceId);
         const token = await getToken();
         const buyCart = await axios.post(`${BASE_URL_TEST}/buyproduct`,{
             id, 

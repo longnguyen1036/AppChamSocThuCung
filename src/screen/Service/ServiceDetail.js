@@ -32,15 +32,15 @@ const ServiceDetail = ({navigation}) => {
   const [address , setAddress] = useState();
   const authState = useSelector(state => state.authState.userInfo)
 
-  console.log('authState', authState);
+  // console.log('authState', authState);
 
-  console.log('_id', _id);
+  // console.log('_id', _id);
 
   const getDetailProducts = async () => {
       const res = await productApi.getDetailProduct(_id, 'serviceStore')
       setListProduct(res.data.data.dataProduct)
       setShop(res.data.data)
-      console.log('rewreerwe', res.data.data);
+      // console.log('rewreerwe', res.data.data);
       setAddress(res.data.data.adress[0])
   }
 

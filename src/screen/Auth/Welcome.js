@@ -4,63 +4,49 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { navigate } from '../../router/NavigationServices';
 import { LOGIN_SCREEN } from '../../router/ScreenName';
 import { loggedAction } from '../../redux/actions/authAction';
-// import { useDispatch, useSelector} from 'react-redux';
+
 
 const Welcome = ({navigation}) => {
     const [currentPage, setCurrentPage] = useState(0);
-    // const dispatch = useDispatch();
-
-    // const data = {
-    //     "name": "toan",
-    //     "age": 16,
-    //     "sex": "male",
-    // }
 
     const handleNextPage = () => {
       setCurrentPage(currentPage + 1);
-      console.log('currentPage: ', currentPage)
-      // dispatch(loggedAction(data))
+      // console.log('currentPage: ', currentPage)
     };
     const tieptuc = () => {
-      console.log('tieptuc', currentPage);
+      // console.log('tieptuc', currentPage);
       navigation.navigate(LOGIN_SCREEN);
       
     }
   
   
     const welcome1 = () => {
-     if(currentPage === 0){
-      return (
-        <Text style={styles.vb}>
-          Với dịch vụ chăm sóc thú cưng, 
-          bạn sẽ làm cho cuộc sống của những người bạn
-           lông lá của chúng ta hạnh phúc hơn.
-        </Text>
-      );
-     }
-      
+      if (currentPage === 0) {
+        return (
+          <Text style={styles.vb}>
+            Chào mừng bạn đã đến với ứng dụng chăm sóc thú cưng.
+          </Text>
+        );
+      }
     };
     const welcome2 = () => {
-      if(currentPage === 1){
+      if (currentPage === 1) {
         return (
           <Text style={styles.vb}>
-            Với dịch vụ chăm sóc thú cưng, 
-          bạn sẽ làm cho cuộc sống của những người bạn
-           lông lá của chúng ta hạnh phúc hơn.
+            Với ứng dụng chăm sóc thú cưng của chúng tôi sẽ làm cho cuộc sống của
+            những người bạn lông lá của bạn hạnh phúc hơn.
           </Text>
         );
-       }
+      }
     };
     const welcome3 = () => {
-      if(currentPage === 2){
+      if (currentPage === 2) {
         return (
           <Text style={styles.vb}>
-            Với dịch vụ chăm sóc thú cưng, 
-          bạn sẽ làm cho cuộc sống của những người bạn
-           lông lá của chúng ta hạnh phúc hơn.
+            Chúc bạn có những trãi nghiệm tốt nhất với ứng dụng của chúng tôi nhé.
           </Text>
         );
-       }
+      }
     };
     return (
       <View style={styles.container}>

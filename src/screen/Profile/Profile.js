@@ -64,7 +64,7 @@ const Profile = ({navigation}) => {
             const checkLogin = await AsyncStorage.getItem('checkLogin'); 
             dispatch(logoutAction());
               
-              console.log('dang xuat')
+              // console.log('dang xuat')
             },
           },
         ],

@@ -59,7 +59,7 @@ import { useFocusEffect } from '@react-navigation/native';
     };
   
     const renderItem = ({item}) => {
-      console.log('item', item)
+      // console.log('item', item)
       return (
         <TouchableOpacity
           onPress={() => navigation.navigate(PETS_DETAIL_SCREEN,{

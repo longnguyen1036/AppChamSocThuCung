@@ -40,7 +40,7 @@ const OTPRegister = async(otpAcount)=>{
 const Login = async(emailAccount, passWordAccount)=>{
     
     try {
-        console.log('truyen vao login', emailAccount, passWordAccount);
+        // console.log('truyen vao login', emailAccount, passWordAccount);
         const login = await axios.post(`${BASE_URL_TEST}/checklogin`,
         {
             emailAccount,

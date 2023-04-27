@@ -30,7 +30,7 @@ const HistoryService = ({navigation}) => {
   },[])
 
   const renderItem = ({item}) => {
-    console.log('item', item);
+    // console.log('item', item);
     return (
       <Block
       marginTop={5}
