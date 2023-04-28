@@ -59,8 +59,7 @@ const ServiceProfileShop = () => {
     )
   }
   return (
-    <Block backgroundColor={'#dcdcdc'} flex={1}>
-   
+    <Block backgroundColor={'#dcdcdc'} flex={1} paddingHorizontal={'1%'}>
 
       <FlatList 
         data={listProduct}

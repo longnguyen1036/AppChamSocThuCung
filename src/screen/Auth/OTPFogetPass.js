@@ -11,14 +11,37 @@ import {
   import React, {useState, useContext} from 'react';
   import OTPTextInput from 'react-native-otp-textinput';
   import authApi from '../../api/authApi';
-  import {CREATE_NEW_PASS} from './../../router/ScreenName';
+  import {CREATE_NEW_PASS, LOGIN_SCREEN} from './../../router/ScreenName';
+import { Notifier, NotifierComponents } from 'react-native-notifier';
 
 const OTPFogetPass = ({navigation}) => {
     const [otp, setOtp] = useState();
 
     const [modalVisible, setModalVisible] = useState(false);
     
-   
+   const submit = async () => {
+    try {
+      const res = await authApi.OtpForgetPass(otp)
+      if(res.status === 200){
+        Notifier.showNotification({
+          title: 'Thông báo',
+          description: 'Xác nhận otp thành công',
+          Component: NotifierComponents.Alert,
+          componentProps: {
+            alertType: 'success',
+          },
+        });
+        console.log('resss', res.data);
+        navigation.navigate(CREATE_NEW_PASS,{
+          id: res.data._id
+        })
+      }else{
+        setModalVisible(true)
+      }
+    } catch (error) {
+      console.log('error', error);
+    }
+   }
   
    
     return (
@@ -46,7 +69,7 @@ const OTPFogetPass = ({navigation}) => {
           />
         </View>
         <View style={styles.v4}>
-          <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate(CREATE_NEW_PASS)}>
+          <TouchableOpacity style={styles.btn} onPress={() => submit()}>
             <Text style={styles.t4}>Tiếp theo</Text>
           </TouchableOpacity>
         </View>

@@ -18,6 +18,7 @@ import { useRoute } from '@react-navigation/native';
 import formatMoney from '../../components/FormatMoney';
 import { PROFILE_SHOP_SCREEN, SERVICE_PROFILE_SHOP_SCREEN } from '../../router/ScreenName';
 import {Notifier, Easing, NotifierComponents} from 'react-native-notifier';
+import { useSelector } from 'react-redux';
 
 
 const ServiceDetail = ({navigation}) => {
@@ -26,20 +27,67 @@ const ServiceDetail = ({navigation}) => {
   const [date, setDate] = useState(new Date());
   const [modalVisible2, setModalVisible2] = useState(false);
   const [time, setTime] = useState();
-  const [listProduct, setListProduct] = useState([])
-  const [shop , setShop] = useState([])
-  const [address , setAddress] = useState()
+  const [listProduct, setListProduct] = useState([]);
+  const [shop , setShop] = useState([]);
+  const [address , setAddress] = useState();
+  const authState = useSelector(state => state.authState.userInfo)
 
+  // console.log('authState', authState);
+
+  // console.log('_id', _id);
 
   const getDetailProducts = async () => {
       const res = await productApi.getDetailProduct(_id, 'serviceStore')
       setListProduct(res.data.data.dataProduct)
       setShop(res.data.data)
+      // console.log('rewreerwe', res.data.data);
       setAddress(res.data.data.adress[0])
   }
 
+  const subMit = async () => {
+    try {
+      if(time == null){
+        Notifier.showNotification({
+          title: 'Thông báo',
+          description: 'Ban chưa chọn giờ',
+          Component: NotifierComponents.Alert,
+          componentProps: {
+            alertType: 'error',
+          },
+        });
+      }else{
+        const res = await productApi.BookingService(authState.id, _id, date.toLocaleDateString(), time, listProduct?.nameService, shop.name, address);
+        // console.log('ress', res.data);
+        if(res.status === 200){
+          Notifier.showNotification({
+            title: 'Thông báo',
+            description: 'đặt lịch thành công',
+            Component: NotifierComponents.Alert,
+            componentProps: {
+              alertType: 'success',
+            },
+          });
+          navigation.goBack();
+        }else{
+          Notifier.showNotification({
+            title: 'Thông báo',
+            description: 'đặt lịch thất bại',
+            Component: NotifierComponents.Alert,
+            componentProps: {
+              alertType: 'error',
+            },
+          });
+        }
+      }
+    } catch (error) {
+      console.log('error', error);
+    }
+  }
 
-  
+
+  useEffect(() => {
+    getDetailProducts();
+  },[])
 
   const addFavorite = async () => {
     
@@ -109,7 +157,7 @@ const ServiceDetail = ({navigation}) => {
         </View>
 
         <View style={{marginTop: '3%'}}>
-          <Text style={{fontSize: 24, fontWeight: '600', color:'black'}}> Teen{listProduct?.nameService}</Text>
+          <Text style={{fontSize: 24, fontWeight: '600', color:'black'}}>{listProduct?.nameService}</Text>
         </View>
 
         <TouchableOpacity
@@ -142,23 +190,12 @@ const ServiceDetail = ({navigation}) => {
 
             <View style={{marginLeft: '5%'}}>
               <Text style={{fontSize: 18, color: 'black', fontWeight: '500'}}>
-                matpetfamily
+                {shop?.name}
               </Text>
-              <Text>Store</Text>
+              <Text numberOfLines={1} style={{width: '48%'}} >{address}</Text>
             </View>
           </View>
 
-          <TouchableOpacity
-            style={{
-              backgroundColor: '#18A2E1',
-              borderRadius: 8,
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: 5,
-              height: 40,
-            }}>
-            <FontAwesome5 name="comments" size={20} color={'white'} />
-          </TouchableOpacity>
         </TouchableOpacity>
 
         <View style={{width: '75%', flexDirection: 'row', marginTop: '3%'}}>
@@ -217,6 +254,7 @@ const ServiceDetail = ({navigation}) => {
         </View>
 
         <TouchableOpacity
+        onPress={() => subMit()}
           style={{
             backgroundColor: '#18A2E1',
             borderRadius: 8,

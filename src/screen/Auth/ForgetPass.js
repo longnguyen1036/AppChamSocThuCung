@@ -12,9 +12,44 @@ import {
 } from 'react-native';
 import React, {useState, useContext} from 'react';
 import { OTP_FORGET_PASS_SCREEN } from '../../router/ScreenName';
+import authApi from '../../api/authApi';
+import { Notifier, NotifierComponents } from 'react-native-notifier';
 
 const ForgetPass = ({navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [email, setEmail] = useState('');
+
+  const submit = async () => {
+    try {
+      if(!email.trim()){
+        setModalVisible(true);
+      }else{
+        const res = await authApi.forgetPass(email);
+        if(res.status === 200 ){
+          Notifier.showNotification({
+            title: 'Thông báo',
+            description: 'Vui lòng kiểm tra email',
+            Component: NotifierComponents.Alert,
+            componentProps: {
+              alertType: 'success',
+            },
+          });
+          navigation.navigate(OTP_FORGET_PASS_SCREEN)
+        }else{
+          Notifier.showNotification({
+            title: 'Thông báo',
+            description: 'email không tồn tại',
+            Component: NotifierComponents.Alert,
+            componentProps: {
+              alertType: 'error',
+            },
+          });
+        }
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  } 
   return (
     <View style={styles.container}>
       
@@ -39,11 +74,13 @@ const ForgetPass = ({navigation}) => {
       <Text style={styles.t3}>Email</Text>
       <TextInput
         style={styles.ip}
+        autoCapitalize='none'
+        onChangeText={(text) => setEmail(text)}
         placeholder="Nhập Email"></TextInput>
     </View>
     <View style={styles.v4}>
       <TouchableOpacity style={styles.btn} 
-      onPress={()=> navigation.navigate(OTP_FORGET_PASS_SCREEN)}>
+      onPress={()=> submit()}>
         <Text style={styles.t4}>Tiếp theo</Text>
       </TouchableOpacity>
     </View>

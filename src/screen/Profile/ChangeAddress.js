@@ -29,7 +29,7 @@ const ChangeAddress = ({navigation}) => {
       if(res.status === 200) {
         Notifier.showNotification({
           title: 'Thông báo',
-          description: 'Đăng ký thành công',
+          description: 'Đổi địa chỉ thành công',
           Component: NotifierComponents.Alert,
           componentProps: {
             alertType: 'success',

@@ -40,7 +40,7 @@ const OTPRegister = async(otpAcount)=>{
 const Login = async(emailAccount, passWordAccount)=>{
     
     try {
-        console.log('truyen vao login', emailAccount, passWordAccount);
+        // console.log('truyen vao login', emailAccount, passWordAccount);
         const login = await axios.post(`${BASE_URL_TEST}/checklogin`,
         {
             emailAccount,
@@ -133,8 +133,47 @@ const getMessengerApi = async () => {
         console('loi api getMess error', error);
 
     }
-
 }
+
+const forgetPass = async (emailAccount)=>{
+    try {
+        const forget = await axios.post(`${BASE_URL_TEST}/sendforgot`,
+        {
+            emailAccount,
+        });
+        return forget;
+
+    } catch (error) {
+        console('loi api login error', error);
+        return error;
+    }
+}
+
+const OtpForgetPass = async (otpAccount) => {
+    try {
+        const otpForget = await axios.post(`${BASE_URL_TEST}/checkotppass`,
+        {
+            otpAccount,
+        });
+        return otpForget;
+    } catch (error) {
+        console.log('error',error);
+    }
+}
+
+const UpdatePass = async (id, pass) => {
+    try {
+        const updatepass = await axios.post(`${BASE_URL_TEST}/updatepass`,
+        {
+            id,
+            pass
+        });
+        return updatepass;
+    } catch (error) {
+        console.log('error',error);
+    }
+}
+
 export default{
     Register,
     OTPRegister, 
@@ -142,5 +181,8 @@ export default{
     getProfile,
     UpdateProfile,
     UpdateTokenFCM,
-    getMessengerApi
+    getMessengerApi,
+    forgetPass,
+    OtpForgetPass,
+    UpdatePass
 }

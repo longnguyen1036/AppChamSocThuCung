@@ -37,7 +37,7 @@ const Chat = ({navigation}) => {
         table: 'user',
       };
       console.log(idSocketStore,'------------------------->')
-      const socket = io(`http://192.168.100.64:9999/`);
+      const socket = io(`http://192.168.1.8:9999/`);
       // socket.on('mgs', msg => {
       //   console.log('mafsdfdssd', msg);
       // });
@@ -106,7 +106,7 @@ const Chat = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Block row={1} paddingVertical={10} paddingHorizontal={10}>
+      <Block row={1} paddingVertical={10} paddingHorizontal={10} backgroundColor={'white'}>
         <TouchableOpacity
           style={{width: '40%'}}
           onPress={() => navigation.goBack()}>
@@ -129,13 +129,13 @@ const Chat = ({navigation}) => {
         <TextInput
           value={inputmess}
           style={styles.input}
-          placeholder="Type your message here"
+          placeholder="Nhập tin nhắn"
           onChangeText={text => SetInputMess(text)}
         />
         <TouchableOpacity
           style={styles.sendButton}
           onPress={() => sendMessage()}>
-          <FontAwesome name={'send'} size={25} />
+          <FontAwesome name={'send'} size={25} color={'skyblue'} />
         </TouchableOpacity>
       </View>
     </View>
@@ -147,7 +147,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F2F2F2',
-    padding: 10,
   },
   messageContainer: {
     flexDirection: 'row',
@@ -178,6 +177,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    backgroundColor: 'white',
   },
   sendButton: {
     width: 50,
@@ -191,6 +191,8 @@ const styles = StyleSheet.create({
     height: 40,
     paddingHorizontal: 10,
     fontSize: 16,
-    borderWidth: 1,
+    borderWidth: 0.4,
+    borderRadius: 12,
+    marginLeft: 10,
   },
 });

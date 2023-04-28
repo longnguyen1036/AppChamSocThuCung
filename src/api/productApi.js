@@ -74,7 +74,7 @@ const addFavorite = async (nameFavorite, _id) => {
 
 const getDetailProduct = async (_id, name) => {
     try {
-        console.log('log id name', _id, name)
+        // console.log('log id name', _id, name)
         const token = await getToken();
         const getDetail = await axios.get(`${BASE_URL_TEST}/getacart/${_id}/${name}`,{
             headers: {
@@ -139,7 +139,7 @@ const getCartProduct = async () => {
 
 const BuyCart = async (id, ProductId, PetId, ServiceId) => {
     try {
-        console.log('truyen vao buy cart', id, ProductId, PetId, ServiceId);
+        // console.log('truyen vao buy cart', id, ProductId, PetId, ServiceId);
         const token = await getToken();
         const buyCart = await axios.post(`${BASE_URL_TEST}/buyproduct`,{
             id, 
@@ -158,6 +158,60 @@ const BuyCart = async (id, ProductId, PetId, ServiceId) => {
     }
 }
 
+const BookingService = async (idUserAccount, idAccountStore, date, time, nameService, nameStore, address) => {
+    try {
+        const token = await getToken();
+        const bookService = await axios.post(`${BASE_URL_TEST}/booking`,{
+            idUserAccount, 
+            idAccountStore,
+            date,
+            time,
+            nameService,
+            nameStore,
+            address
+        },{
+            headers: {
+                token: `Bearer ${token}`,
+            },
+        })
+
+        return bookService
+    } catch (error) {
+        console.log('loi api bookService product error', error)
+    }
+}
+
+const getListHistory = async () => {
+    try {
+        const token = await getToken();
+        const getHistory = await axios.get(`${BASE_URL_TEST}/getlisthistory`,{
+            headers: {
+                token: `Bearer ${token}`,
+            },
+        })
+
+        return getHistory
+    } catch (error) {
+        console.log('error', error);
+    }
+}
+
+const getHistoryService = async () => {
+    try {
+        const token = await getToken();
+        const getSevice = await axios.get(`${BASE_URL_TEST}/getlistbook`,{
+            headers: {
+                token: `Bearer ${token}`,
+            },
+        })
+
+        return getSevice
+    } catch (error) {
+        console.log('error', error);
+    }
+}
+
+
 export default {
     getAllFavorite,
     getAllProducts,
@@ -167,5 +221,8 @@ export default {
     getAllProductStore,
     addCartProduct,
     getCartProduct,
-    BuyCart
+    BuyCart,
+    BookingService,
+    getListHistory,
+    getHistoryService
 }

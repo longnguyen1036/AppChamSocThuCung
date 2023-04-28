@@ -37,14 +37,14 @@ const Register = ({navigation}) => {
   const register = async () => {
     const emailRegex = /\S+@\S+.\S+/;
     const isValidEmail = emailRegex.test(emailAccount);
-    console.log('log emaill', emailAccount);
+    // console.log('log emaill', emailAccount);
 
     if (passwordAccount.localeCompare(confirmPassWord) == 0) {
       try {
         if (nameAccount == '' || emailAccount == '' || passwordAccount == '') {
           setModalVisible(true);
         } else if (!isValidEmail) {
-          console.log('Email khong hop le');
+          // console.log('Email khong hop le');
         } else {
           submitRegister();
         }
@@ -67,11 +67,11 @@ const Register = ({navigation}) => {
       telephone
     );
     setCheckUser(user.status);
-    console.log('data', user.status);
+    // console.log('data', user.status);
     if (user.status === 200) {
       navigation.navigate('CONFIRM_OTP_SCREEN');
     } else {
-      console.log('loi');
+      // console.log('loi');
     }
   };
   return (

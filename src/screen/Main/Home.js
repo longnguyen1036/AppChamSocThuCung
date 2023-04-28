@@ -88,7 +88,7 @@ const Home = () => {
   };
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: '#DADADA'}}>
+    <ScrollView style={{flex: 1, backgroundColor: '#DADADA'}}>
       <View style={styles.header}>
         <View style={styles.h1}>
           <Text style={styles.t1}>Welcome to</Text>
@@ -100,7 +100,7 @@ const Home = () => {
           <FontAwesome5
             style={styles.ic}
             color={'black'}
-            name="shopping-bag"
+            name="shopping-cart"
             size={25}
           />
             </TouchableOpacity>
@@ -126,7 +126,14 @@ const Home = () => {
             </View>
           </View>
           <View key="2">
-            <Text>Second page</Text>
+            <View style={styles.p1}>
+              <Text style={styles.tp1}>
+                Khuyên mãi cực sốc giảm ngay 205 cho khách hàng mua sản phẩm ngày hôm nay.
+              </Text>
+              <Image
+                style={styles.i2}
+                source={require('../../assets/image/dog.png')}></Image>
+            </View>
           </View>
         </PagerView>
       </View>
@@ -176,10 +183,10 @@ const Home = () => {
         <Text style ={{fontSize: 20, fontWeight: '700', color: 'black'}}>Top bán chạy</Text>
       </View>
 
-      <Block  flex={1} paddingHorizontal={15} justifySpaceBetween>
+      <Block width={'100%'} paddingHorizontal={'2%'}>
         <FlatList  data={listRandom} renderItem={renderItem} numColumns={2} />
       </Block>
-    </SafeAreaView>
+    </ScrollView>
   );
 };
 
@@ -239,7 +246,7 @@ const styles = StyleSheet.create({
   },
   ic: {
     top: '10%',
-    right: '20%',
+    right: '24%',
   },
 
   categories: {

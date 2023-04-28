@@ -59,7 +59,7 @@ import { useFocusEffect } from '@react-navigation/native';
     };
   
     const renderItem = ({item}) => {
-      console.log('item', item)
+      // console.log('item', item)
       return (
         <TouchableOpacity
           onPress={() => navigation.navigate(PETS_DETAIL_SCREEN,{
@@ -125,7 +125,8 @@ import { useFocusEffect } from '@react-navigation/native';
         
         
   
-        <Block width={'90%'}>
+        <Block width={'100%'} paddingHorizontal={'2%'}>
+
           <FlatGrid key={listfavorite._id} data={listfavorite} renderItem={renderItem} />
         </Block>
   

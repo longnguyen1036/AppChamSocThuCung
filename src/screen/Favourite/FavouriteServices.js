@@ -121,7 +121,7 @@ import { useFocusEffect } from '@react-navigation/native';
         <Block row justifyCenter>
       </Block>
   
-        <Block>
+      <Block width={'100%'} paddingHorizontal={'2%'}>
           <FlatList key={listfavorite._id} data={listfavorite} renderItem={renderItem} />
         </Block>
   

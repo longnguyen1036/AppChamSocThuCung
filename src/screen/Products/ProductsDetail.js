@@ -45,6 +45,7 @@ const addCart = async (id, product, quantity) => {
       alertType: 'success',
     },
   });
+  navigation.goBack()
   return res
 }
 
@@ -160,24 +161,11 @@ const addFavorite = async () => {
                 {shop?.name}
               </Text>
               {
-               !address ? <Text>shop</Text> : <Text style={{width: '40%'}} numberOfLines={1}>{address}</Text>
+               !address ? <Text>shop</Text> : <Text style={{width: '44%'}} numberOfLines={1}>{address}</Text>
               }
               
             </View>
           </View>
-
-          <TouchableOpacity
-            style={{
-              backgroundColor: '#18A2E1',
-              borderRadius: 8,
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: 5,
-              height: 40,
-
-            }}>
-            <FontAwesome5 name="comments" size={20} color={'white'} />
-          </TouchableOpacity>
         </TouchableOpacity>
         
 

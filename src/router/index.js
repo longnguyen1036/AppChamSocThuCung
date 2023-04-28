@@ -101,9 +101,9 @@ function MainNavigation() {
 
   useEffect(() => {
     const getCheckLogin = async () => {
-      const checkDangNhap = await AsyncStorage.getItem('checkLogin');
+      // const checkDangNhap = await AsyncStorage.getItem('checkLogin');
       setCheckLogin(checkDangNhap);
-      console.log('Check Dang Nhap', checkDangNhap);
+      // console.log('Check Dang Nhap', checkDangNhap);
       if (checkDangNhap == true) {
         dispatch(loggedAction());
       } else {
