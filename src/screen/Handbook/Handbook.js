@@ -28,45 +28,28 @@ const DATA = [
     {
       id: 3,
       title: 'Chu kỳ kinh nguyệt của chó cái (sa lơ) bao nhiêu ngày?',
-      image: require('./../../assets/image/camnang3.png'),
+      image: require('./../../assets/image/camnang3.jpg'),
       description: 'Cứ nửa năm một lần là đến chu kỳ kinh nguyệt của chó. 1 năm ...',
     },
     {
       id: 4,
       title: 'Tẩy giun cho chó và những điều bạn cần phải biết',
-      image: require('./../../assets/image/camnang4.png'),
+      image: require('./../../assets/image/camnang4.jpg'),
       description: 'Tẩy giun cho chó và phòng ngừa giun sán là việc rất quan trọng. Cũng ...',
     },
     {
       id: 5,
       title: 'Phải làm sao khi chó bị đau chân và đi khập khiễng?',
-      image: require('./../../assets/image/camnang5.png'),
+      image: require('./../../assets/image/camnang5.jpg'),
       description: 'Chó bị đau chân cà nhắc có thể do nhiều nguyên nhân bởi loài chó ...',
     },
     {
       id: 6,
-      title: 'Cách chăm sóc chó mang thai tại nhà cần phải biết',
-      image: require('./../../assets/image/anhcamnang6.png'),
-      description: 'Việc chăm sóc chó mang thai tại nhà cũng không hề đơn giản. Nếu bạn ..',
-    },
-    {
-      id: 7,
       title: 'Từng bước cách chăm sóc chó mẹ sau sinh mổ đẻ',
-      image: require('./../../assets/image/camnang7.png'),
+      image: require('./../../assets/image/camnang7.jpg'),
       description: 'Chăm sóc chó mẹ sau sinh thường hoặc mổ đẻ là việc làm rất quan ...',
     },
-    {
-      id: 8,
-      title: 'Danh sách các thuốc tẩy giun cho chó con an toàn',
-      image: require('./../../assets/image/anhcamnang8.png'),
-      description: 'Mua thuốc tẩy giun cho chó con là một việc nhất thiết bạn phải làm khi nuôi một chú chó',
-    },
-    {
-      id: 9,
-      title: 'Hướng dẫn từng bước đỡ đẻ cho chó ngay tại nhà',
-      image: require('./../../assets/image/anhcamnang9.png'),
-      description: 'Quá trình đỡ đẻ cho chó bao gồm nhiều trình tự khác nhau. Nếu bạn ...',
-    },
+   
   
   ];
   
