@@ -103,7 +103,7 @@ const Handbook = ({navigation}) => {
           </Block>
         </Block>
 
-      <Block marginBottom={250}>
+      <Block marginBottom={250} flex={1}>
           <FlatList
             data={DATA}
             renderItem={({item}) => (

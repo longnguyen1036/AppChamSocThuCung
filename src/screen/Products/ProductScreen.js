@@ -139,7 +139,7 @@ const ProductScreen = ({navigation}) => {
         </Block>
       </Block>
 
-      <Block width={'100%'} paddingHorizontal={'2%'}>
+      <Block width={'100%'} paddingHorizontal={'2%'} flex={1}>
         <FlatGrid key={listProduct._id} data={listProduct} renderItem={renderItem} />
       </Block>
 

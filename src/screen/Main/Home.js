@@ -183,7 +183,7 @@ const Home = () => {
         <Text style ={{fontSize: 20, fontWeight: '700', color: 'black'}}>Top bán chạy</Text>
       </View>
 
-      <Block width={'100%'} paddingHorizontal={'2%'}>
+      <Block width={'100%'} paddingHorizontal={'2%'} flex={1}>
         <FlatList  data={listRandom} renderItem={renderItem} numColumns={2} />
       </Block>
     </ScrollView>

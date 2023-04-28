@@ -104,7 +104,7 @@ const ServiceScreen = ({navigation}) => {
         </Block>
       </Block>
 
-      <Block width={'100%'} paddingHorizontal={'2%'}>
+      <Block width={'100%'} paddingHorizontal={'2%'} flex={1}>
         <FlatList key={listProduct._id} data={listProduct} renderItem={renderItem} />
       </Block>
 
