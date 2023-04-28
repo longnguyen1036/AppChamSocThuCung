@@ -39,41 +39,33 @@ const ServiceScreen = ({navigation}) => {
           _id : item._id
         })}>
         <Block
-          marginLeft={'8%'}
-          backgroundColor={'#E6EAED'}
-          width={350}
-          height={130}
-          row={1}
-          marginTop={10} 
-          radius={10}>
-          <Image style={styles.ilist} source={{uri: item.imgService}}></Image>
-          <Block
-            paddingLeft={'5%'}
-            margin={5}
+            marginLeft={'4%'}
             backgroundColor={'white'}
-            height={120}
-            width={245}
-            radius={10}>
-            <Block paddingTop={5}>
-              <Text size={16} bold>{item.nameService}</Text>
-              <Text color={'red'} size={12}>
-              {item.priceService*80/100}
-              </Text>
-              <Text size={12}>{item.priceService}</Text>
-              <Text size={12}>Cửa hàng: {item.address}</Text>
-              <Text height={30} size={12}>Mô tả: {item.descriptionService}</Text>
+            width={'92%'}
+            // height={130}
+            row
+            marginTop={10} 
+            radius={10}
+            // alignCenter
+            padding={12}
+            >
+            <Image style={styles.ilist} source={{uri: item.imgService}}></Image>
+            
+              <Block marginLeft={'2%'} width={'74%'} >
+                <Text numberOfLines={1} color={'#18A2E1'} size={18}>
+                 Dịch vụ: {item.nameService}
+                </Text>
+                <Text  marginTop={4} size={16}>Giá: {formatMoney(item.priceService)}</Text>
+                <Text numberOfLines={2} marginTop={4} size={14}>Mô tả: {item.descriptionService}</Text>
+              </Block>
+             
             </Block>
-            <TouchableOpacity style={styles.nut}>
-              <AntDesign name="right" size={25} />
-            </TouchableOpacity>
-          </Block>
-        </Block>
       </TouchableOpacity>
     );
   };
 
   return (
-    <Block backgroundColor={'white'} flex={1}>
+    <Block backgroundColor={'#F2F3F2'} flex={1}>
       <Block row={1} paddingVertical={10} paddingHorizontal={10}>
         <TouchableOpacity
           style={{width: '40%'}}
@@ -98,7 +90,7 @@ const ServiceScreen = ({navigation}) => {
           row={1}
           justifyCenter
           alignCenter
-          backgroundColor={'#F2F3F2'}
+          backgroundColor={'white'}
           height={40}
           borderRadius={15}
           margin={10}>

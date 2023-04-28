@@ -1,6 +1,7 @@
-import { StyleSheet, Text, View, FlatList ,TouchableOpacity, Image} from 'react-native'
+import { StyleSheet, View, FlatList ,TouchableOpacity, Image} from 'react-native'
 import React,{useState, useEffect} from 'react'
 import Block from '../../components/Block'
+import Text from '../../components/Text'
 import { useRoute , useNavigation} from '@react-navigation/native'
 import productApi from '../../api/productApi'
 import { SERVICES_DETAIL_SCREEN } from '../../router/ScreenName'
@@ -32,66 +33,28 @@ const ServiceProfileShop = () => {
       onPress={() => navigation.navigate(SERVICES_DETAIL_SCREEN,{
         _id: item.item._id
       })}>
-           <View
-        style={{
-          width: '100%',
-          backgroundColor: '#E6EAED',
-          flexDirection: 'row',
-          paddingVertical: 10,
-          borderRadius: 8,
-          marginTop: '3%',
-        }}>
-        <Image
-          style={{
-            width: 100,
-            height: 120,
-            borderRadius: 8,
-            marginLeft: '2%',
-            marginRight: '2%',
-          }}
-          source={{uri: item.item.imgService}}></Image>
-
-        <Block
-          radius={4}
-          width={'68%'}
-          height={120}
-          backgroundColor={'white'}
-          paddingLeft={'2%'}>
-          <Block row justifySpaceBetween width={'95%'} >
-            <Block>
-              <Text style={{color: 'black', fontSize: 18, fontWeight: '500', width: 190, height: 20}}>
-                Tên: {item.item.nameService}
-              </Text>
-              <Text style={{color: 'black'}}>Giá: {formatMoney(item.item.priceService)}</Text>
-              <Text style={{color: 'red'}}>KM: {formatMoney(item.item.priceService*8/10)}</Text>
-
-              <Text>Dành cho: {item.item.typeService}</Text>
+           <Block
+            marginLeft={'4%'}
+            backgroundColor={'white'}
+            width={'92%'}
+            // height={130}
+            row
+            marginTop={10} 
+            radius={10}
+            // alignCenter
+            padding={12}
+            >
+            <Image style={styles.ilist} source={{uri: item.item.imgService}}></Image>
+            
+              <Block marginLeft={'2%'} width={'74%'} >
+                <Text numberOfLines={1} color={'#18A2E1'} size={18}>
+                 Dịch vụ: {item.item.nameService}
+                </Text>
+                <Text  marginTop={4} size={16}>Giá: {formatMoney(item.item.priceService)}</Text>
+                <Text numberOfLines={2} marginTop={4} size={14}>Mô tả: {item.item.descriptionService}</Text>
+              </Block>
+             
             </Block>
-            <TouchableOpacity
-              style={{
-                backgroundColor: '#E6EAED',
-                borderRadius: 5,
-                width: 35,
-                height: 35,
-                marginTop: '4%',
-                marginRight: '0%',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <FontAwesome5
-                style={{}}
-                color={'black'}
-                name="chevron-right"
-                size={18}
-              />
-            </TouchableOpacity>
-          </Block>
-          <Text style ={{width: '99%', marginTop: '2%', color: 'black' }}>
-          Mô tả: {item.item.descriptionService} Mô tả này dài lắm nên phải để đoạn text này dài
-            ra.
-          </Text>
-        </Block>
-      </View>
       </TouchableOpacity>
     )
   }
@@ -109,4 +72,11 @@ const ServiceProfileShop = () => {
 
 export default ServiceProfileShop
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  ilist: {
+    width: 90,
+    height: 100,
+    borderRadius: 6,
+    
+  },
+})

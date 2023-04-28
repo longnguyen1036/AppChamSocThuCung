@@ -1,11 +1,14 @@
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image } from 'react-native'
+import { StyleSheet, View, FlatList, TouchableOpacity, Image } from 'react-native'
 import React,{useState, useEffect} from 'react'
 import Block from '../../components/Block'
+import Text from '../../components/Text'
 import { useRoute , useNavigation} from '@react-navigation/native'
 import productApi from '../../api/productApi'
 import { PETS_DETAIL_SCREEN } from '../../router/ScreenName'
 import formatMoney from '../../components/FormatMoney'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { FlatGrid } from 'react-native-super-grid'
+
 
 
 const PetProfileShop = () => {
@@ -32,67 +35,41 @@ const PetProfileShop = () => {
         _id: item.item._id
       })}>
         
-        <View
-        style={{
-          backgroundColor: '#E6EAED',
-          width: 165,
-          height: 205,
-          borderRadius: 8,
-          paddingHorizontal: 8,
-          marginRight: '5%',
-          marginTop: '2%',
-          marginLeft: '5%',
-        }}>
-        <Block alignCenter marginTop={'5%'}>
-          <Image
-            style={{width: 100, height: 110}}
-            source={{uri: item.item.imgPet}}></Image>
-        </Block>
         <Block
-          marginLeft={'1%'}
-          marginTop={'3%'}
-          width={150}
-          height={80}
+          marginLeft={'8%'}
           backgroundColor={'white'}
-          radius={8}>
-          <Block marginLeft={'5%'}>
-            <Text  style={{color: 'black',fontWeight: '700', width: 110, height: 38, marginTop: '5%'}}>
-              Tên: {item.item.namePet}
-            </Text>
-            <Block
-              marginTop={'4%'}
-              row
-              justifySpaceBetween
-              paddingHorizontal={5}>
-              <Text style={{width: 90, height: 18}}>
-               {formatMoney(item.item.pricePet)}
-              </Text>
-              <TouchableOpacity
-                style={{
-                  backgroundColor: '#E6EAED',
-                  borderRadius: 5,
-                  width: 25,
-                  height: 25,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <FontAwesome5
-                  style={{}}
-                  color={'black'}
-                  name="chevron-right"
-                  size={18}
-                />
-              </TouchableOpacity>
+          width={160}
+         marginTop={12}
+          radius={10}
+          >
+          <Image style={styles.ilist} source={{uri: item.item.imgPet}}></Image>
+          <Block
+            paddingLeft={'5%'}
+            padding={3}
+            marginTop={8}
+            height={70}
+      
+            >
+            <Block width={140} paddingTop={5}>
+              <Block width={'100%'} height={20} > 
+              <Text bold>{item.item.namePet}</Text>
+              </Block>
+              <Block width={100} marginTop={10}>
+                <Text color={'#18A2E1'} bold size={16}>
+                  {formatMoney(item.item.pricePet)}
+                </Text>
+              </Block>
             </Block>
+            
           </Block>
         </Block>
-      </View>
       </TouchableOpacity>
     )
   }
   return (
     <Block backgroundColor={'#dcdcdc'} flex={1}>
-      <FlatList 
+      <FlatGrid 
+
         data={listProduct}
         renderItem={renderItem}
       />
@@ -102,4 +79,11 @@ const PetProfileShop = () => {
 
 export default PetProfileShop
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  ilist: {
+    width: '100%',
+      height: 150,
+      borderTopRightRadius: 10,
+      borderTopLeftRadius: 10,
+  },
+})

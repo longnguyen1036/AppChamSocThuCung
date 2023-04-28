@@ -1,10 +1,16 @@
-import { StyleSheet, View, Image, TextInput, FlatList,SafeAreaView, } from 'react-native'
-import React from 'react'
+import {
+  StyleSheet,
+  View,
+  Image,
+  TextInput,
+  FlatList,
+  SafeAreaView,
+} from 'react-native';
+import React from 'react';
 import Block from './../../components/Block';
 import Text from './../../components/Text';
-import { HANDBOOK_DETAIL_SCREEN } from '../../router/ScreenName';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-
+import {HANDBOOK_DETAIL_SCREEN} from '../../router/ScreenName';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const DATA = [
     {
@@ -69,100 +75,101 @@ const DATA = [
 
 const Handbook = ({navigation}) => {
   const Item = ({title, image, description}) => (
-    <TouchableOpacity onPress={ ()=>navigation.navigate(HANDBOOK_DETAIL_SCREEN)}>
-    <View elevation={5} style={styles.item}>
-      <Image source={image} style = {{ width: '100%'}} ></Image>
-      <Text style={styles.title}>{title}</Text>
-      <Text style={styles.description}>{description}</Text>
-      
-    </View>
+    <TouchableOpacity
+      onPress={() => navigation.navigate(HANDBOOK_DETAIL_SCREEN)}>
+      <View elevation={5} style={styles.item}>
+        <Image source={image} style={{width: '100%'}}></Image>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.description}>{description}</Text>
+      </View>
     </TouchableOpacity>
   );
 
   return (
-    <Block backgroundColor={'#E6EAED'}>
+    <Block backgroundColor={'#E6EAED'} flex={1}>
       <Block>
-        
-        <Block row={1} paddingVertical={20} paddingHorizontal= {20} >
-          <Block width={'40%'} >
-            <Image source={require('./../../assets/image/backpet.png')} style = {{}} ></Image>
+        <Block row={1} paddingVertical={20} paddingHorizontal={20}>
+          <Block width={'40%'}>
+            <Image
+              source={require('./../../assets/image/backpet.png')}
+              style={{}}></Image>
           </Block>
           <Block width={'50%'}>
-            <Text size={20} color={'black'} bold >Cẩm nang</Text>
+            <Text size={20} color={'black'} bold>
+              Cẩm nang
+            </Text>
           </Block>
         </Block>
-        
-        <Block paddingHorizontal={10} >
+
+        <Block paddingHorizontal={10}>
           <Block
-           row={1}
-           justifyCenter
-           alignCenter
-           backgroundColor={'#F2F3F2'}
-           height= {40}
-           borderRadius={15}
-           margin= {10}>
-            <Image source={require('./../../assets/image/timkiempet.png')} style = {styles.seachImage} ></Image>
-            <TextInput placeholder='Tìm kiếm' style = {{flex: 1}} underlineColorAndroid="transparent"></TextInput>
-
+            row={1}
+            justifyCenter
+            alignCenter
+            backgroundColor={'#F2F3F2'}
+            height={40}
+            borderRadius={15}
+            margin={10}>
+            <Image
+              source={require('./../../assets/image/timkiempet.png')}
+              style={styles.seachImage}></Image>
+            <TextInput
+              placeholder="Tìm kiếm"
+              style={{flex: 1}}
+              underlineColorAndroid="transparent"></TextInput>
           </Block>
-
         </Block>
 
-
-        <Block>
-          <SafeAreaView >
-
-            <FlatList
-            
-              data={DATA}
-              renderItem={({item}) => <Item title={item.title} image = {item.image} description = {item.description} />}
-              keyExtractor={item => item.id}
-            />
-          </SafeAreaView>
-
-        </Block>
-
-        
-
-
-
+      <Block marginBottom={250}>
+          <FlatList
+            data={DATA}
+            renderItem={({item}) => (
+              <Item
+                title={item.title}
+                image={item.image}
+                description={item.description}
+              />
+            )}
+            keyExtractor={item => item.id}
+          />
+          </Block>
+       
       </Block>
     </Block>
-  )
-}
+  );
+};
 
-export default Handbook
+export default Handbook;
 
 const styles = StyleSheet.create({
-    item: {
-        backgroundColor: '#F7FEF9',
-        padding: 20,
-        marginVertical: 10,
-        marginHorizontal: 16,
-        borderRadius: 10,
-        shadowColor: '#000000',
-        shadowOffset: {
-          width: 0,
-          height: 3
-        },
-        shadowRadius: 5,
-        shadowOpacity: 1.0
-      },
-      title: {
-        fontSize: 16,
-        color: 'black',
-        fontWeight: 'bold',
-      },
-      description: {
-        fontSize: 14,
-      },
-      seachImage: {
-        padding: 10,
-        margin: 5,
-        height: 25,
-        width: 25,
-        resizeMode: 'stretch',
-        alignItems: 'center',
-    
-      },
-})
+  item: {
+    backgroundColor: '#F7FEF9',
+    padding: 20,
+    marginVertical: 10,
+    marginHorizontal: 16,
+    borderRadius: 10,
+    shadowColor: '#000000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowRadius: 5,
+    shadowOpacity: 1.0,
+  },
+  title: {
+    fontSize: 16,
+    color: 'black',
+    fontWeight: 'bold',
+  },
+  description: {
+    fontSize: 14,
+  },
+  seachImage: {
+    padding: 10,
+    margin: 5,
+    height: 25,
+    width: 25,
+    resizeMode: 'stretch',
+    alignItems: 'center',
+  },
+});

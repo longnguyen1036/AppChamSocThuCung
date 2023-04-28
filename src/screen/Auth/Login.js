@@ -1,94 +1,93 @@
+import React, {useEffect, useState} from 'react';
 import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TextInput,
-  TouchableOpacity,
-  ScrollView,
   Alert,
+  Image,
   Modal,
   Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import React, {useState, useEffect} from 'react';
-import {FORGET_PASS, REGISTER_SCREEN} from '../../router/ScreenName';
 import {useDispatch, useSelector} from 'react-redux';
 import authApi from '../../api/authApi';
+import {FORGET_PASS, REGISTER_SCREEN} from '../../router/ScreenName';
+import {io} from 'socket.io-client';
 
-import {CREATE_NEW_PASS, MAIN_TAB} from './../../router/ScreenName';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { loggedAction } from '../../redux/actions/authAction';
-import {setToken, getToken} from '../../helper/auth';
 import messaging from '@react-native-firebase/messaging';
+import {setToken} from '../../helper/auth';
+import {loggedAction} from '../../redux/actions/authAction';
+import {MAIN_TAB} from './../../router/ScreenName';
+import {sendMessenger} from '../../redux/actions/messAction';
 import { io } from 'socket.io-client';
-import { BASE_URL_TEST } from '../../api/BASE_URL';
 
 const Login = ({navigation}) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const authMess = useSelector(state => state.authMess.messages);
 
   const [modalVisible, setModalVisible] = useState(false);
   const [emailAccount, setEmailAccount] = useState('prolatui@gmail.com');
   const [passWordAccount, setPasswordAccount] = useState('123');
-  const [fcmTokenFireBase, setFcmTokenFireBase] = useState()
+  const [fcmTokenFireBase, setFcmTokenFireBase] = useState();
 
   const registerAppWithFCM = async () => {
     await messaging().registerDeviceForRemoteMessages();
-  
+
     // Lấy token FCM cho thiết bị hiện tại
     const fcmToken = await messaging().getToken();
     // console.log('FCM Token:', fcmToken);
     setFcmTokenFireBase(fcmToken);
-
   };
 
-  const connectSocket = async () => {
-    try {
-      const data = {
-        emailAccount: emailAccount,
-        table: 'user'
-      }
-      const socket = io(`http://192.168.1.6:9999/`);
-      socket.on('connect', () => {
-        console.log('connected to server');
-      });
-  
-      const res =  socket.emit('Login', data);
-      console.log('ressss', res);
-      socket.on('checkLogin', (data) => {
-          console.log('data socket', data);
-      })
-    } catch (error) {
-      console.log(error)
-    }
-    }
+  let socketClient = io(`http://192.168.100.64:9999/`);
+  socketClient.on('connect', () => {
+    console.log('connected to server');
+  });
+  socketClient.on('checkLogin', data => {
+    console.log('data socket', data);
+  });
+  socketClient.on('mgs', async(data) => {
+    const data2 = await data;
+    console.log('dataa', data2);
+    let arr = []
+    arr.push(data2);
+    console.log('authMessss', authMess);
+    const newMessages = [...authMess, ...arr];
+    dispatch(sendMessenger(newMessages));
+  });
 
-  useEffect(() => {
-    registerAppWithFCM()
-  },[])
-  
+
+  const data = {
+    emailAccount: emailAccount,
+    table: 'user',
+  };
+
+  const emitLogin = socketClient => {
+    socketClient.emit('Login', data);
+  };
+
   const Login = async () => {
     try {
-    
-      if ( emailAccount == '' || passWordAccount == '') {
+      if (emailAccount == '' || passWordAccount == '') {
         setModalVisible(true);
       }
-      const res = await authApi.Login(
-        emailAccount, 
-        passWordAccount,
-      );
+      const res = await authApi.Login(emailAccount, passWordAccount);
       // console.log('resssssssssssssssssssssssssssss',res.status);
       if (res.status != 200) {
         setModalVisible(true);
       } else {
         AsyncStorage.setItem('checkLogin', 'true');
-        const checkLogin = await AsyncStorage.getItem('checkLogin'); 
+        emitLogin(socketClient);
+        const checkLogin = await AsyncStorage.getItem('checkLogin');
         dispatch(loggedAction(res.data));
-        
+
         // console.log('fcm token',fcmTokenFireBase);
         navigation.navigate(MAIN_TAB);
-        await setToken(res.data.token)
-        await authApi.UpdateTokenFCM(fcmTokenFireBase)
-        connectSocket();
+        await setToken(res.data.token);
+        await authApi.UpdateTokenFCM(fcmTokenFireBase);
       }
     } catch (e) {
       console.log('login error: ', e);
@@ -98,8 +97,15 @@ const Login = ({navigation}) => {
   return (
     <ScrollView>
       <View>
-        <View style={{justifyContent: 'center', alignItems: 'center', marginLeft: 20,}}>
-          <Image source={require('../../assets/image/phonenumber.png')} style={styles.hinh}></Image>
+        <View
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginLeft: 20,
+          }}>
+          <Image
+            source={require('../../assets/image/phonenumber.png')}
+            style={styles.hinh}></Image>
         </View>
 
         <View style={{width: '100%', paddingHorizontal: 15}}>
@@ -160,15 +166,13 @@ const Login = ({navigation}) => {
               flexDirection: 'row',
               marginLeft: '20%',
             }}>
-              <Text>Người dùng mới? </Text>
-              <TouchableOpacity
-  
-                onPress={() => {
-                  navigation.navigate(REGISTER_SCREEN);
-                }}>
-                <Text style={{color: '#52B4FF',}}>  Tạo tài khoản</Text>
-              </TouchableOpacity>
-            
+            <Text>Người dùng mới? </Text>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate(REGISTER_SCREEN);
+              }}>
+              <Text style={{color: '#52B4FF'}}> Tạo tài khoản</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
@@ -177,25 +181,28 @@ const Login = ({navigation}) => {
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
+          Alert.alert('Modal has been closed.');
           setModalVisible(!modalVisible);
-        }}
-      >
+        }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
+            <Image
+              style={{width: 60, height: 60}}
+              source={require('../../assets/image/warning.png')}></Image>
+            <Text style={styles.modalText}>
+              Chua nhap dung tài khoản hoặc mật khẩu!
+            </Text>
             <Image style={{width: 60, height: 60}}  source={require('../../assets/image/warning.png')}></Image>
-            <Text style={styles.modalText}>Chua nhap dung tài khoản hoặc mật khẩu!</Text>
+            <Text style={styles.modalText}>Chưa nhập đúng email hoặc mật khẩu!</Text>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
-            >
+              onPress={() => setModalVisible(!modalVisible)}>
               <Text style={styles.textStyle}>Đồng ý</Text>
             </Pressable>
           </View>
         </View>
       </Modal>
     </ScrollView>
-    
   );
 };
 
@@ -205,40 +212,40 @@ const styles = StyleSheet.create({
   modalView: {
     margin: 30,
     marginTop: '60%',
-    backgroundColor: "white",
+    backgroundColor: 'white',
     borderRadius: 20,
     padding: 35,
-    alignItems: "center",
-    shadowColor: "#000",
+    alignItems: 'center',
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 2
+      height: 2,
     },
     shadowOpacity: 0.25,
     shadowRadius: 4,
-    elevation: 5
+    elevation: 5,
   },
   button: {
     borderRadius: 5,
     padding: 10,
-    elevation: 2
+    elevation: 2,
   },
   buttonOpen: {
-    backgroundColor: "#52B4FF",
+    backgroundColor: '#52B4FF',
   },
   buttonClose: {
-    backgroundColor: "#52B4FF",
+    backgroundColor: '#52B4FF',
     width: 200,
   },
   textStyle: {
     fontSize: 18,
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center"
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
   modalText: {
     marginBottom: 15,
-    textAlign: "center"
+    textAlign: 'center',
   },
   hinh: {
     marginTop: 20,

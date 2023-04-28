@@ -11,6 +11,7 @@ import {
 import React, {useState, useContext} from 'react';
 import OTPTextInput from 'react-native-otp-textinput';
 import authApi from '../../api/authApi';
+import {Notifier, Easing, NotifierComponents} from 'react-native-notifier';
 import {LOGIN_SCREEN} from './../../router/ScreenName';
 
 const ConfirmOTP = ({navigation}) => {
@@ -23,11 +24,19 @@ const ConfirmOTP = ({navigation}) => {
       const res = await authApi.OTPRegister(
         otp
       );
-      console.log('res',res);
       if (res.status != 200) {
         setModalVisible(true);
       } else {
+        Notifier.showNotification({
+          title: 'Thông báo',
+          description: 'Đăng ký thành công',
+          Component: NotifierComponents.Alert,
+          componentProps: {
+            alertType: 'success',
+          },
+        });
         navigation.navigate('LOGIN_SCREEN');
+        
       }
     } catch (e) {
       console.log('login error: ', e);

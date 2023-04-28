@@ -62,30 +62,40 @@ const PetScreen = ({navigation}) => {
       <TouchableOpacity  onPress={ ()=>navigation.navigate(PETS_DETAIL_SCREEN,{
           _id : item._id
       })}>
-      <Block
-     
-        marginLeft={'15%'}
-        backgroundColor={'#E6EAED'}
-        width={'91%'}
-        height={190} 
-        radius={10}>
-        <Image style={styles.ilist} source={{uri: item.imgPet}}></Image>
-        <Block radius={10}   paddingLeft={'5%'} margin={5} backgroundColor={'white'} height={70}>
-          <Block paddingTop={5}>
-            <Text>{item.namePet}</Text>
-            <Text marginTop={7} size={12}>{formatMoney(item.pricePet)}</Text>
+       <Block
+          marginLeft={'8%'}
+          backgroundColor={'white'}
+          width={160}
+         marginTop={12}
+          radius={10}
+          >
+          <Image style={styles.ilist} source={{uri: item.imgPet}}></Image>
+          <Block
+            paddingLeft={'5%'}
+            padding={3}
+            marginTop={8}
+            height={70}
+      
+            >
+            <Block width={140} paddingTop={5}>
+              <Block width={'100%'} height={20} > 
+              <Text bold>{item.namePet}</Text>
+              </Block>
+              <Block width={100} marginTop={10}>
+                <Text color={'#18A2E1'} bold size={16}>
+                  {formatMoney(item.pricePet)}
+                </Text>
+              </Block>
+            </Block>
+            
           </Block>
-          <TouchableOpacity style={styles.nut}>
-            <AntDesign name="right" size={25} />
-          </TouchableOpacity>
         </Block>
-      </Block>
       </TouchableOpacity>
     );
   };
 
   return (
-    <Block flex={1} backgroundColor={'white'} >
+    <Block flex={1} backgroundColor={'#F2F3F2'} >
       <Block row={1} paddingVertical={10} paddingHorizontal={10}>
       <TouchableOpacity style={{width: '40%'}} onPress={() => navigation.goBack()}>
           
@@ -110,7 +120,7 @@ const PetScreen = ({navigation}) => {
           row={1}
           justifyCenter
           alignCenter
-          backgroundColor={'#F2F3F2'}
+          backgroundColor={'white'}
           height={40}
           borderRadius={15}
           margin={10}>
@@ -412,19 +422,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   ilist: {
-    width: 100,
-    height: 110,
-    marginLeft: '18%',
+    width: '100%',
+      height: 150,
+      borderTopRightRadius: 10,
+      borderTopLeftRadius: 10,
   },
-  nut: {
-    width: 32,
-    height: 32,
-    backgroundColor: '#F2F3F2',
-    position: 'absolute',
-    right: '5%',
-    bottom: '8%',
-    alignItems: 'center',
-    borderRadius: 4,
-    paddingTop: '15%',
-  },
+  
 });
