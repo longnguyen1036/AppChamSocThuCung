@@ -114,7 +114,12 @@ function MainNavigation() {
   }, [checkLogin]);
   return (
     <NavigationContainer ref={navigationRef1}>
+<<<<<<< Updated upstream
      {authState == true ? <MainStack /> : <AuthStack />}
+=======
+      {/* {checkLogin === 'true' ? <MainStack /> : <AuthStack />} */}
+      <MainStack/>
+>>>>>>> Stashed changes
     </NavigationContainer>
   );
 }
